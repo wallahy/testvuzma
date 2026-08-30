@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:100vw;height:100vh;margin:0;padding:0;overflow:hidden;display:flex;align-items:center;justify-content:center;background:transparent;font-family:'Segoe UI',system-ui,sans-serif}
+.window{width:900px;height:530px;background:#0f0a14;border-radius:14px;border:1px solid rgba(255,255,255,0.06);border-top:1px solid rgba(168,85,247,0.28);box-shadow:0 12px 32px rgba(0,0,0,0.7);overflow:hidden;display:flex;flex-direction:column;animation:windowIn 0.35s ease both}
+@keyframes windowIn{from{opacity:0;transform:scale(0.98) translateY(6px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.hugo-header{height:38px;min-height:38px;background:#0f0a14;display:flex;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid rgba(168,85,247,0.14);flex-shrink:0;position:relative}
+.hugo-header span{font-size:13px;font-weight:700;color:#e8e8f0;letter-spacing:0.02em;position:relative}
+.hugo-header small{font-size:10px;font-weight:600;color:#7a7a8a;letter-spacing:0.08em;margin-left:4px;position:relative}
+.hugo-body{flex:1;display:flex;overflow:hidden}
+.hugo-sidebar{width:188px;min-width:188px;background:#0f0a14;border-right:1px solid rgba(255,255,255,0.04);display:flex;flex-direction:column;padding:10px 0 10px;overflow-y:auto}
+.hugo-sidebar::-webkit-scrollbar{width:0}
+.sidebar-label{font-size:9px;font-weight:700;letter-spacing:0.14em;color:#6b7280;padding:14px 16px 6px;text-transform:uppercase}
+.hugo-nav-item{margin:2px 10px;padding:8px 11px;border-radius:7px;font-size:12.5px;font-weight:500;color:#7a7a8a;cursor:pointer;transition:background 0.15s,color 0.15s;user-select:none;display:flex;align-items:center;gap:8px;position:relative}
+.hugo-nav-item:hover{background:rgba(255,255,255,0.04);color:#b8b8d0}
+.hugo-nav-item.active{background:#7c3aed;color:#fff}
+.hugo-nav-item.active i{color:#fff}
+.hugo-nav-item i{font-size:11px;width:14px;text-align:center;color:#6b7280;transition:color 0.16s} .hugo-nav-item:hover i{color:#a78bfa}
+.hugo-center{flex:1;background:#131318;display:flex;flex-direction:column;overflow-y:auto;padding:8px;position:relative}
+.hugo-center::-webkit-scrollbar{width:5px} .hugo-center::-webkit-scrollbar-thumb{background:#2a2a30;border-radius:10px} .hugo-center::-webkit-scrollbar-track{background:transparent}
+.section-label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:#6b7280;padding:12px 8px 6px;text-transform:uppercase}
+.feature-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;background:#1a1a20;border:1px solid rgba(255,255,255,0.04);margin:4px 0;cursor:pointer;transition:background 0.15s,border-color 0.15s}
+.feature-row:hover{background:#21212a;border-color:rgba(255,255,255,0.06)}
+.feature-row span{font-size:12.5px;font-weight:400;color:#8a8a9a;letter-spacing:0.01em}
+.feature-row.on span{color:#e8e0ff}
+.feature-row.on{border-color:rgba(124,58,237,0.18);background:rgba(124,58,237,0.08)}
+.toggle{width:36px;height:20px;background:#2a2a30;border-radius:20px;position:relative;flex-shrink:0;transition:background 0.2s;border:1px solid rgba(255,255,255,0.06)}
+.toggle::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:#5a5a6a;border-radius:50%;transition:left 0.2s,background 0.2s}
+.toggle.on{background:#7c3aed;border-color:rgba(124,58,237,0.3)} .toggle.on::after{left:18px;background:#fff}
+.hugo-credits{width:248px;min-width:248px;background:#0f0a14;border-left:1px solid rgba(255,255,255,0.04);padding:16px 14px;display:flex;flex-direction:column;overflow-y:auto;position:relative}
+.hugo-credits::-webkit-scrollbar{width:0}
+.credits-label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:#6b7280;margin-bottom:10px;position:relative}
+.credit-line{font-size:12px;color:#9ca3af;padding:3px 0;position:relative}
+.hugo-tag{margin-top:12px;display:inline-flex;align-items:center;gap:6px;font-size:10px;color:#7a7a8a;font-weight:700;letter-spacing:0.08em;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);padding:6px 10px;border-radius:20px;width:fit-content;position:relative}
+.paid-badge{position:absolute;top:10px;right:12px;background:#1e1e28;color:#9ca3af;font-size:9px;font-weight:700;letter-spacing:0.08em;padding:4px 8px;border-radius:20px;border:1px solid rgba(255,255,255,0.06)}
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="hugo-header"><span>Hugo.Dev</span><small>PAID</small><div class="paid-badge">PRIVATE</div></div>
+  <div class="hugo-body">
+    <div class="hugo-sidebar" id="hugo-sidebar">
+      <div class="sidebar-label">Player</div>
+      <div class="hugo-nav-item active" data-tab="Player"><i class="fa-solid fa-user"></i> Player</div>
+      <div class="hugo-nav-item" data-tab="Weapons"><i class="fa-solid fa-crosshairs"></i> Weapons</div>
+      <div class="hugo-nav-item" data-tab="World"><i class="fa-solid fa-globe"></i> World</div>
+      <div class="hugo-nav-item" data-tab="Visuals"><i class="fa-solid fa-eye"></i> Visuals</div>
+      <div class="sidebar-label">Network</div>
+      <div class="hugo-nav-item" data-tab="Exploits"><i class="fa-solid fa-bolt"></i> Exploits</div>
+      <div class="hugo-nav-item" data-tab="Player List"><i class="fa-solid fa-list"></i> Player List</div>
+      <div class="hugo-nav-item" data-tab="Assets Spawn"><i class="fa-solid fa-cube"></i> Assets</div>
+      <div class="hugo-nav-item" data-tab="Antis"><i class="fa-solid fa-shield-halved"></i> Antis</div>
+      <div class="sidebar-label">System</div>
+      <div class="hugo-nav-item" data-tab="Configs"><i class="fa-solid fa-gear"></i> Configs</div>
+      <div class="hugo-nav-item" data-tab="Credits"><i class="fa-solid fa-star"></i> Credits</div>
+    </div>
+    <div class="hugo-center" id="hugo-center"></div>
+    <div class="hugo-credits">
+      <div class="credits-label">HUGO.DEV</div>
+      <div class="credit-line" style="color:#e8e8f0;font-weight:700">Hugo.Dev — Paid</div>
+      <div class="credit-line">Private DLL • MeowNet</div>
+      <div class="credit-line" style="margin-top:10px;color:#7a7a8a;font-size:11px">Includes all Free +</div>
+      <div class="credit-line" style="color:#8a8a9a;font-size:11px;line-height:1.5">Freecam • Packet Fly • Vehicle<br>Box 3D • Skeleton • Radar<br>Themes • Configs • Antis</div>
+      <div class="hugo-tag">PAID</div>
+    </div>
+  </div>
+</div>
+<script>
+const HUGO = {
+  "Player": [
+    {type:"toggle", name:"Dynamic Fly"}, {type:"toggle", name:"Static Fly"}, {type:"toggle", name:"Packet Fly"},
+    {type:"toggle", name:"Own All Keys"}, {type:"toggle", name:"Bypass Trials"}, {type:"toggle", name:"Walk Speed"},
+    {type:"toggle", name:"Player Scale"}, {type:"toggle", name:"God Mode"}, {type:"toggle", name:"Set HP"},
+    {type:"toggle", name:"Dev Hook"}, {type:"toggle", name:"Force Master"}, {type:"toggle", name:"Inventions"},
+    {type:"toggle", name:"Maker Pen"}, {type:"toggle", name:"Airstuck"}, {type:"toggle", name:"Freeze Body"},
+    {type:"toggle", name:"Look TP"}, {type:"toggle", name:"Timescale"}, {type:"toggle", name:"FOV Changer"}, {type:"toggle", name:"Freecam"},
+    {type:"toggle", name:"Name Spoof"}
+  ],
+  "Weapons": [
+    {type:"toggle", name:"Anti Cooldown"}, {type:"toggle", name:"Infinite Ammo"}, {type:"toggle", name:"Anti Drop Tool"},
+    {type:"toggle", name:"Anti Recoil"}, {type:"toggle", name:"No Spread"}, {type:"toggle", name:"Bullet Toggle"},
+    {type:"toggle", name:"Bullet Speed"}, {type:"toggle", name:"Bullet Lifetime"}, {type:"toggle", name:"Enable Aimbot"},
+    {type:"toggle", name:"Silent Aim"}, {type:"toggle", name:"Bullet Lock On"}, {type:"toggle", name:"Quest God-Mode"},
+    {type:"label", name:"Advanced"}, {type:"toggle", name:"Team Check"}, {type:"toggle", name:"Hide Shots"}
+  ],
+  "World": [
+    {type:"toggle", name:"Point Multiplier"}, {type:"toggle", name:"Gold & Silver"}, {type:"label", name:"Quest Skips"},
+    {type:"toggle", name:"Skip Trophy"}, {type:"toggle", name:"Skip Crimson"}, {type:"toggle", name:"Skip Jumbotron"},
+    {type:"toggle", name:"Skip Isle"}, {type:"toggle", name:"Skip Crescendo"}, {type:"toggle", name:"Skip Boss"},
+    {type:"label", name:"Vehicle"}, {type:"toggle", name:"Car Boosting"}, {type:"toggle", name:"Hitbox Size"}, {type:"toggle", name:"Custom Speed"}
+  ],
+  "Visuals": [
+    {type:"toggle", name:"Enable ESP"}, {type:"toggle", name:"Boxes"}, {type:"toggle", name:"Boxes 3D"}, {type:"toggle", name:"Cornered"}, {type:"toggle", name:"Filled"},
+    {type:"toggle", name:"Skeleton"}, {type:"toggle", name:"Snaplines"}, {type:"toggle", name:"Tracers"}, {type:"toggle", name:"Player Names"}, {type:"toggle", name:"Distance"},
+    {type:"toggle", name:"Health Check"}, {type:"toggle", name:"Item ESP"}, {type:"toggle", name:"Radar"}, {type:"toggle", name:"Crosshair"},
+    {type:"toggle", name:"Particles"}, {type:"toggle", name:"Watermark"}, {type:"toggle", name:"3D Mode"}
+  ],
+  "Exploits": [
+    {type:"toggle", name:"Asset Spawn"}, {type:"toggle", name:"Food Sploit"}, {type:"toggle", name:"Gift Spawn"},
+    {type:"toggle", name:"Exploits Popout"}, {type:"toggle", name:"Blacklist Tab"}, {type:"toggle", name:"Whitelist Tab"}
+  ],
+  "Player List": [{type:"info", name:"Shows players in the current room."}],
+  "Assets Spawn": [{type:"toggle", name:"Spawn at local"}],
+  "Antis": [
+    {type:"toggle", name:"Anti Despawn"}, {type:"toggle", name:"Anti Respawn"}, {type:"toggle", name:"Anti Fling"}, {type:"toggle", name:"Anti Teleport"},
+    {type:"toggle", name:"Anti Bring"}, {type:"toggle", name:"Anti Void"}, {type:"toggle", name:"Anti Disarm"}, {type:"toggle", name:"Anti Spaz"},
+    {type:"toggle", name:"Anti Freeze"}, {type:"toggle", name:"Anti Kick"}, {type:"toggle", name:"Anti Ban"}, {type:"toggle", name:"Anti Ram Crash"},
+    {type:"toggle", name:"Nop All RPCs"}, {type:"toggle", name:"Hide Bullets"}
+  ],
+  "Configs": [{type:"info", name:"Configs"}],
+
+  "Credits": [{type:"info", name:"Hugo.Dev<br><br>Paid private build<br><span style='color:#a78bfa'>Hugo — MeowNet • Purple Edition</span>"}]
+};
+const center=document.getElementById('hugo-center');
+const nav=document.querySelectorAll('.hugo-nav-item');
+function ls(k){try{return localStorage.getItem('hugo_'+k)==='1'}catch(e){return false}}
+function ss(k,v){try{localStorage.setItem('hugo_'+k, v?'1':'0')}catch(e){}}
+function render(tab){
+  center.innerHTML='';
+  (HUGO[tab]||[]).forEach(it=>{
+    if(it.type==='label'){const d=document.createElement('div');d.className='section-label';d.textContent=it.name;center.appendChild(d);return}
+    if(it.type==='info'){const d=document.createElement('div');d.style.cssText='padding:14px;color:#6b7280;font-size:12.5px;line-height:1.6';d.innerHTML=it.name;center.appendChild(d);return}
+    const r=document.createElement('div');r.className='feature-row';const on=ls(tab+'::'+it.name);if(on) r.classList.add('on');
+    r.innerHTML='<span>'+it.name+'</span><div class="toggle'+(on?' on':'')+'"></div>';
+    r.addEventListener('click',()=>{const t=r.querySelector('.toggle');const n=t.classList.toggle('on');r.classList.toggle('on',n);ss(tab+'::'+it.name,n)});
+    center.appendChild(r);
+  });
+}
+nav.forEach(el=>el.addEventListener('click',()=>{nav.forEach(x=>x.classList.remove('active'));el.classList.add('active');render(el.dataset.tab)}));
+render('Player');
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  width:100vw;height:100vh;margin:0;padding:0;
+  overflow:hidden;display:flex;align-items:center;justify-content:center;
+  background:transparent;
+  font-family:'Segoe UI',system-ui,sans-serif;
+}
+.window{
+  width:900px;height:530px;
+  background:#0a0a0c;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.06);
+  border-top:1px solid rgba(208,120,255,0.35);
+  box-shadow:0 12px 32px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.03);
+  overflow:hidden;display:flex;flex-direction:column;
+  animation:windowIn 0.35s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes windowIn{from{opacity:0;transform:scale(0.94) translateY(14px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.vyron-header{
+  height:36px;min-height:36px;
+  background:#070709;
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:2px solid #e07cff;
+  flex-shrink:0;
+}
+.vyron-header span{font-size:13px;font-weight:500;color:#e8e8f0;letter-spacing:0.02em}
+.vyron-body{flex:1;display:flex;overflow:hidden}
+.vyron-sidebar{
+  width:185px;min-width:185px;
+  background:#09090b;
+  border-right:1px solid rgba(255,255,255,0.04);
+  display:flex;flex-direction:column;
+  padding:14px 0 10px 0;
+  overflow-y:auto;
+}
+.vyron-sidebar::-webkit-scrollbar{width:0}
+.sidebar-label{font-size:11px;font-weight:600;letter-spacing:0.08em;color:#2e2e3a;padding:14px 16px 8px 14px;text-transform:uppercase}
+.sidebar-label:first-child{padding-top:4px}
+.vyron-nav-item{margin:2px 8px;padding:8px 12px;border-radius:6px;font-size:13px;font-weight:500;color:#6e6e84;cursor:pointer;transition:background 0.15s,color 0.15s;user-select:none}
+.vyron-nav-item:hover{background:rgba(255,255,255,0.04);color:#9a9ab0}
+.vyron-nav-item.active{background:#25252b;color:#e8e8f0;box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+.vyron-center{flex:1;background:#131315;display:flex;flex-direction:column;overflow-y:auto;padding:6px 6px 6px 6px}
+.vyron-center::-webkit-scrollbar{width:6px}
+.vyron-center::-webkit-scrollbar-thumb{background:#25252b;border-radius:3px}
+.section-label{font-size:10px;font-weight:700;letter-spacing:0.1em;color:#7c3aed;padding:10px 8px 4px 8px;text-transform:uppercase}
+.section-label.red{color:#ff3b3b}
+.feature-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:8px;background:#17171a;border:1px solid rgba(255,255,255,0.04);margin:3px 0;transition:background 0.15s,border-color 0.15s;cursor:pointer}
+.feature-row:hover{background:#1e1e22;border-color:rgba(124,58,237,0.15)}
+.feature-row span{font-size:13px;font-weight:400;color:#7a7a8c}
+.feature-row.on span{color:#d0d0e0}
+.feature-row.on{border-color:rgba(124,58,237,0.2);background:rgba(124,58,237,0.07)}
+.toggle{width:38px;height:20px;background:#2a2a2e;border-radius:20px;position:relative;flex-shrink:0;transition:background 0.2s;border:1px solid rgba(255,255,255,0.04)}
+.toggle::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:#4a4a52;border-radius:50%;transition:left 0.2s,background 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.4)}
+.toggle.on{background:#7c3aed;border-color:rgba(124,58,237,0.4)}
+.toggle.on::after{left:20px;background:#fff}
+.action-row{justify-content:center;background:linear-gradient(135deg,#7c3aed,#6d28d9);border-color:rgba(124,58,237,0.4);margin:6px 0}
+.action-row span{color:#fff !important;font-weight:600;font-size:13px}
+.action-row:hover{background:linear-gradient(135deg,#8b4df0,#7c3aed)}
+.info-text{padding:16px;color:#5a5a72;font-size:13px;line-height:1.6}
+.vyron-credits{width:255px;min-width:255px;background:#0c0c0e;border-left:2px solid #c97cff;padding:14px 16px;display:flex;flex-direction:column;overflow-y:auto}
+.vyron-credits::-webkit-scrollbar{width:0}
+.credits-label{font-size:11px;font-weight:600;letter-spacing:0.06em;color:#3a3a48;margin-bottom:10px}
+.credit-name{font-size:13px;font-weight:500;padding:3px 0}
+.credit-name.blue{color:#5b7cff}
+.credit-name.green{color:#00e676}
+.credit-name.orange{color:#ff8a3d}
+.credit-name.cyan{color:#2af0ff}
+.credits-divider{height:1px;background:rgba(255,255,255,0.07);margin:12px 0}
+.credit-scam{font-size:12px;color:#5b64ff;margin-bottom:6px}
+.credit-free{font-size:13px;font-weight:500;color:#e8e8f0}
+</style>
+</head>
+<body>
+<div class="window">
+  <div class="vyron-header"><span>Vyron Client</span></div>
+  <div class="vyron-body">
+    <div class="vyron-sidebar" id="vyron-sidebar">
+      <div class="sidebar-label">Features</div>
+      <div class="vyron-nav-item active" data-tab="Main">Main</div>
+      <div class="vyron-nav-item" data-tab="Movement">Movement</div>
+      <div class="vyron-nav-item" data-tab="Combat">Combat</div>
+      <div class="vyron-nav-item" data-tab="Visuals">Visuals</div>
+      <div class="sidebar-label">Tools</div>
+      <div class="vyron-nav-item" data-tab="Player List">Player List</div>
+      <div class="vyron-nav-item" data-tab="Item Spawn">Item Spawn</div>
+      <div class="vyron-nav-item" data-tab="Anti-Crash">Anti-Crash</div>
+      <div class="vyron-nav-item" data-tab="Quests">Quests</div>
+      <div class="sidebar-label">Info</div>
+      <div class="vyron-nav-item" data-tab="Credits">Credits</div>
+    </div>
+    <div class="vyron-center" id="vyron-center"></div>
+    <div class="vyron-credits">
+      <div class="credits-label">CREDITS</div>
+      <div class="credit-name blue">Elly TuffNuts</div>
+      <div class="credit-name green">TimeZone999</div>
+      <div class="credit-name orange">Shabeel</div>
+      <div class="credit-name cyan">Gango</div>
+      <div class="credits-divider"></div>
+      <div class="credit-free">Vyron Client - FREE</div>
+    </div>
+  </div>
+</div>
+<script>
+// Exact feature mapping from C:\Users\elexm\CascadeProjects\MeowNetCheat\External\external.cpp ImGui
+const TABS = {
+  "Main": [
+    {type:"toggle", name:"Fly"},
+    {type:"toggle", name:"Developer Mode"},
+    {type:"toggle", name:"God Mode"},
+    {type:"toggle", name:"MakerPen"},
+    {type:"toggle", name:"Spawn Inventions"},
+    {type:"toggle", name:"Unlock Clothing"},
+    {type:"toggle", name:"Own All Keys"},
+    {type:"toggle", name:"Everyone Is Friend"},
+    {type:"toggle", name:"Skip Orientation"},
+    {type:"toggle", name:"Skip Tutorial"},
+    {type:"toggle", name:"Vanish"},
+    {type:"toggle", name:"Force Master"},
+    {type:"label", name:"OP Features", cls:"red"},
+    {type:"toggle", name:"No Damage Taken"},
+    {type:"toggle", name:"Is Invincible"},
+    {type:"toggle", name:"Block Authority Damage"},
+    {type:"toggle", name:"Set Health 99999"},
+    {type:"toggle", name:"Set MaxHealth 99999"},
+    {type:"toggle", name:"Unsuppress Weapon Damage"},
+    {type:"toggle", name:"Spawn Consumables"},
+    {type:"toggle", name:"Edit Room Roles"},
+    {type:"button", name:"Destroy All Objects in Room"},
+    {type:"button", name:"Kick All Players"},
+    {type:"button", name:"Crash Server"},
+  ],
+  "Movement": [
+    {type:"toggle", name:"Walk Speed"},
+    {type:"toggle", name:"Airstuck"},
+    {type:"toggle", name:"Spinbot"},
+    {type:"toggle", name:"Player Scale"},
+    {type:"toggle", name:"Timescale"},
+    {type:"toggle", name:"FOV Slider"},
+    {type:"toggle", name:"Anti Drop Tool"},
+    {type:"toggle", name:"Anti Void"},
+    {type:"toggle", name:"Anti Freeze"},
+    {type:"toggle", name:"Anti Spaz"},
+  ],
+  "Combat": [
+    {type:"toggle", name:"Enable Aimbot"},
+    {type:"toggle", name:"Silent Aim"},
+    {type:"toggle", name:"Aim Assist"},
+    {type:"toggle", name:"Auto Fire"},
+    {type:"toggle", name:"No Spread"},
+    {type:"toggle", name:"Anti Cooldown"},
+    {type:"toggle", name:"Infinite Ammo"},
+    {type:"toggle", name:"Anti Recoil"},
+    {type:"toggle", name:"One Hit Kill"},
+    {type:"toggle", name:"Hide Shots"},
+    {type:"toggle", name:"Bullet Lock On"},
+    {type:"toggle", name:"Bullet Toggle"},
+    {type:"toggle", name:"Bullet Speed"},
+    {type:"toggle", name:"Bullet Lifetime"},
+    {type:"toggle", name:"Custom Fire Rate"},
+    {type:"label", name:"OP Weapon", cls:"red"},
+    {type:"toggle", name:"Projectile Speed Mod"},
+    {type:"toggle", name:"Infinite Range"},
+    {type:"toggle", name:"Super Dash Speed"},
+  ],
+  "Visuals": [
+    {type:"toggle", name:"Enable ESP"},
+    {type:"toggle", name:"Boxes"},
+    {type:"toggle", name:"Names"},
+    {type:"toggle", name:"Tracers"},
+    {type:"toggle", name:"Self ESP"},
+    {type:"toggle", name:"Rainbow"},
+    {type:"toggle", name:"Thickness"},
+    {type:"toggle", name:"Render Distance"},
+    {type:"toggle", name:"Box Color"},
+    {type:"toggle", name:"Tracer Color"},
+  ],
+  "Player List": [
+    {type:"info", name:"Shows players in the current room."},
+  ],
+  "Item Spawn": [
+    {type:"toggle", name:"Spawn at local player"},
+    {type:"button", name:"Spawn"},
+  ],
+  "Anti-Crash": [
+    {type:"toggle", name:"Anti Kick"},
+    {type:"toggle", name:"Anti Fling"},
+    {type:"toggle", name:"Anti Despawn"},
+    {type:"toggle", name:"Anti Teleport"},
+    {type:"toggle", name:"Anti Disarm"},
+    {type:"toggle", name:"Anti Cheer"},
+    {type:"toggle", name:"Anti Spaz"},
+    {type:"toggle", name:"Anti Freeze"},
+    {type:"toggle", name:"Anti Void"},
+    {type:"toggle", name:"Anti Bring"},
+    {type:"toggle", name:"Anti Force Chat"},
+    {type:"toggle", name:"Anti Gas"},
+    {type:"toggle", name:"Anti Flashbang"},
+    {type:"toggle", name:"Anti Scale"},
+    {type:"toggle", name:"Anti Equip"},
+    {type:"toggle", name:"Anti Fly"},
+    {type:"toggle", name:"Anti Ram Crash"},
+  ],
+  "Quests": [
+    {type:"toggle", name:"Quest Points Modifier"},
+    {type:"toggle", name:"Quest Gold Modifier"},
+  ],
+  "Credits": [
+    {type:"info", name:"Vyron Client v4.2<br><br>Elly TuffNuts • TimeZone999 • Shabeel • Gango<br><br><span style='color:#c97cff'>FREE</span>"},
+  ]
+};
+
+const center = document.getElementById('vyron-center');
+const navItems = document.querySelectorAll('.vyron-nav-item');
+
+function loadState(key){ try{ return localStorage.getItem('vyron_toggle_'+key)==='1'; }catch(e){ return false; } }
+function saveState(key,val){ try{ localStorage.setItem('vyron_toggle_'+key, val?'1':'0'); }catch(e){} }
+
+function render(tab){
+  center.innerHTML='';
+  const list = TABS[tab]||[];
+  list.forEach(item=>{
+    if(item.type==='label'){
+      const d=document.createElement('div');
+      d.className='section-label '+(item.cls||'');
+      d.textContent=item.name;
+      center.appendChild(d);
+      return;
+    }
+    if(item.type==='info'){
+      const d=document.createElement('div');
+      d.className='info-text';
+      d.innerHTML=item.name;
+      center.appendChild(d);
+      return;
+    }
+    if(item.type==='button'){
+      const row=document.createElement('div');
+      row.className='feature-row action-row';
+      row.innerHTML='<span>'+item.name+'</span>';
+      row.addEventListener('click',()=>{ row.style.transform='scale(0.97)'; setTimeout(()=>row.style.transform='',120); });
+      center.appendChild(row);
+      return;
+    }
+    const row=document.createElement('div');
+    row.className='feature-row';
+    const isOn=loadState(tab+'::'+item.name);
+    if(isOn) row.classList.add('on');
+    row.innerHTML='<span>'+item.name+'</span><div class="toggle'+(isOn?' on':'')+'"></div>';
+    row.addEventListener('click',()=>{
+      const tog=row.querySelector('.toggle');
+      const nowOn=tog.classList.toggle('on');
+      row.classList.toggle('on',nowOn);
+      saveState(tab+'::'+item.name,nowOn);
+    });
+    center.appendChild(row);
+  });
+}
+navItems.forEach(el=>{
+  el.addEventListener('click',()=>{
+    navItems.forEach(x=>x.classList.remove('active'));
+    el.classList.add('active');
+    render(el.dataset.tab);
+  });
+});
+render('Main');
+</script>
+</body>
+</html>
