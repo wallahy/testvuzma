@@ -63,12 +63,12 @@ html,body{width:100%;height:100%;background:#000;font-family:'Segoe UI',system-u
 .particles-mini{
   position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:22px;
 }
-.particles-mini .pw{position:absolute;background:#fff;border-radius:50%;opacity:0.55;animation: pwMini linear infinite}
+.particles-mini .pw{position:absolute;bottom:-10px;background:radial-gradient(circle, #fff 0%, rgba(255,255,255,0.7) 40%, transparent 70%);border-radius:50%;opacity:0;will-change:transform,opacity;filter:blur(0.2px);animation: pwMini linear infinite}
 @keyframes pwMini{
-  0%{transform: translateY(110%) scale(0.8); opacity:0}
-  10%{opacity:0.6}
-  90%{opacity:0.6}
-  100%{transform: translateY(-20%) scale(1); opacity:0}
+  0%{transform: translate3d(var(--drift, 0px), 0, 0) scale(0.7); opacity:0}
+  8%{opacity:0.75}
+  92%{opacity:0.75}
+  100%{transform: translate3d(var(--drift2, 12px), -240px, 0) scale(1.05); opacity:0}
 }
 .card{
   position:relative;z-index:1;
@@ -197,36 +197,37 @@ html,body{width:100%;height:100%;background:#000;font-family:'Segoe UI',system-u
     });
   }
 })();
-// Profile 3D tilt + small particles
+// Profile 3D tilt + small particles - only on profile hover, clean
 (function(){
   var card=document.getElementById('profile-bg');
-  var center=document.getElementById('center');
-  if(!card || !center) return;
-  // particles
+  if(!card) return;
+  // particles - clean smooth, no roof stick
   var cont=document.getElementById('profile-particles');
   if(cont){
-    for(var i=0;i<14;i++){
+    for(var i=0;i<18;i++){
       var d=document.createElement('div');
       d.className='pw';
-      var s=(1.4+Math.random()*1.6).toFixed(1);
+      var s=(1.6+Math.random()*1.4).toFixed(1);
       d.style.width=s+'px'; d.style.height=s+'px';
       d.style.left=(Math.random()*100)+'%';
-      d.style.top=(Math.random()*100)+'%';
-      d.style.animationDuration=(9+Math.random()*9)+'s';
-      d.style.animationDelay=(Math.random()*6)+'s';
+      d.style.bottom='-10px';
+      d.style.animationDuration=(10+Math.random()*8)+'s';
+      d.style.animationDelay=(Math.random()*8)+'s';
+      d.style.setProperty('--drift', (Math.random()*30-15).toFixed(1)+'px');
+      d.style.setProperty('--drift2', (Math.random()*40-20).toFixed(1)+'px');
       cont.appendChild(d);
     }
   }
-  // 3D on mousemove over center (background)
-  center.addEventListener('mousemove', function(e){
+  // 3D only when hovering profile bg - clean
+  card.addEventListener('mousemove', function(e){
     var rect=card.getBoundingClientRect();
     var cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
     var dx=(e.clientX-cx)/(rect.width/2);
     var dy=(e.clientY-cy)/(rect.height/2);
-    var rx= -dy*7, ry= dx*9;
+    var rx= -dy*6, ry= dx*8;
     card.style.transform='rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg)';
   });
-  center.addEventListener('mouseleave', function(){ card.style.transform='rotateX(0) rotateY(0)'; });
+  card.addEventListener('mouseleave', function(){ card.style.transform='rotateX(0) rotateY(0)'; });
 })();
 </script>
 </body>
