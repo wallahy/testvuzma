@@ -177,12 +177,12 @@ html,body{width:100%;height:100%;background:#000;font-family:'Segoe UI',system-u
         if(audio.paused) audio.play().catch(()=>{});
         icon.className='fa-solid fa-volume-high';
         btn.title='Mute';
-        if(video) video.muted=false;
+        // video stays muted
       } else {
         audio.muted=true;
         icon.className='fa-solid fa-volume-xmark';
         btn.title='Unmute';
-        if(video) video.muted=true;
+        // video stays muted
       }
     });
   }
