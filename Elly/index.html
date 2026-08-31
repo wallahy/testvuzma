@@ -1,143 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elly — About</title>
-<link rel="stylesheet" href="css/all.min.css">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;cursor:url('images/about-cursor.png'), auto}
-a,button{cursor:url('images/about-cursor.png'), auto !important}
-html,body{width:100%;height:100%;background:#000;font-family:'Segoe UI',system-ui,sans-serif;color:#fff;overflow:hidden}
-.bg{position:fixed;inset:0;background:#000;z-index:0;overflow:hidden}
-.bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(2px) brightness(0.45);transform:scale(1.05)}
-.bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.45)}
-.topbar{position:fixed;top:18px;left:18px;z-index:10;width:42px;height:42px;background:rgba(22,22,22,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;cursor:pointer;transition:background 0.15s}
-.topbar:hover{background:rgba(32,32,32,0.95)}
-.plus{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:10;width:38px;height:38px;background:rgba(22,22,22,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;cursor:pointer;transition:transform 0.2s, background 0.15s}
-.plus:hover{background:rgba(32,32,32,0.95);transform:translateX(-50%) scale(1.05)}
-.plus.pop{animation: plusPop 0.35s cubic-bezier(0.22,1,0.36,1)}
-@keyframes plusPop{0%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.15) rotate(90deg)}100%{transform:translateX(-50%) scale(1) rotate(0)}}
-.center{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;padding:20px;perspective:900px}
-.profile-bg{position:relative;background:#1e1e22;border:1px solid rgba(255,255,255,0.06);border-radius:22px;padding:22px 26px;box-shadow:0 20px 50px rgba(0,0,0,0.6);transform-style:preserve-3d;will-change:transform;transition:transform 0.12s ease-out;overflow:hidden}
-.profile-bg::before{content:'';position:absolute;inset:0;background: radial-gradient(ellipse 400px 200px at 30% 20%, rgba(255,255,255,0.04), transparent 60%);pointer-events:none}
-.particles-mini{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:22px}
-.particles-mini .pw{position:absolute;bottom:-10px;background:radial-gradient(circle, #fff 0%, rgba(255,255,255,0.7) 40%, transparent 70%);border-radius:50%;opacity:0;will-change:transform,opacity;filter:blur(0.2px);animation: pwMini linear infinite}
-@keyframes pwMini{0%{transform: translate3d(var(--drift, 0px), 0, 0) scale(0.7); opacity:0}8%{opacity:0.75}92%{opacity:0.75}100%{transform: translate3d(var(--drift2, 12px), -240px, 0) scale(1.05); opacity:0}}
-.card{position:relative;z-index:1;display:flex;align-items:center;gap:22px;background: transparent}
-.pfp{width:118px;height:118px;border-radius:18px;overflow:hidden;background:#111;flex-shrink:0;border:1px solid rgba(255,255,255,0.06)}
-.pfp img{width:100%;height:100%;object-fit:cover}
-.info{display:flex;flex-direction:column;gap:8px;min-width:0}
-.name-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.name{font-size:28px;font-weight:800;letter-spacing:-0.02em;color:#fff}
-.badges{display:flex;align-items:center;gap:4px;background:rgba(28,28,30,0.9);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:5px 8px}
-.badges i{font-size:13px;position:relative;cursor:help}
-.badges i::after{content:attr(data-tip);position:absolute;bottom:140%;left:50%;transform:translateX(-50%);background:#1e1e22;color:#e8e8f0;font-size:10px;font-weight:600;letter-spacing:0.02em;padding:5px 7px;border-radius:6px;white-space:nowrap;border:1px solid rgba(255,255,255,0.08);opacity:0;pointer-events:none;transition:opacity 0.15s, transform 0.15s;transform:translateX(-50%) translateY(4px)}
-.badges i:hover::after{opacity:1;transform:translateX(-50%) translateY(0)}
-.b1{color:#ffd700} .b2{color:#9ca3af} .b3{color:#60a5fa} .b4{color:#facc15} .b5{color:#22d3ee} .b6{color:#f472b6} .b7{color:#a78bfa} .b8{color:#fb7185} .b9{color:#4ade80}
-.bio{font-size:13px;font-weight:500;color:#e8e8f0;letter-spacing:0.01em}
-.bio-handle{font-size:13px;color:#b5bac1;margin-top:2px}
-.links{display:flex;align-items:center;gap:10px;margin-top:6px}
-.links a{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:#d8d8e0;font-size:18px;text-decoration:none;transition:background 0.15s, transform 0.15s;border:none;box-shadow:none}
-.links a:hover{transform:scale(1.06);background:rgba(255,255,255,0.10)}
-.links a.discord{color:#b5bac1}
-@media(max-width:600px){.card{flex-direction:column;text-align:center}.name-row{justify-content:center}.links{justify-content:center}.profile-bg{padding:18px}}
-</style>
-</head>
-<body>
-<div class="bg"><video id="bg-video" autoplay muted loop playsinline><source src="media/guns-bg.mp4" type="video/mp4"></video></div>
-<div class="topbar" id="speaker-btn" title="Mute"><i class="fa-solid fa-volume-high" id="speaker-icon"></i></div>
-<div class="plus" id="plus-btn" title="Back"><i class="fa-solid fa-arrow-left" style="color:#fff"></i></div>
-<div class="center" id="center">
-  <div class="profile-bg" id="profile-bg">
-    <div class="particles-mini" id="profile-particles"></div>
-    <div class="card">
-      <div class="pfp"><img src="images/elly-pfp.jpg" alt="Elly"></div>
-      <div class="info">
-        <div class="name-row">
-          <div class="name">Elly</div>
-          <div class="badges">
-            <i class="fa-solid fa-crown b1" data-tip="Owner"></i>
-            <i class="fa-solid fa-gear b2" data-tip="Developer"></i>
-            <i class="fa-solid fa-circle-check b3" data-tip="Verified"></i>
-            <i class="fa-solid fa-star b4" data-tip="Star"></i>
-            <i class="fa-solid fa-gem b5" data-tip="Diamond"></i>
-            <i class="fa-solid fa-fire b6" data-tip="Fire"></i>
-            <i class="fa-solid fa-gift b7" data-tip="Gift"></i>
-            <i class="fa-solid fa-leaf b8" data-tip="Leaf"></i>
-            <i class="fa-solid fa-gamepad b9" data-tip="Gamer"></i>
-          </div>
-        </div>
-        <div class="bio">Thank God I Ant Gotta Rob And Scam</div>
-        <div class="bio-handle">@Elly is my only discord.</div>
-        <div class="links">
-          <a class="discord" href="https://discord.gg/vyronclient" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<audio id="about-audio" src="media/Rob and Scam.mp3" loop></audio>
-<script>
-(function(){
-  var audio=document.getElementById('about-audio');
-  var btn=document.getElementById('speaker-btn');
-  var icon=document.getElementById('speaker-icon');
-  var video=document.getElementById('bg-video');
-  try{ audio.volume=0.7; var p=audio.play(); if(p) p.catch(()=>{}); if(video) video.play().catch(()=>{}); }catch(e){}
-  if(btn){
-    btn.addEventListener('click', function(){
-      if(audio.muted || audio.paused){
-        audio.muted=false;
-        if(audio.paused) audio.play().catch(()=>{});
-        icon.className='fa-solid fa-volume-high';
-        btn.title='Mute';
-      } else {
-        audio.muted=true;
-        icon.className='fa-solid fa-volume-xmark';
-        btn.title='Unmute';
-      }
-    });
-  }
-})();
-(function(){
-  var plus=document.getElementById('plus-btn');
-  if(plus){
-    plus.addEventListener('click', function(){
-      plus.classList.remove('pop'); void plus.offsetWidth; plus.classList.add('pop');
-      setTimeout(function(){ window.location.href='index.html'; }, 260);
-    });
-  }
-})();
-(function(){
-  var card=document.getElementById('profile-bg');
-  if(!card) return;
-  var cont=document.getElementById('profile-particles');
-  if(cont){
-    for(var i=0;i<18;i++){
-      var d=document.createElement('div');
-      d.className='pw';
-      var s=(1.6+Math.random()*1.4).toFixed(1);
-      d.style.width=s+'px'; d.style.height=s+'px';
-      d.style.left=(Math.random()*100)+'%';
-      d.style.bottom='-10px';
-      d.style.animationDuration=(10+Math.random()*8)+'s';
-      d.style.animationDelay=(Math.random()*8)+'s';
-      d.style.setProperty('--drift', (Math.random()*30-15).toFixed(1)+'px');
-      d.style.setProperty('--drift2', (Math.random()*40-20).toFixed(1)+'px');
-      cont.appendChild(d);
-    }
-  }
-  card.addEventListener('mousemove', function(e){
-    var rect=card.getBoundingClientRect();
-    var cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
-    var dx=(e.clientX-cx)/(rect.width/2);
-    var dy=(e.clientY-cy)/(rect.height/2);
-    var rx= -dy*6, ry= dx*8;
-    card.style.transform='rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg)';
-  });
-  card.addEventListener('mouseleave', function(){ card.style.transform='rotateX(0) rotateY(0)'; });
-})();
-</script>
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elly — About</title>
+<link rel="stylesheet" href="css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;cursor:url('images/about-cursor.png'), auto}
+a,button{cursor:url('images/about-cursor.png'), auto !important}
+html,body{width:100%;height:100%;background:#000;font-family:'Segoe UI',system-ui,sans-serif;color:#fff;overflow:hidden}
+.bg{position:fixed;inset:0;background:#000;z-index:0;overflow:hidden}
+.bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(2px) brightness(0.45);transform:scale(1.05)}
+.bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.45)}
+.topbar{position:fixed;top:18px;left:18px;z-index:10;width:42px;height:42px;background:rgba(22,22,22,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;cursor:pointer;transition:background 0.15s}
+.topbar:hover{background:rgba(32,32,32,0.95)}
+.plus{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:10;width:38px;height:38px;background:rgba(22,22,22,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;cursor:pointer;transition:transform 0.2s, background 0.15s}
+.plus:hover{background:rgba(32,32,32,0.95);transform:translateX(-50%) scale(1.05)}
+.plus.pop{animation: plusPop 0.35s cubic-bezier(0.22,1,0.36,1)}
+@keyframes plusPop{0%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.15) rotate(90deg)}100%{transform:translateX(-50%) scale(1) rotate(0)}}
+.center{position:fixed;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;padding:20px;perspective:900px}
+.profile-bg{position:relative;background:#1e1e22;border:1px solid rgba(255,255,255,0.06);border-radius:22px;padding:22px 26px;box-shadow:0 20px 50px rgba(0,0,0,0.6);transform-style:preserve-3d;will-change:transform;transition:transform 0.12s ease-out;overflow:hidden}
+.profile-bg::before{content:'';position:absolute;inset:0;background: radial-gradient(ellipse 400px 200px at 30% 20%, rgba(255,255,255,0.04), transparent 60%);pointer-events:none}
+.particles-mini{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:22px}
+.particles-mini .pw{position:absolute;bottom:-10px;background:radial-gradient(circle, #fff 0%, rgba(255,255,255,0.7) 40%, transparent 70%);border-radius:50%;opacity:0;will-change:transform,opacity;filter:blur(0.2px);animation: pwMini linear infinite}
+@keyframes pwMini{0%{transform: translate3d(var(--drift, 0px), 0, 0) scale(0.7); opacity:0}8%{opacity:0.75}92%{opacity:0.75}100%{transform: translate3d(var(--drift2, 12px), -240px, 0) scale(1.05); opacity:0}}
+.card{position:relative;z-index:1;display:flex;align-items:center;gap:22px;background: transparent}
+.pfp{width:118px;height:118px;border-radius:18px;overflow:hidden;background:#111;flex-shrink:0;border:1px solid rgba(255,255,255,0.06)}
+.pfp img{width:100%;height:100%;object-fit:cover}
+.info{display:flex;flex-direction:column;gap:8px;min-width:0}
+.name-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.name{font-size:28px;font-weight:800;letter-spacing:-0.02em;color:#fff}
+.badges{display:flex;align-items:center;gap:4px;background:rgba(28,28,30,0.9);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:5px 8px}
+.badges i{font-size:13px;position:relative;cursor:help}
+.badges i::after{content:attr(data-tip);position:absolute;bottom:140%;left:50%;transform:translateX(-50%);background:#1e1e22;color:#e8e8f0;font-size:10px;font-weight:600;letter-spacing:0.02em;padding:5px 7px;border-radius:6px;white-space:nowrap;border:1px solid rgba(255,255,255,0.08);opacity:0;pointer-events:none;transition:opacity 0.15s, transform 0.15s;transform:translateX(-50%) translateY(4px)}
+.badges i:hover::after{opacity:1;transform:translateX(-50%) translateY(0)}
+.b1{color:#ffd700} .b2{color:#9ca3af} .b3{color:#60a5fa} .b4{color:#facc15} .b5{color:#22d3ee} .b6{color:#f472b6} .b7{color:#a78bfa} .b8{color:#fb7185} .b9{color:#4ade80}
+.bio{font-size:13px;font-weight:500;color:#e8e8f0;letter-spacing:0.01em}
+.bio-handle{font-size:13px;color:#b5bac1;margin-top:2px}
+.links{display:flex;align-items:center;gap:10px;margin-top:6px}
+.links a{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:#d8d8e0;font-size:18px;text-decoration:none;transition:background 0.15s, transform 0.15s;border:none;box-shadow:none}
+.links a:hover{transform:scale(1.06);background:rgba(255,255,255,0.10)}
+.links a.discord{color:#b5bac1}
+@media(max-width:600px){.card{flex-direction:column;text-align:center}.name-row{justify-content:center}.links{justify-content:center}.profile-bg{padding:18px}}
+</style>
+</head>
+<body>
+<div class="bg"><video id="bg-video" autoplay muted loop playsinline><source src="media/guns-bg.mp4" type="video/mp4"></video></div>
+<div class="topbar" id="speaker-btn" title="Mute"><i class="fa-solid fa-volume-high" id="speaker-icon"></i></div>
+<div class="plus" id="plus-btn" title="Back"><i class="fa-solid fa-arrow-left" style="color:#fff"></i></div>
+<div class="center" id="center">
+  <div class="profile-bg" id="profile-bg">
+    <div class="particles-mini" id="profile-particles"></div>
+    <div class="card">
+      <div class="pfp"><img src="images/cat-pfp.jpg" alt="Elly"></div>
+      <div class="info">
+        <div class="name-row">
+          <div class="name">Elly</div>
+          <div class="badges">
+            <i class="fa-solid fa-crown b1" data-tip="Owner"></i>
+            <i class="fa-solid fa-gear b2" data-tip="Developer"></i>
+            <i class="fa-solid fa-circle-check b3" data-tip="Verified"></i>
+            <i class="fa-solid fa-star b4" data-tip="Star"></i>
+            <i class="fa-solid fa-gem b5" data-tip="Diamond"></i>
+            <i class="fa-solid fa-fire b6" data-tip="Fire"></i>
+            <i class="fa-solid fa-gift b7" data-tip="Gift"></i>
+            <i class="fa-solid fa-leaf b8" data-tip="Leaf"></i>
+            <i class="fa-solid fa-gamepad b9" data-tip="Gamer"></i>
+          </div>
+        </div>
+        <div class="bio">Thank God I Ant Gotta Rob And Scam</div>
+        <div class="bio-handle">@Elly is my only discord.</div>
+        <div class="links">
+          <a class="discord" href="https://discord.gg/vyronclient" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<audio id="about-audio" src="media/Rob and Scam.mp3" loop></audio>
+<script>
+(function(){
+  var audio=document.getElementById('about-audio');
+  var btn=document.getElementById('speaker-btn');
+  var icon=document.getElementById('speaker-icon');
+  var video=document.getElementById('bg-video');
+  try{ audio.volume=0.7; var p=audio.play(); if(p) p.catch(()=>{}); if(video) video.play().catch(()=>{}); }catch(e){}
+  if(btn){
+    btn.addEventListener('click', function(){
+      if(audio.muted || audio.paused){
+        audio.muted=false;
+        if(audio.paused) audio.play().catch(()=>{});
+        icon.className='fa-solid fa-volume-high';
+        btn.title='Mute';
+      } else {
+        audio.muted=true;
+        icon.className='fa-solid fa-volume-xmark';
+        btn.title='Unmute';
+      }
+    });
+  }
+})();
+(function(){
+  var plus=document.getElementById('plus-btn');
+  if(plus){
+    plus.addEventListener('click', function(){
+      plus.classList.remove('pop'); void plus.offsetWidth; plus.classList.add('pop');
+      setTimeout(function(){ window.location.href='index.html'; }, 260);
+    });
+  }
+})();
+(function(){
+  var card=document.getElementById('profile-bg');
+  if(!card) return;
+  var cont=document.getElementById('profile-particles');
+  if(cont){
+    for(var i=0;i<18;i++){
+      var d=document.createElement('div');
+      d.className='pw';
+      var s=(1.6+Math.random()*1.4).toFixed(1);
+      d.style.width=s+'px'; d.style.height=s+'px';
+      d.style.left=(Math.random()*100)+'%';
+      d.style.bottom='-10px';
+      d.style.animationDuration=(10+Math.random()*8)+'s';
+      d.style.animationDelay=(Math.random()*8)+'s';
+      d.style.setProperty('--drift', (Math.random()*30-15).toFixed(1)+'px');
+      d.style.setProperty('--drift2', (Math.random()*40-20).toFixed(1)+'px');
+      cont.appendChild(d);
+    }
+  }
+  card.addEventListener('mousemove', function(e){
+    var rect=card.getBoundingClientRect();
+    var cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+    var dx=(e.clientX-cx)/(rect.width/2);
+    var dy=(e.clientY-cy)/(rect.height/2);
+    var rx= -dy*6, ry= dx*8;
+    card.style.transform='rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg)';
+  });
+  card.addEventListener('mouseleave', function(){ card.style.transform='rotateX(0) rotateY(0)'; });
+})();
+</script>
+</body>
+</html>
