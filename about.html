@@ -11,32 +11,73 @@ a,button{cursor:url('images/cursors/link.cur'), pointer !important}
 html,body{width:100%;height:100%;background:#000;font-family:'Segoe UI',system-ui,sans-serif;color:#fff;overflow:hidden}
 .bg{
   position:fixed;inset:0;
-  background: url('images/guns-bg.jpg') center/cover no-repeat;
-  filter: blur(18px) brightness(0.35);
-  transform: scale(1.08);
-  z-index:0;
+  background:#000;
+  z-index:0;overflow:hidden;
 }
-.bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.55)}
+.bg video{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  filter: blur(2px) brightness(0.45);
+  transform: scale(1.05);
+}
+.bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.45)}
 .topbar{
   position:fixed;top:18px;left:18px;z-index:10;
   width:42px;height:42px;background:rgba(22,22,22,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:10px;
   display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.4);
+  cursor:pointer;transition:background 0.15s;
 }
-.plus{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:10;color:rgba(255,255,255,0.9);font-size:22px;font-weight:300;line-height:1}
+.topbar:hover{background:rgba(32,32,32,0.95)}
+.plus{
+  position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:10;
+  width:38px;height:38px;background:rgba(22,22,22,0.9);border:1px solid rgba(255,255,255,0.08);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.9);font-size:18px;font-weight:300;
+  cursor:pointer;transition:transform 0.2s, background 0.15s;
+}
+.plus:hover{background:rgba(32,32,32,0.95);transform:translateX(-50%) scale(1.05)}
+.plus.pop{animation: plusPop 0.35s cubic-bezier(0.22,1,0.36,1)}
+@keyframes plusPop{0%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.15) rotate(90deg)}100%{transform:translateX(-50%) scale(1) rotate(0)}}
 .center{
   position:fixed;inset:0;z-index:5;
   display:flex;align-items:center;justify-content:center;
   padding:20px;
+  perspective:900px;
+}
+.profile-bg{
+  position:relative;
+  background:#1e1e22;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:22px;
+  padding:22px 26px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.6);
+  transform-style:preserve-3d;
+  will-change:transform;
+  transition:transform 0.12s ease-out;
+  overflow:hidden;
+}
+.profile-bg::before{
+  content:'';position:absolute;inset:0;
+  background: radial-gradient(ellipse 400px 200px at 30% 20%, rgba(255,255,255,0.04), transparent 60%);
+  pointer-events:none;
+}
+.particles-mini{
+  position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:22px;
+}
+.particles-mini .pw{position:absolute;background:#fff;border-radius:50%;opacity:0.55;animation: pwMini linear infinite}
+@keyframes pwMini{
+  0%{transform: translateY(110%) scale(0.8); opacity:0}
+  10%{opacity:0.6}
+  90%{opacity:0.6}
+  100%{transform: translateY(-20%) scale(1); opacity:0}
 }
 .card{
+  position:relative;z-index:1;
   display:flex;align-items:center;gap:22px;
   background: transparent;
 }
 .pfp{
   width:118px;height:118px;border-radius:18px;overflow:hidden;
   background:#111;flex-shrink:0;
-  box-shadow:0 8px 24px rgba(0,0,0,0.6);
   border:1px solid rgba(255,255,255,0.06);
 }
 .pfp img{width:100%;height:100%;object-fit:cover}
@@ -48,63 +89,145 @@ html,body{width:100%;height:100%;background:#000;font-family:'Segoe UI',system-u
   background:rgba(28,28,30,0.9);border:1px solid rgba(255,255,255,0.06);
   border-radius:18px;padding:5px 8px;
 }
-.badges i{font-size:13px;filter: drop-shadow(0 0 6px currentColor)}
+.badges i{font-size:13px;position:relative;cursor:help}
+.badges i::after{
+  content:attr(data-tip);
+  position:absolute;bottom:140%;left:50%;transform:translateX(-50%);
+  background:#1e1e22;color:#e8e8f0;font-size:10px;font-weight:600;letter-spacing:0.02em;
+  padding:5px 7px;border-radius:6px;white-space:nowrap;
+  border:1px solid rgba(255,255,255,0.08);
+  opacity:0;pointer-events:none;transition:opacity 0.15s, transform 0.15s;
+  transform:translateX(-50%) translateY(4px);
+}
+.badges i:hover::after{opacity:1;transform:translateX(-50%) translateY(0)}
 .b1{color:#ffd700} .b2{color:#9ca3af} .b3{color:#60a5fa} .b4{color:#facc15} .b5{color:#22d3ee} .b6{color:#f472b6} .b7{color:#a78bfa} .b8{color:#fb7185} .b9{color:#4ade80}
 .bio{font-size:13px;font-weight:500;color:#e8e8f0;letter-spacing:0.01em}
 .bio-handle{font-size:13px;color:#b5bac1;margin-top:2px}
 .links{display:flex;align-items:center;gap:10px;margin-top:6px}
 .links a{
   width:36px;height:36px;border-radius:10px;
-  background:rgba(28,28,30,0.9);border:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.06);
   display:flex;align-items:center;justify-content:center;
-  color:#fff;font-size:18px;
-  box-shadow:0 0 12px rgba(255,255,255,0.15);
-  transition:transform 0.15s, box-shadow 0.15s;
+  color:#d8d8e0;font-size:18px;
   text-decoration:none;
+  transition:background 0.15s, transform 0.15s;
+  border:none;box-shadow:none;
 }
-.links a:hover{transform:scale(1.07);box-shadow:0 0 16px rgba(255,255,255,0.25)}
-.links a.discord{color:#fff;box-shadow:0 0 14px rgba(88,101,242,0.6);border-color:rgba(88,101,242,0.3)}
-.links a.insta{color:#fff;box-shadow:0 0 14px rgba(225,48,108,0.5);border-color:rgba(225,48,108,0.3)}
-.links a.twitch{color:#fff;box-shadow:0 0 14px rgba(145,70,255,0.5);border-color:rgba(145,70,255,0.3)}
+.links a:hover{transform:scale(1.06);background:rgba(255,255,255,0.10)}
+.links a.discord{color:#b5bac1}
+.links a.insta{color:#b5bac1}
+.links a.twitch{color:#b5bac1}
 @media(max-width:600px){
   .card{flex-direction:column;text-align:center}
   .name-row{justify-content:center}
-  .bio{justify-content:center}
   .links{justify-content:center}
+  .profile-bg{padding:18px}
 }
 </style>
 </head>
 <body>
-<div class="bg"></div>
-<div class="topbar"><i class="fa-solid fa-volume-high"></i></div>
-<div class="plus">+</div>
-<div class="center">
-  <div class="card">
-    <div class="pfp"><img src="images/elly-pfp.jpg" alt="Elly"></div>
-    <div class="info">
-      <div class="name-row">
-        <div class="name">Elly</div>
-        <div class="badges">
-          <i class="fa-solid fa-crown b1" title="crown"></i>
-          <i class="fa-solid fa-gear b2"></i>
-          <i class="fa-solid fa-circle-check b3"></i>
-          <i class="fa-solid fa-star b4"></i>
-          <i class="fa-solid fa-gem b5"></i>
-          <i class="fa-solid fa-fire b6"></i>
-          <i class="fa-solid fa-gift b7"></i>
-          <i class="fa-solid fa-leaf b8"></i>
-          <i class="fa-solid fa-gamepad b9"></i>
+<div class="bg"><video id="bg-video" autoplay muted loop playsinline><source src="media/guns-bg.mp4" type="video/mp4"></video></div>
+<div class="topbar" id="speaker-btn" title="Mute"><i class="fa-solid fa-volume-high" id="speaker-icon"></i></div>
+<div class="plus" id="plus-btn" title="Back to Vyron">+</div>
+<div class="center" id="center">
+  <div class="profile-bg" id="profile-bg">
+    <div class="particles-mini" id="profile-particles"></div>
+    <div class="card">
+      <div class="pfp"><img src="images/elly-pfp.jpg" alt="Elly"></div>
+      <div class="info">
+        <div class="name-row">
+          <div class="name">Elly</div>
+          <div class="badges">
+            <i class="fa-solid fa-crown b1" data-tip="Owner"></i>
+            <i class="fa-solid fa-gear b2" data-tip="Developer"></i>
+            <i class="fa-solid fa-circle-check b3" data-tip="Verified"></i>
+            <i class="fa-solid fa-star b4" data-tip="Star"></i>
+            <i class="fa-solid fa-gem b5" data-tip="Diamond"></i>
+            <i class="fa-solid fa-fire b6" data-tip="Fire"></i>
+            <i class="fa-solid fa-gift b7" data-tip="Gift"></i>
+            <i class="fa-solid fa-leaf b8" data-tip="Leaf"></i>
+            <i class="fa-solid fa-gamepad b9" data-tip="Gamer"></i>
+          </div>
         </div>
-      </div>
-      <div class="bio">Thank God I Ant Gotta Rob And Scam</div>
-      <div class="bio-handle">@Elly is my only discord.</div>
-      <div class="links">
-        <a class="discord" href="https://discord.gg/vyronclient" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
-        <a class="insta" href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a class="twitch" href="#" title="Twitch"><i class="fa-brands fa-twitch"></i></a>
+        <div class="bio">Thank God I Ant Gotta Rob And Scam</div>
+        <div class="bio-handle">@Elly is my only discord.</div>
+        <div class="links">
+          <a class="discord" href="https://discord.gg/vyronclient" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+          <a class="insta" href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a class="twitch" href="#" title="Twitch"><i class="fa-brands fa-twitch"></i></a>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<audio id="about-audio" src="media/Rob and Scam.mp3" loop></audio>
+<script>
+// Speaker mute toggle + autoplay on About
+(function(){
+  var audio=document.getElementById('about-audio');
+  var btn=document.getElementById('speaker-btn');
+  var icon=document.getElementById('speaker-icon');
+  var video=document.getElementById('bg-video');
+  // try autoplay rob and scam when page loads (from About click)
+  try{ audio.volume=0.7; var p=audio.play(); if(p) p.catch(()=>{}); if(video) video.play().catch(()=>{}); }catch(e){}
+  if(btn){
+    btn.addEventListener('click', function(){
+      if(audio.muted || audio.paused){
+        audio.muted=false;
+        if(audio.paused) audio.play().catch(()=>{});
+        icon.className='fa-solid fa-volume-high';
+        btn.title='Mute';
+        if(video) video.muted=false;
+      } else {
+        audio.muted=true;
+        icon.className='fa-solid fa-volume-xmark';
+        btn.title='Unmute';
+        if(video) video.muted=true;
+      }
+    });
+  }
+})();
+// Plus -> back to vyron tabs with pop
+(function(){
+  var plus=document.getElementById('plus-btn');
+  if(plus){
+    plus.addEventListener('click', function(){
+      plus.classList.remove('pop'); void plus.offsetWidth; plus.classList.add('pop');
+      setTimeout(function(){ window.location.href='index.html'; }, 260);
+    });
+  }
+})();
+// Profile 3D tilt + small particles
+(function(){
+  var card=document.getElementById('profile-bg');
+  var center=document.getElementById('center');
+  if(!card || !center) return;
+  // particles
+  var cont=document.getElementById('profile-particles');
+  if(cont){
+    for(var i=0;i<14;i++){
+      var d=document.createElement('div');
+      d.className='pw';
+      var s=(1.4+Math.random()*1.6).toFixed(1);
+      d.style.width=s+'px'; d.style.height=s+'px';
+      d.style.left=(Math.random()*100)+'%';
+      d.style.top=(Math.random()*100)+'%';
+      d.style.animationDuration=(9+Math.random()*9)+'s';
+      d.style.animationDelay=(Math.random()*6)+'s';
+      cont.appendChild(d);
+    }
+  }
+  // 3D on mousemove over center (background)
+  center.addEventListener('mousemove', function(e){
+    var rect=card.getBoundingClientRect();
+    var cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+    var dx=(e.clientX-cx)/(rect.width/2);
+    var dy=(e.clientY-cy)/(rect.height/2);
+    var rx= -dy*7, ry= dx*9;
+    card.style.transform='rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg)';
+  });
+  center.addEventListener('mouseleave', function(){ card.style.transform='rotateX(0) rotateY(0)'; });
+})();
+</script>
 </body>
 </html>
