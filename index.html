@@ -1,2138 +1,2139 @@
-<!DOCTYPE html><html lang="en"><head>
-
-  <meta charset="utf-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>VyronClient — Rec Room MeowNet Cheat (2021)</title>
-
-  <meta name="description" content="VyronClient is a free Rec Room MeowNet external cheat from 2021. Fly, ESP, aimbot, item spawn and more. This cheat only works on MeowNet for now.">
-
-  <meta property="og:title" content="VyronClient — MeowNet 2021">
-
-  <meta property="og:description" content="Free MeowNet external — Fly, God Mode, ESP, Item Spawn. 2021 cheat, MeowNet only.">
-
-  <link rel="canonical" href="https://vyronclient.com/">
-
-  <link rel="icon" type="image/png" href="images/image-removebg-preview%20%286%29.png">
-
-  <link rel="stylesheet" href="css/all.min.css">
-
-  <style>
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-
-
-    *{cursor: url('images/cursors/cursor.cur'), auto}
-
-    a, button, .store-btn, .download-btn, .top-nav button, .paid-switch .slider{cursor: url('images/cursors/link.cur'), pointer !important}
-
-    html:active{cursor: url('images/cursors/work.ani'), wait}
-
-    body {
-
-      width: 100vw;
-
-      height: 100vh;
-
-      overflow: hidden;
-
-      background: #060608;
-
-      font-family: 'Segoe UI', sans-serif;
-
-      color: #e0e0f0;
-
-      position: relative;
-
-      cursor: url('images/cursors/cursor.cur'), auto;
-
-    }
-
-
-
-    body::before {
-
-      content: '';
-
-      position: fixed;
-
-      inset: -30%;
-
-      background:
-
-        radial-gradient(ellipse 900px 650px at 18% 32%, rgba(255,61,144,0.16), transparent 58%),
-
-        radial-gradient(ellipse 800px 600px at 82% 68%, rgba(180,20,80,0.14), transparent 58%),
-
-        radial-gradient(ellipse 700px 500px at 50% 55%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.3) 100%),
-
-        linear-gradient(180deg, #060608 0%, #0a0a12 100%);
-
-      pointer-events: none;
-
-      z-index: 0;
-
-      animation: liquidBg 20s ease-in-out infinite alternate;
-
-    }
-
-    @keyframes liquidBg{
-
-      0%{transform: translate3d(0,0,0) scale(1) rotate(0deg)}
-
-      50%{transform: translate3d(1.2%, -1%,0) scale(1.02) rotate(0.3deg)}
-
-      100%{transform: translate3d(-1%, 1%,0) scale(1.01) rotate(-0.3deg)}
-
-    }
-
-
-
-    /* ── Intro overlay ────────────────────────────────────── */
-
-    .intro-overlay {
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 99999;
-
-      background: #060608;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      flex-direction: column;
-
-    }
-
-    .intro-overlay .intro-glow {
-
-      position: absolute;
-
-      width: 400px;
-
-      height: 400px;
-
-      border-radius: 50%;
-
-      background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
-
-      animation: introGlow 2.5s ease forwards;
-
-    }
-
-    .intro-overlay .intro-logo {
-
-      width: 300px;
-
-      height: 300px;
-
-      object-fit: contain;
-
-      animation: introZoom 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-
-    }
-
-    .intro-overlay .intro-text {
-
-      position: absolute;
-
-      bottom: 30%;
-
-      font-size: 13px;
-
-      font-weight: 600;
-
-      color: #4a4a62;
-
-      letter-spacing: 0.3em;
-
-      text-transform: uppercase;
-
-      opacity: 0;
-
-      animation: introFade 2.5s ease forwards;
-
-      animation-delay: 0.5s;
-
-    }
-
-    .intro-overlay.fade-out {
-
-      animation: introFadeOut 0.8s ease forwards;
-
-    }
-
-    @keyframes introZoom {
-
-      0%   { transform: scale(3);   opacity: 0; filter: blur(20px); }
-
-      30%  { opacity: 1;            filter: blur(0); }
-
-      70%  { transform: scale(1);   opacity: 1; }
-
-      100% { transform: scale(0.4); opacity: 0; filter: blur(8px); }
-
-    }
-
-    @keyframes introGlow {
-
-      0%   { opacity: 0;   transform: scale(0.5); }
-
-      30%  { opacity: 1; }
-
-      70%  { opacity: 0.6; }
-
-      100% { opacity: 0;   transform: scale(2); }
-
-    }
-
-    @keyframes introFade {
-
-      0%   { opacity: 0;   transform: translateY(10px); }
-
-      40%  { opacity: 0.6; }
-
-      80%  { opacity: 0.3; }
-
-      100% { opacity: 0; }
-
-    }
-
-    @keyframes introFadeOut {
-
-      0%   { opacity: 1; }
-
-      100% { opacity: 0; visibility: hidden; }
-
-    }
-
-
-
-    /* ── Brand + Top Nav ────────────────────────────────── */
-
-    .brand {
-
-      position: fixed;
-
-      top: 14px;
-
-      left: 24px;
-
-      z-index: 20;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-    }
-
-    .brand-logo {
-
-      width: 34px;
-
-      height: 34px;
-
-      border-radius: 8px;
-
-      overflow: hidden;
-
-      border: 1px solid rgba(255,255,255,0.08);
-
-    }
-
-    .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
-
-    .brand-text h1 {
-
-      font-size: 15px;
-
-      font-weight: 700;
-
-      color: #f0f0f8;
-
-      letter-spacing: 0.01em;
-
-    }
-
-    .brand-text p {
-
-      font-size: 10px;
-
-      color: #6a6a80;
-
-      letter-spacing: 0.06em;
-
-      margin-top: 1px;
-
-    }
-
-    .top-nav {
-
-      position: fixed;
-
-      top: 16px;
-
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      z-index: 20;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 6px;
-
-      background: rgba(18,18,20,0.9);
-
-      border: 1px solid rgba(255,255,255,0.07);
-
-      border-radius: 10px;
-
-      padding: 4px;
-
-      backdrop-filter: blur(8px);
-
-    }
-
-    .top-nav button{
-
-      display:flex;align-items:center;gap:7px;
-
-      padding:7px 16px;
-
-      border:none;border-radius:7px;
-
-      background:transparent;color:#7a7a8e;
-
-      font-size:13px;font-weight:600;
-
-      cursor:pointer;transition:background 0.15s,color 0.15s;
-
-    }
-
-    .top-nav button.active{background:linear-gradient(135deg, #ff3d8a, #ff7ab8);color:#fff;box-shadow:0 2px 10px rgba(255,61,144,0.25)}
-
-    .top-nav button:hover:not(.active){color:#b0b0c8;background:rgba(255,255,255,0.04)}
-
-    .top-nav button i{font-size:12px}
-
-
-
-    /* ── Hero ───────────────────────────────────────────── */
-
-    .hero-wrap {
-
-      position: fixed;
-
-      top: 165px;
-
-      left: 48px;
-
-      z-index: 10;
-
-      display: flex;
-
-      flex-direction: column;
-
-      gap: 12px;
-
-      max-width: 560px;
-
-      max-height: calc(100vh - 190px);
-
-      animation: heroIn 0.6s cubic-bezier(0.22,1,0.36,1) both;
-
-    }
-
-    @keyframes heroIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-
-    /* download view - left aligned like store, but lower */
-
-    #hero-download{
-
-      margin-top: 18px;
-
-      align-items: flex-start;
-
-      text-align: left;
-
-      padding: 12px 0 0 0;
-
-      animation: fadeUp 0.5s ease both;
-
-    }
-
-    #hero-download .hero-note{max-width:360px}
-
-    #hero-store{animation: fadeUp 0.5s ease both}
-
-    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-    /* notifications - moved up, cleaner */
-
-    .notif-stack{
-
-      position: fixed;
-
-      bottom: 125px;
-
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      z-index: 30;
-
-      display:flex;flex-direction:column;gap:8px;align-items:center;
-
-      pointer-events:none;
-
-    }
-
-    .notif{
-
-      display:flex;align-items:center;gap:10px;
-
-      background: #1e1e22;
-
-      border:1px solid rgba(255,255,255,0.07);
-
-      color:#e8e8f0;
-
-      font-size:12.5px;font-weight:500;
-
-      padding:10px 14px 10px 12px;
-
-      border-radius:10px;
-
-      box-shadow:0 10px 28px rgba(0,0,0,0.5);
-
-      animation: notifIn 0.35s cubic-bezier(0.22,1,0.36,1) both, notifOut 0.32s ease forwards 2.4s;
-
-    }
-
-    .notif i{
-
-      width:22px;height:22px;
-
-      display:flex;align-items:center;justify-content:center;
-
-      background: rgba(34,197,94,0.15);
-
-      border:1px solid rgba(34,197,94,0.35);
-
-      color:#22c55e;
-
-      font-size:11px;
-
-      border-radius:50%;
-
-      flex-shrink:0;
-
-    }
-
-    .notif.x i{
-
-      background: rgba(239,68,68,0.15);
-
-      border-color: rgba(239,68,68,0.35);
-
-      color: #ef4444;
-
-    }
-
-    .notif.x{border-color: rgba(239,68,68,0.18)}
-
-    @keyframes notifIn{from{opacity:0;transform:translateY(10px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-    @keyframes notifOut{to{opacity:0;transform:translateY(-8px) scale(0.98)}}
-
-    /* extra clean animations */
-
-    .brand{animation: brandIn 0.5s ease both}
-
-    @keyframes brandIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
-
-    .top-nav{animation: navIn 0.5s 0.1s ease both}
-
-    @keyframes navIn{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
-
-    .menu-scene{animation: menuIn 0.7s 0.25s cubic-bezier(0.22,1,0.36,1) both}
-
-    @keyframes menuIn{from{opacity:0;transform:translateY(-46%) scale(0.96)}to{opacity:1;transform:translateY(-50%) scale(1)}}
-
-    .hero-label {
-
-      font-size: 11px;
-
-      font-weight: 600;
-
-      color: #6a6a80;
-
-      letter-spacing: 0.12em;
-
-      text-transform: uppercase;
-
-    }
-
-    .hero-title {
-
-      font-size: 34px;
-
-      font-weight: 800;
-
-      color: #f0f0f8;
-
-      line-height: 1.1;
-
-      letter-spacing: -0.02em;
-
-    }
-
-    .hero-title span { color: #ff7ab8; font-weight: 800; }
-
-    .hero-note {
-
-      font-size: 12px;
-
-      font-weight: 500;
-
-      color: #9a9ab0;
-
-      line-height: 1.5;
-
-    }
-
-    .hero-note b{color:#d8d8e8}
-
-    .download-btn {
-
-      display: inline-flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 8px;
-
-      margin-top: 4px;
-
-      padding: 12px 22px;
-
-      background: #1e1e22;
-
-      color: #e8e8f0;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
-      border: 1px solid rgba(255,255,255,0.10);
-
-      border-radius: 8px;
-
-      cursor: pointer;
-
-      text-decoration: none;
-
-      transition: background 0.15s, border-color 0.15s;
-
-      width: fit-content;
-
-    }
-
-    .download-btn:hover { background:#2a2a30; border-color:rgba(167,139,250,0.3); color:#fff; }
-
-    .download-btn i{font-size:13px;color:#ff7ab8}
-
-    .download-meta { font-size: 11px; color: #4a4a5e; margin-top: 2px; }
-
-    /* Store panel - fits without scroll */
-
-    .store-panel{ display:none; flex-direction:column; gap:10px; overflow:visible; padding-right:0; }
-
-    .store-panel.active{ display:flex; }
-
-    .store-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-
-    .store-card{
-
-      position:relative; overflow:hidden;
-
-      border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px;
-
-      display:flex; flex-direction:column; gap:7px;
-
-      background: #0d0a14;
-
-      min-height: 0;
-
-      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-
-    }
-
-    .store-card::before{
-
-      content:''; position:absolute; inset:-25%;
-
-      background:
-
-        radial-gradient(ellipse 360px 240px at 28% 35%, rgba(255,61,144,0.32), transparent 62%),
-
-        radial-gradient(ellipse 380px 260px at 78% 68%, rgba(88,28,135,0.26), transparent 62%),
-
-        linear-gradient(130deg, #0f0a18 0%, #1a0f2e 50%, #0f0a18 100%);
-
-      animation: swirlDrift 14s ease-in-out infinite alternate;
-
-      opacity: 1;
-
-    }
-
-    @keyframes swirlDrift{
-
-      0%{transform: translate3d(0,0,0) rotate(0deg) scale(1)}
-
-      100%{transform: translate3d(1.2%, -1%,0) rotate(0.6deg) scale(1.02)}
-
-    }
-
-    .store-card::after{
-
-      content:''; position:absolute; inset:0;
-
-      background: rgba(12,12,18,0.76);
-
-    }
-
-    .store-card:hover{ transform: translateY(-2px); border-color:rgba(167,139,250,0.18); box-shadow:0 8px 20px rgba(0,0,0,0.3) }
-
-    .store-card.paid{ border-color:rgba(167,139,250,0.22); }
-
-    .store-card.paid::after{ background: rgba(16,12,28,0.68); }
-
-    .store-card.paid::before{ opacity:1; filter: brightness(1.05) }
-
-    .store-card > *{ position:relative; z-index:1; }
-
-    .store-card h3{ font-size:12.5px; font-weight:700; color:#f0f0f8; display:flex; align-items:center; gap:6px; }
-
-    .store-card h3 i{font-size:11px} .store-card.free h3 i{color:#a0a0b8} .store-card.paid h3 i{color:#ffb3d1}
-
-    .store-card .price{ font-size:16px; font-weight:800; color:#f0f0f8; } .store-card.paid .price{color:#ffb3d1}
-
-    .store-card .price small{font-size:11px;font-weight:600;color:#8a8a9e}
-
-    .store-card ul{ list-style:none; display:flex; flex-direction:column; gap:3px; margin:2px 0; }
-
-    .store-card ul li{ font-size:11px; color:#b0b0c8; display:flex; gap:6px; align-items:flex-start; line-height:1.35; }
-
-    .store-card ul li::before{content:'—';color:#5a5a6e;flex-shrink:0}
-
-    .store-card.paid ul li{color:#d0c8f0} .store-card.paid ul li::before{color:#ff7ab8}
-
-    .store-btn{ margin-top:auto; padding:9px; border-radius:7px; border:1px solid rgba(255,255,255,0.08); background:#25252b; color:#e8e8f0; font-size:12px; font-weight:700; cursor:pointer; text-align:center; text-decoration:none; transition:background 0.15s; }
-
-    .store-btn:hover{background:#2e2e36} .store-btn.paid{background:#ff3d8a;border-color:#ff3d8a;color:#fff} .store-btn.paid:hover{background:#6d28d9}
-
-    @media(max-width:900px){ .store-grid{grid-template-columns:1fr} }
-
-
-
-
-
-    /* White particles - cleaner smooth */
-
-    #pink-particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
-
-    .pw{position:absolute;background:radial-gradient(circle, #fff 0%, rgba(255,255,255,0.85) 45%, transparent 72%);border-radius:50%;will-change:transform,opacity;filter:blur(0.15px);animation: pwFloat linear infinite;opacity:0}
-
-    @keyframes pwFloat{
-
-      0%{transform: translate3d(0, 105vh, 0) scale(0.7); opacity:0}
-
-      8%{opacity:0.85}
-
-      92%{opacity:0.85}
-
-      100%{transform: translate3d(var(--drift, 18px), -18vh, 0) scale(1.05); opacity:0}
-
-    }
-
-
-
-    /* ── Menu 3D ──────────────────────────────────────────── */
-
-    .menu-scene {
-
-      position: fixed;
-
-      right: 70px;
-
-      top: 50%;
-
-      transform: translateY(-50%);
-
-      perspective: 1600px;
-
-      z-index: 5;
-
-    }
-
-
-
-    .menu-3d {
-
-      transform-style: preserve-3d;
-
-      will-change: transform;
-
-      border-radius: 14px;
-
-    }
-
-
-
-    .menu-iframe {
-
-      width: 900px;
-
-      height: 530px;
-
-      border: none;
-
-      border-radius: 14px;
-
-      background: transparent;
-
-      display: block;
-
-      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.03);
-
-    }
-
-
-
-    /* ── Hint ─────────────────────────────────────────────── */
-
-    .hint {
-
-      position: fixed;
-
-      bottom: 22px;
-
-      left: 48px;
-
-      z-index: 10;
-
-      font-size: 10px;
-
-      color: #2a2a3e;
-
-      letter-spacing: 0.06em;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 7px;
-
-    }
-
-    .hint i { color: #333348; }
-
-
-
-    /* ── Paid toggle next to HUD ─────────────────────────── */
-
-    .paid-switch-wrap{
-
-      position: fixed;
-
-      bottom: 24px;
-
-      left: 50%;
-
-      transform: translateX(340px);
-
-      z-index: 20;
-
-      display:flex;align-items:center;gap:10px;
-
-      background: rgba(18,18,22,0.92);
-
-      border:1px solid rgba(255,255,255,0.07);
-
-      border-radius:9px;
-
-      padding:7px 12px;
-
-      backdrop-filter: blur(8px);
-
-      box-shadow:0 6px 18px rgba(0,0,0,0.35);
-
-    }
-
-    .paid-switch-wrap span.lbl{
-
-      font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9a9ab0;
-
-    }
-
-    .paid-switch{
-
-      position:relative;display:inline-block;width:36px;height:20px;
-
-    }
-
-    .paid-switch input{display:none}
-
-    .paid-switch .slider{
-
-      position:absolute;inset:0;
-
-      background:#2a2a30;border:1px solid rgba(255,255,255,0.08);
-
-      border-radius:20px;transition:background 0.2s;
-
-      cursor:pointer;
-
-    }
-
-    .paid-switch .slider::before{
-
-      content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;
-
-      background:#7a7a8a;border-radius:50%;transition:transform 0.2s,background 0.2s;
-
-      box-shadow:0 1px 3px rgba(0,0,0,0.4);
-
-    }
-
-    .paid-switch input:checked + .slider{background:#ff3d8a;border-color:rgba(255,61,144,0.4)}
-
-    .paid-switch input:checked + .slider::before{transform:translateX(16px);background:#fff}
-
-    .discord-circle{
-
-      width:32px;height:32px;border-radius:50%;
-
-      background:#313338;
-
-      border:1px solid rgba(255,255,255,0.06);
-
-      display:flex;align-items:center;justify-content:center;
-
-      color:#b5bac1;font-size:15px;
-
-      text-decoration:none;
-
-      transition:background 0.15s, color 0.15s, transform 0.15s;
-
-      flex-shrink:0;
-
-    }
-
-    .discord-circle:hover{background:#404249;color:#fff;transform:scale(1.05)}
-
-    @media(max-width:1100px){ .paid-switch-wrap{transform:translateX(280px)}}
-
-    @media(max-width:850px){ .paid-switch-wrap{display:none}}
-
-
-
-    /* ── Music player HUD ─────────────────────────────────── */
-
-    .music-hud {
-
-      position: fixed;
-
-      bottom: 22px;
-
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      z-index: 20;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 14px;
-
-      background: rgba(12, 12, 18, 0.85);
-
-      border: 1px solid rgba(255,255,255,0.06);
-
-      border-radius: 14px;
-
-      padding: 10px 18px;
-
-      backdrop-filter: blur(12px);
-
-      min-width: 380px;
-
-      box-shadow: 0 8px 28px rgba(0,0,0,0.5);
-
-    }
-
-    .music-hud .mh-cover {
-
-      width: 44px;
-
-      height: 44px;
-
-      border-radius: 8px;
-
-      overflow: hidden;
-
-      flex-shrink: 0;
-
-      background: linear-gradient(135deg, #ff3d8a, #4c1d95);
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-    }
-
-    .music-hud .mh-cover img {
-
-      width: 100%;
-
-      height: 100%;
-
-      object-fit: cover;
-
-    }
-
-    .music-hud .mh-cover .mh-cover-icon {
-
-      font-size: 18px;
-
-      color: #ff7ab8;
-
-    }
-
-    .music-hud .mh-info {
-
-      flex: 1;
-
-      min-width: 0;
-
-    }
-
-    .music-hud .mh-title {
-
-      font-size: 13px;
-
-      font-weight: 600;
-
-      color: #e8e8f5;
-
-      white-space: nowrap;
-
-      overflow: hidden;
-
-      text-overflow: ellipsis;
-
-    }
-
-    .music-hud .mh-artist {
-
-      font-size: 11px;
-
-      color: #5a5a78;
-
-      white-space: nowrap;
-
-      overflow: hidden;
-
-      text-overflow: ellipsis;
-
-    }
-
-    .music-hud .mh-progress {
-
-      width: 100%;
-
-      height: 3px;
-
-      background: rgba(255,255,255,0.08);
-
-      border-radius: 2px;
-
-      margin-top: 5px;
-
-      overflow: hidden;
-
-      cursor: pointer;
-
-    }
-
-    .music-hud .mh-progress-bar {
-
-      height: 100%;
-
-      width: 0%;
-
-      background: linear-gradient(90deg, #ff7ab8, #ff3d8a);
-
-      border-radius: 2px;
-
-      transition: width 0.2s linear;
-
-    }
-
-    .music-hud .mh-controls {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      flex-shrink: 0;
-
-    }
-
-    .music-hud .mh-btn {
-
-      background: none;
-
-      border: none;
-
-      color: #6a6a88;
-
-      font-size: 14px;
-
-      cursor: pointer;
-
-      padding: 4px;
-
-      transition: color 0.2s, transform 0.15s;
-
-    }
-
-    .music-hud .mh-btn:hover {
-
-      color: #ff7ab8;
-
-      transform: scale(1.1);
-
-    }
-
-    .music-hud .mh-play {
-
-      width: 32px;
-
-      height: 32px;
-
-      border-radius: 50%;
-
-      background: rgba(255,61,144,0.15);
-
-      border: 1px solid rgba(255,61,144,0.3);
-
-      color: #ff7ab8;
-
-      font-size: 13px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      transition: background 0.2s, transform 0.15s;
-
-    }
-
-    .music-hud .mh-play:hover {
-
-      background: rgba(255,61,144,0.3);
-
-      transform: scale(1.08);
-
-    }
-
-    .music-hud .mh-time {
-
-      font-size: 10px;
-
-      color: #4a4a62;
-
-      font-variant-numeric: tabular-nums;
-
-      min-width: 70px;
-
-      text-align: right;
-
-    }
-
-    .music-hud .mh-vol {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 5px;
-
-    }
-
-    .music-hud .mh-vol input[type=range] {
-
-      width: 60px;
-
-      height: 3px;
-
-      -webkit-appearance: none;
-
-      background: rgba(255,255,255,0.1);
-
-      border-radius: 2px;
-
-      outline: none;
-
-    }
-
-    .music-hud .mh-vol input[type=range]::-webkit-slider-thumb {
-
-      -webkit-appearance: none;
-
-      width: 10px;
-
-      height: 10px;
-
-      border-radius: 50%;
-
-      background: #ff7ab8;
-
-      cursor: pointer;
-
-    }
-
-
-
-    /* ── Responsive ───────────────────────────────────────── */
-
-    @media (max-width: 1100px) {
-
-      .menu-iframe { width: 700px; height: 450px; }
-
-      .hero-title { font-size: 32px; }
-
-    }
-
-    @media (max-width: 850px) {
-
-      .menu-iframe { width: 560px; height: 400px; }
-
-      .menu-scene { right: 20px; }
-
-      .hero-wrap { left: 24px; }
-
-      .brand { left: 24px; }
-
-      .hint { left: 24px; }
-
-      .music-hud { min-width: 300px; padding: 8px 12px; }
-
-    }
-
-  </style>
-
-</head>
-
-<body><div id="pink-particles"></div>
-
-
-
-  <!-- Intro overlay -->
-
-  <div class="intro-overlay" id="intro-overlay">
-
-    <div class="intro-glow"></div>
-
-    <img class="intro-logo" src="images/otherpic%20i%20want.png" alt="VyronClient">
-
-    <div class="intro-text">VyronClient</div>
-
-  </div>
-
-
-
-  <!-- Brand -->
-
-  <div class="brand">
-
-    <div class="brand-logo">
-
-      <img src="images/image-removebg-preview%20%286%29.png" alt="logo">
-
-    </div>
-
-    <div class="brand-text">
-
-      <h1>VyronClient</h1>
-
-      <p>v4.2</p>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- Top Nav -->
-
-  <nav class="top-nav" id="top-nav">
-
-    <button class="active" data-view="store" id="nav-store"><i class="fa-solid fa-store"></i> Store</button>
-
-    <button data-view="download" id="nav-download"><i class="fa-solid fa-download"></i> Download</button>
-
-    <button data-view="other" id="nav-other"><i class="fa-solid fa-layer-group"></i> Other Menus</button>
-
-    <button id="nav-about" onclick="window.location.href='Elly.html'"><i class="fa-solid fa-user"></i> About The Owner</button>
-    <button data-view="sevenup" id="nav-sevenup"><i class="fa-solid fa-file-lines"></i> 7UP Files</button>
-
-  </nav>
-
-
-
-  <!-- Hero -->
-
-  <div class="hero-wrap">
-
-    <!-- Download View -->
-
-     <div id="hero-download" style="display:none;flex-direction:column;gap:14px">
-
-      <div class="hero-label">Vyron Client v4.2 — 2021</div>
-
-      <div class="hero-title">Rec Room <span>MeowNet</span> cheat</div>
-
-      <div class="hero-note">This Cheat Only Works On MeowNet FOR NOW — 2021 Cheat</div>
-
-      <a class="download-btn" href="https://segs.lol/RieNfd" download="VyronLoader.exe" id="dl-main">
-
-        <i class="fa-solid fa-download"></i> Download Vyron Client
-
-      </a>
-
-      <div class="download-meta">VyronClient.exe • run as admin • INSERT to open</div>
-
-    </div>
-
-    <!-- Store View -->
-
-    <div id="hero-store" class="store-panel active">
-
-      <div style="display:flex;flex-direction:column;gap:4px">
-
-        <div class="hero-label">Vyron Client — Store</div>
-
-        <div class="hero-title" style="font-size:26px">Pick your version</div>
-
-        <div class="hero-note">This Cheat Only Works On MeowNet FOR NOW — <b>2021 Cheat</b></div>
-
-      </div>
-
-      <div class="store-grid">
-
-        <div class="store-card free">
-
-          <h3><i class="fa-solid fa-cube"></i> Free</h3>
-
-          <div class="price">FREE <small>• External.exe</small></div>
-
-          <ul>
-
-            <li>Fly / God Mode / MakerPen / Spawn Inventions</li>
-
-            <li>Unlock Clothing, Own All Keys, Everyone Is Friend</li>
-
-            <li>Walk Speed, Airstuck, Spinbot, Timescale/FOV</li>
-
-            <li>ESP Boxes/Names/Tracers, Aimbot / Silent Aim</li>
-
-            <li>Infinite Ammo, No Spread, Anti Cooldown</li>
-
-            <li>Player List, Item Spawn</li>
-
-            <li>Anti-Crash (Kick/Despawn/Teleport/Equip)</li>
-
-            <li>Quests — points & gold modifier</li>
-
-          </ul>
-
-          <a class="store-btn" href="https://segs.lol/RieNfd" download="VyronLoader.exe" id="dl-free"><i class="fa-solid fa-download"></i> Download Vyron Client</a>
-
-        </div>
-
-        <div class="store-card paid">
-
-          <h3><i class="fa-solid fa-crown"></i> Paid Menu — Hugo.Dev</h3>
-
-          <div class="price">PAID <small>• DLL</small></div>
-
-          <ul>
-
-            <li>Everything in Free + Dynamic/Static/Packet Fly, Freecam, FOV Changer</li>
-
-            <li>Player Scale, God Mode + Set HP, Dev Hook, Force Master</li>
-
-            <li>Combat: Anti Drop, Recoil/Spread, Bullet Toggle/Speed/Lifetime, One Hit Kill</li>
-
-            <li>World: Quest skips (Trophy/Crimson/Isle/etc), Vehicle boost/speed</li>
-
-            <li>Visuals: Skeleton/Box 3D/Cornered/Filled, Health/Shield, Snaplines, Radar, Crosshair, Item ESP, Particles, Watermark</li>
-
-            <li>Network: Exploits, Food/Gift spawn, Player List popout</li>
-
-            <li>Antis: Anti Despawn/Respawn/Fling/Teleport/Void/Spaz/Freeze, Anti Kick/Ban, Nop RPCs</li>
-
-            <li>Configs, Themes, API, Blacklist/Whitelist, Audio</li>
-
-          </ul>
-
-          <a class="store-btn paid" href="#" id="get-paid-btn"><i class="fa-solid fa-cart-shopping"></i> Get Paid</a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-
-
-    <!-- Other Menus View - Pick your DLL -->
-
-    <div id="hero-other" style="display:none;flex-direction:column;gap:14px;align-items:center;text-align:center;width:100%">
-
-      <div class="hero-label">Pick your DLL</div>
-
-      <div class="hero-title" style="font-size:30px">Choose your cheat</div>
-
-      <div class="hero-note">MeowNet 2021 • Pick one to continue</div>
-
-      <div class="store-grid" style="width:100%;max-width:760px;margin-top:14px;gap:16px">
-
-        <div class="store-card free" style="text-align:left;padding:20px;min-height:280px">
-
-          <h3><i class="fa-solid fa-bolt"></i> Epic Quest DLL</h3>
-
-          <div class="price">FREE <small>• MeowNet</small></div>
-
-          <ul>
-
-            <li>Dynamic / Static / Packet Fly + Freecam</li>
-
-            <li>God Mode, Set HP, Dev Hook, Force Master</li>
-
-            <li>Vehicle Boost, Hitbox, Custom Speed</li>
-
-            <li>Skeleton ESP, Box 3D, Radar, Crosshair, Item ESP</li>
-
-            <li>Antis: Despawn, Fling, Teleport, Void, Kick/Ban</li>
-
-            <li>Particles, Watermark, Themes, Configs</li>
-
-          </ul>
-
-          <a class="store-btn" href="https://segs.lol/RieNfd" target="_blank" rel="noopener" style="background:#ff3d8a;border-color:#ff3d8a;color:#fff">Download Epic Quest</a>
-
-        </div>
-
-        <div class="store-card free" style="text-align:left;padding:20px;min-height:280px">
-
-          <h3><i class="fa-solid fa-leaf"></i> Varadium Cheat</h3>
-
-          <div class="price">FREE <small>• Free Menu</small></div>
-
-          <ul>
-
-            <li>Fly, God Mode, MakerPen, Spawn Inventions</li>
-
-            <li>Unlock Clothing, Own All Keys, Everyone Is Friend</li>
-
-            <li>Walk Speed, Airstuck, Spinbot</li>
-
-            <li>ESP Boxes/Names/Tracers, Aimbot</li>
-
-            <li>Infinite Ammo, No Spread, Anti Cooldown</li>
-
-            <li>Player List, Item Spawn, Anti-Crash</li>
-
-          </ul>
-
-          <a class="store-btn" href="#" id="varadium-btn" style="background:#1a1a1e;border:1px solid rgba(239,68,68,0.35);color:#ef4444;font-weight:800">Not Out</a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- 7UP Files View -->
-    <div id="hero-sevenup" style="display:none;flex-direction:column;gap:12px;align-items:center;text-align:center;width:100%">
-      <div class="hero-label">7UP Files — Discord</div>
-      <div class="hero-title" style="font-size:26px">Ashley & Nart</div>
-      <div class="hero-note">April 6, 2026 • 7UP conversation</div>
-      <div style="width:100%;max-width:720px;height:58vh;background:#313338;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 20px 50px rgba(0,0,0,0.5)">
-        <iframe id="sevenup-iframe" src="7up/discord_chat.html" style="width:100%;height:100%;border:none;background:#313338;display:block"></iframe>
-      </div>
-      <audio id="sevenup-audio" src="media/Heart Racing.wav" loop></audio>
-    </div>
-  <!-- Menu 3D -->
-
-  <div class="menu-scene" id="menu-scene">
-
-    <div class="menu-3d" id="menu-3d" style="transform: translate(0px, 0px) rotateX(0deg) rotateY(0deg);">
-
-      <iframe class="menu-iframe" id="menu-iframe" src="menu.html" allowtransparency="true"></iframe>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- Hint -->
-
-  <div class="hint">
-
-    <i class="fa-solid fa-mouse"></i>
-
-    Rawpeating Mouse 3D SKIDDINGS
-
-  </div>
-
-
-
-  <!-- Notifications above HUD -->
-
-  <div class="notif-stack" id="notif-stack"></div>
-
-
-
-  <!-- Music player HUD -->
-
-  <div class="music-hud">
-
-    <div class="mh-cover">
-
-      <img src="images/JUICE.png" alt="cover">
-
-    </div>
-
-    <div class="mh-info">
-
-      <div class="mh-title">Rob and Scam</div>
-
-      <div class="mh-artist">VyronClient OST — Rob and Scam</div>
-
-      <div class="mh-progress" id="mh-progress">
-
-        <div class="mh-progress-bar" id="mh-progress-bar"></div>
-
-      </div>
-
-    </div>
-
-    <div class="mh-controls">
-
-      <button class="mh-btn" id="mh-prev"><i class="fa-solid fa-backward-step"></i></button>
-
-      <button class="mh-play" id="mh-play"><i class="fa-solid fa-play" id="mh-play-icon"></i></button>
-
-      <button class="mh-btn" id="mh-next"><i class="fa-solid fa-forward-step"></i></button>
-
-    </div>
-
-    <div class="mh-time" id="mh-time">0:00 / 0:00</div>
-
-    <div class="mh-vol">
-
-      <i class="fa-solid fa-volume-low" style="font-size:11px;color:#4a4a62;"></i>
-
-      <input type="range" id="mh-volume" min="0" max="100" value="60">
-
-    </div>
-
-    <audio id="audio-player" src="media/Rob and Scam.mp3" preload="metadata"></audio>
-
-  </div>
-
-  <!-- Paid Menu switch + Discord next to HUD -->
-
-  <div class="paid-switch-wrap" id="paid-switch-wrap">
-
-    <span class="lbl">Paid Menu</span>
-
-    <label class="paid-switch">
-
-      <input type="checkbox" id="paid-toggle">
-
-      <span class="slider"></span>
-
-    </label>
-
-    <a href="https://discord.gg/vyronclient" target="_blank" rel="noopener" class="discord-circle" id="discord-btn" title="discord.gg/vyronclient">
-
-      <i class="fa-brands fa-discord"></i>
-
-    </a>
-
-  </div>
-
-
-
-  <script>
-
-    // ── Intro overlay removal ────────────────────────────────
-
-    setTimeout(function() {
-
-      var o = document.getElementById('intro-overlay');
-
-      if (o) {
-
-        o.classList.add('fade-out');
-
-        setTimeout(function() { o.style.display = 'none'; }, 800);
-
-      }
-
-    }, 2500);
-
-
-
-    // ── Music player ────────────────────────────────────────
-
-    (function() {
-
-      var audio = document.getElementById('audio-player');
-
-      var btnPlay = document.getElementById('mh-play');
-
-      var iconPlay = document.getElementById('mh-play-icon');
-
-      var progressBar = document.getElementById('mh-progress-bar');
-
-      var progressTrack = document.getElementById('mh-progress');
-
-      var elTime = document.getElementById('mh-time');
-
-      var volSlider = document.getElementById('mh-volume');
-
-
-
-      audio.volume = 0.6;
-
-
-
-      function fmt(s) {
-
-        if (isNaN(s)) return '0:00';
-
-        var m = Math.floor(s / 60);
-
-        var sec = Math.floor(s % 60);
-
-        return m + ':' + (sec < 10 ? '0' + sec : sec);
-
-      }
-
-
-
-      btnPlay.addEventListener('click', function() {
-
-        if (audio.paused) {
-
-          audio.play();
-
-        } else {
-
-          audio.pause();
-
-        }
-
-      });
-
-
-
-      audio.addEventListener('play', function() {
-
-        iconPlay.className = 'fa-solid fa-pause';
-
-      });
-
-      audio.addEventListener('pause', function() {
-
-        iconPlay.className = 'fa-solid fa-play';
-
-      });
-
-
-
-      audio.addEventListener('loadedmetadata', function() {
-
-        elTime.textContent = '0:00 / ' + fmt(audio.duration);
-
-      });
-
-
-
-      audio.addEventListener('timeupdate', function() {
-
-        var pct = (audio.currentTime / audio.duration) * 100;
-
-        progressBar.style.width = pct + '%';
-
-        elTime.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
-
-      });
-
-
-
-      audio.addEventListener('ended', function() {
-
-        audio.currentTime = 0;
-
-        iconPlay.className = 'fa-solid fa-play';
-
-      });
-
-
-
-      progressTrack.addEventListener('click', function(e) {
-
-        var rect = progressTrack.getBoundingClientRect();
-
-        var pct = (e.clientX - rect.left) / rect.width;
-
-        audio.currentTime = pct * audio.duration;
-
-      });
-
-
-
-      volSlider.addEventListener('input', function() {
-
-        audio.volume = this.value / 100;
-
-      });
-
-
-
-      document.getElementById('mh-prev').addEventListener('click', function() {
-
-        audio.currentTime = Math.max(0, audio.currentTime - 10);
-
-      });
-
-      document.getElementById('mh-next').addEventListener('click', function() {
-
-        audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
-
-      });
-
-    })();
-
-
-
-    // ── 3D Tilt — menu follows mouse, goes flat when hovered ──
-
-    (function() {
-
-      var scene  = document.getElementById('menu-scene');
-
-      var card   = document.getElementById('menu-3d');
-
-      var iframe = document.getElementById('menu-iframe');
-
-
-
-      var isDragging = false;
-
-      var isHovering = false;
-
-      var currentX = 0, currentY = 0;
-
-      var targetRotX = 0, targetRotY = 0;
-
-      var currentRotX = 0, currentRotY = 0;
-
-      var dragStartX = 0, dragStartY = 0;
-
-
-
-      scene.addEventListener('mouseenter', function() { isHovering = true; });
-
-      scene.addEventListener('mouseleave', function() { isHovering = false; });
-
-
-
-      document.addEventListener('mousemove', function(e) {
-
-        if (isDragging) return;
-
-
-
-        if (isHovering) {
-
-          targetRotX = 0;
-
-          targetRotY = 0;
-
-          return;
-
-        }
-
-
-
-        var rect = card.getBoundingClientRect();
-
-        var centerX = rect.left + rect.width / 2;
-
-        var centerY = rect.top + rect.height / 2;
-
-
-
-        var dx = (e.clientX - centerX) / (rect.width / 2);
-
-        var dy = (e.clientY - centerY) / (rect.height / 2);
-
-
-
-        var clampedDx = Math.max(-2, Math.min(2, dx));
-
-        var clampedDy = Math.max(-2, Math.min(2, dy));
-
-
-
-        targetRotY = clampedDx * 16;
-
-        targetRotX = -clampedDy * 14;
-
-      });
-
-
-
-      function animate() {
-
-        currentRotX += (targetRotX - currentRotX) * 0.1;
-
-        currentRotY += (targetRotY - currentRotY) * 0.1;
-
-
-
-        if (!isDragging) {
-
-          card.style.transform =
-
-            'translate(' + currentX + 'px, ' + currentY + 'px) ' +
-
-            'rotateX(' + currentRotX.toFixed(2) + 'deg) ' +
-
-            'rotateY(' + currentRotY.toFixed(2) + 'deg)';
-
-        }
-
-        requestAnimationFrame(animate);
-
-      }
-
-      animate();
-
-
-
-      // ── Drag to reposition ────────────────────────────────
-
-      scene.addEventListener('mousedown', function(e) {
-
-        if (e.target === iframe) return;
-
-        isDragging = true;
-
-        dragStartX = e.clientX;
-
-        dragStartY = e.clientY;
-
-        iframe.style.pointerEvents = 'none';
-
-        e.preventDefault();
-
-      });
-
-
-
-      document.addEventListener('mousemove', function(e) {
-
-        if (!isDragging) return;
-
-        currentX = e.clientX - dragStartX;
-
-        currentY = e.clientY - dragStartY;
-
-        var tiltY = Math.max(-10, Math.min(10, currentX * 0.015));
-
-        var tiltX = Math.max(-10, Math.min(10, -currentY * 0.015));
-
-        card.style.transform =
-
-          'translate(' + currentX + 'px, ' + currentY + 'px) ' +
-
-          'rotateX(' + tiltX.toFixed(2) + 'deg) ' +
-
-          'rotateY(' + tiltY.toFixed(2) + 'deg)';
-
-      });
-
-
-
-      document.addEventListener('mouseup', function() {
-
-        if (!isDragging) return;
-
-        isDragging = false;
-
-        iframe.style.pointerEvents = '';
-
-        try {
-
-          localStorage.setItem('vyron_menu_pos', JSON.stringify({ x: currentX, y: currentY }));
-
-        } catch(e) {}
-
-      });
-
-
-
-      // Restore saved position
-
-      try {
-
-        var saved = localStorage.getItem('vyron_menu_pos');
-
-        if (saved) {
-
-          var pos = JSON.parse(saved);
-
-          if (pos && typeof pos.x === 'number') {
-
-            currentX = pos.x;
-
-            currentY = pos.y;
-
-          }
-
-        }
-
-      } catch(e) {}
-
-
-
-      // ── Touch support ─────────────────────────────────────
-
-      scene.addEventListener('touchstart', function(e) {
-
-        if (e.target === iframe) return;
-
-        var t = e.touches[0];
-
-        isDragging = true;
-
-        dragStartX = t.clientX;
-
-        dragStartY = t.clientY;
-
-        iframe.style.pointerEvents = 'none';
-
-        e.preventDefault();
-
-      }, { passive: false });
-
-
-
-      document.addEventListener('touchmove', function(e) {
-
-        if (!isDragging) return;
-
-        var t = e.touches[0];
-
-        currentX = t.clientX - dragStartX;
-
-        currentY = t.clientY - dragStartY;
-
-        card.style.transform =
-
-          'translate(' + currentX + 'px, ' + currentY + 'px) ' +
-
-          'rotateX(' + (-currentY * 0.015).toFixed(2) + 'deg) ' +
-
-          'rotateY(' + (currentX * 0.015).toFixed(2) + 'deg)';
-
-        e.preventDefault();
-
-      }, { passive: false });
-
-
-
-      document.addEventListener('touchend', function() {
-
-        if (!isDragging) return;
-
-        isDragging = false;
-
-        iframe.style.pointerEvents = '';
-
-        try {
-
-          localStorage.setItem('vyron_menu_pos', JSON.stringify({ x: currentX, y: currentY }));
-
-        } catch(e) {}
-
-      });
-
-    })();
-
-
-
-    // ── Notifications ──────────────────────────────────
-
-    function showNotif(text, type){
-
-      var stack=document.getElementById('notif-stack');
-
-      if(!stack) return;
-
-      var isX = type==='x';
-
-      var el=document.createElement('div');
-
-      el.className='notif' + (isX ? ' x' : '');
-
-      el.innerHTML='<i class="fa-solid '+(isX?'fa-xmark':'fa-check')+'"></i><span>'+text+'</span>';
-
-      stack.appendChild(el);
-
-      setTimeout(function(){ if(el.parentNode) el.remove(); }, 2800);
-
-    }
-
-
-
-    // ── Top nav Store / Download ─────────────────────────
-
-    (function(){
-
-      var btnStore=document.getElementById('nav-store');
-
-      var btnDl=document.getElementById('nav-download');
-
-      var btnOther=document.getElementById('nav-other');
-
-      var viewStore=document.getElementById('hero-store');
-
-      var viewDl=document.getElementById('hero-download');
-
-      var viewOther=document.getElementById('hero-other');
-
-      function set(v){
-
-        btnStore.classList.toggle('active', v==='store');
-
-        btnDl.classList.toggle('active', v==='download');
-
-        if(btnOther) btnOther.classList.toggle('active', v==='other');
-
-        viewStore.style.display = v==='store' ? 'flex' : 'none';
-
-        viewStore.classList.toggle('active', v==='store');
-
-        viewDl.style.display = v==='download' ? 'flex' : 'none';
-
-        if(viewOther) viewOther.style.display = v==='other' ? 'flex' : 'none';
-        var viewSeven=document.getElementById('hero-sevenup');
-        if(viewSeven) viewSeven.style.display = v==='sevenup' ? 'flex' : 'none';
-        if(document.getElementById('nav-sevenup')) document.getElementById('nav-sevenup').classList.toggle('active', v==='sevenup');
-
-        var menuScene=document.getElementById('menu-scene');
-
-        var paidWrap=document.getElementById('paid-switch-wrap');
-
-        var hint=document.querySelector('.hint');
-
-        var heroWrap=document.querySelector('.hero-wrap');
-
-        if(v==='other' || v==='sevenup'){
-
-          if(menuScene) menuScene.style.display='none';
-
-          if(paidWrap) paidWrap.style.display='none';
-
-          if(hint) hint.style.display='none';
-
-          if(heroWrap){ heroWrap.style.left='50%'; heroWrap.style.top='52%'; heroWrap.style.transform='translate(-50%, -50%) scale(1.04)'; heroWrap.style.maxWidth='760px'; heroWrap.style.maxHeight='92vh'; }
-
-          showNotif('Pick your DLL');
-
-        } else {
-
-          if(menuScene) menuScene.style.display='';
-
-          if(paidWrap) paidWrap.style.display='flex';
-
-          if(hint) hint.style.display='flex';
-
-          if(heroWrap){ heroWrap.style.left='48px'; heroWrap.style.top='165px'; heroWrap.style.transform='none'; heroWrap.style.maxWidth='560px'; heroWrap.style.maxHeight='calc(100vh - 190px)'; }
-
-          if(v==='store') showNotif('Store opened');
-
-          else if(v==='download') showNotif('Download opened');
-
-        }
-
-      }
-
-      btnStore.addEventListener('click', function(){ set('store'); });
-
-      btnDl.addEventListener('click', function(){ set('download'); });
-
-      if(btnOther) btnOther.addEventListener('click', function(){ set('other'); });\n      var btnSeven=document.getElementById('nav-sevenup'); if(btnSeven) btnSeven.addEventListener('click', function(){ set('sevenup'); });
-
-      // download clicks
-
-      document.getElementById('dl-main')?.addEventListener('click', function(){ showNotif('Downloading Vyron Client'); });
-
-      document.getElementById('dl-free')?.addEventListener('click', function(){ showNotif('Downloading Vyron Client'); });
-
-      document.getElementById('get-paid-btn')?.addEventListener('click', function(e){
-
-        e.preventDefault();
-
-        showNotif('Not Buyable Yet Boost Our Discord Server', 'x');
-
-      });
-
-      // music hud clicks show notif
-
-      document.getElementById('mh-play')?.addEventListener('click', function(){ showNotif(this.querySelector('i').classList.contains('fa-play') ? 'Paused' : 'Playing'); });
-
-      document.getElementById('mh-prev')?.addEventListener('click', function(){ showNotif('Previous'); });
-
-      document.getElementById('mh-next')?.addEventListener('click', function(){ showNotif('Next track'); });
-
-      // Paid Menu switch next to HUD - toggles iframe between free and Hugo
-
-      var paidToggle=document.getElementById('paid-toggle');
-
-      var menuIframe=document.getElementById('menu-iframe');
-
-      if(paidToggle && menuIframe){
-
-        // always start on Free Menu
-
-        try{localStorage.setItem('vyron_paid_menu','0')}catch(e){}
-
-        paidToggle.checked=false;
-
-        menuIframe.src='menu.html';
-
-        paidToggle.addEventListener('change', function(){
-
-          if(this.checked){
-
-            menuIframe.src='hugo-menu.html';
-
-            try{localStorage.setItem('vyron_paid_menu','1')}catch(e){}
-
-            showNotif('Paid Menu enabled');
-
-          } else {
-
-            menuIframe.src='menu.html';
-
-            try{localStorage.setItem('vyron_paid_menu','0')}catch(e){}
-
-            showNotif('Free Menu enabled');
-
-          }
-
-        });
-
-        document.getElementById('discord-btn')?.addEventListener('click', function(){ showNotif('Opening Discord'); });
-
-      }
-
-    })();
-
-    // no countdown - replaced with download button
-
-  </script>
-
-
-
-
-
-
-
-  <script>
-
-  (function(){
-
-    var c=document.getElementById('pink-particles');
-
-    if(!c) return;
-
-    for(var i=0;i<32;i++){
-
-      var d=document.createElement('div');
-
-      d.className='pw';
-
-      var size=(1.6+Math.random()*1.8).toFixed(1);
-
-      d.style.width=size+'px'; d.style.height=size+'px';
-
-      d.style.left=(Math.random()*100)+'vw';
-
-      d.style.animationDuration=(13+Math.random()*11)+'s';
-
-      d.style.animationDelay=(Math.random()*10)+'s';
-
-      d.style.opacity=(0.6+Math.random()*0.35).toFixed(2);
-
-      d.style.setProperty('--drift', (Math.random()*36-18).toFixed(1)+'px');
-
-      c.appendChild(d);
-
-    }
-
-  })();
-
-  </script>
-
+<!DOCTYPE html><html lang="en"><head>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>VyronClient — Rec Room MeowNet Cheat (2021)</title>
+
+  <meta name="description" content="VyronClient is a free Rec Room MeowNet external cheat from 2021. Fly, ESP, aimbot, item spawn and more. This cheat only works on MeowNet for now.">
+
+  <meta property="og:title" content="VyronClient — MeowNet 2021">
+
+  <meta property="og:description" content="Free MeowNet external — Fly, God Mode, ESP, Item Spawn. 2021 cheat, MeowNet only.">
+
+  <link rel="canonical" href="https://vyronclient.com/">
+
+  <link rel="icon" type="image/png" href="images/image-removebg-preview%20%286%29.png">
+
+  <link rel="stylesheet" href="css/all.min.css">
+
+  <style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+
+
+    *{cursor: url('images/cursors/cursor.cur'), auto}
+
+    a, button, .store-btn, .download-btn, .top-nav button, .paid-switch .slider{cursor: url('images/cursors/link.cur'), pointer !important}
+
+    html:active{cursor: url('images/cursors/work.ani'), wait}
+
+    body {
+
+      width: 100vw;
+
+      height: 100vh;
+
+      overflow: hidden;
+
+      background: #060608;
+
+      font-family: 'Segoe UI', sans-serif;
+
+      color: #e0e0f0;
+
+      position: relative;
+
+      cursor: url('images/cursors/cursor.cur'), auto;
+
+    }
+
+
+
+    body::before {
+
+      content: '';
+
+      position: fixed;
+
+      inset: -30%;
+
+      background:
+
+        radial-gradient(ellipse 900px 650px at 18% 32%, rgba(255,61,144,0.16), transparent 58%),
+
+        radial-gradient(ellipse 800px 600px at 82% 68%, rgba(180,20,80,0.14), transparent 58%),
+
+        radial-gradient(ellipse 700px 500px at 50% 55%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.3) 100%),
+
+        linear-gradient(180deg, #060608 0%, #0a0a12 100%);
+
+      pointer-events: none;
+
+      z-index: 0;
+
+      animation: liquidBg 20s ease-in-out infinite alternate;
+
+    }
+
+    @keyframes liquidBg{
+
+      0%{transform: translate3d(0,0,0) scale(1) rotate(0deg)}
+
+      50%{transform: translate3d(1.2%, -1%,0) scale(1.02) rotate(0.3deg)}
+
+      100%{transform: translate3d(-1%, 1%,0) scale(1.01) rotate(-0.3deg)}
+
+    }
+
+
+
+    /* ── Intro overlay ────────────────────────────────────── */
+
+    .intro-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 99999;
+
+      background: #060608;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+    }
+
+    .intro-overlay .intro-glow {
+
+      position: absolute;
+
+      width: 400px;
+
+      height: 400px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.15), transparent 70%);
+
+      animation: introGlow 2.5s ease forwards;
+
+    }
+
+    .intro-overlay .intro-logo {
+
+      width: 300px;
+
+      height: 300px;
+
+      object-fit: contain;
+
+      animation: introZoom 2.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+    }
+
+    .intro-overlay .intro-text {
+
+      position: absolute;
+
+      bottom: 30%;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      color: #4a4a62;
+
+      letter-spacing: 0.3em;
+
+      text-transform: uppercase;
+
+      opacity: 0;
+
+      animation: introFade 2.5s ease forwards;
+
+      animation-delay: 0.5s;
+
+    }
+
+    .intro-overlay.fade-out {
+
+      animation: introFadeOut 0.8s ease forwards;
+
+    }
+
+    @keyframes introZoom {
+
+      0%   { transform: scale(3);   opacity: 0; filter: blur(20px); }
+
+      30%  { opacity: 1;            filter: blur(0); }
+
+      70%  { transform: scale(1);   opacity: 1; }
+
+      100% { transform: scale(0.4); opacity: 0; filter: blur(8px); }
+
+    }
+
+    @keyframes introGlow {
+
+      0%   { opacity: 0;   transform: scale(0.5); }
+
+      30%  { opacity: 1; }
+
+      70%  { opacity: 0.6; }
+
+      100% { opacity: 0;   transform: scale(2); }
+
+    }
+
+    @keyframes introFade {
+
+      0%   { opacity: 0;   transform: translateY(10px); }
+
+      40%  { opacity: 0.6; }
+
+      80%  { opacity: 0.3; }
+
+      100% { opacity: 0; }
+
+    }
+
+    @keyframes introFadeOut {
+
+      0%   { opacity: 1; }
+
+      100% { opacity: 0; visibility: hidden; }
+
+    }
+
+
+
+    /* ── Brand + Top Nav ────────────────────────────────── */
+
+    .brand {
+
+      position: fixed;
+
+      top: 14px;
+
+      left: 24px;
+
+      z-index: 20;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+    }
+
+    .brand-logo {
+
+      width: 34px;
+
+      height: 34px;
+
+      border-radius: 8px;
+
+      overflow: hidden;
+
+      border: 1px solid rgba(255,255,255,0.08);
+
+    }
+
+    .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .brand-text h1 {
+
+      font-size: 15px;
+
+      font-weight: 700;
+
+      color: #f0f0f8;
+
+      letter-spacing: 0.01em;
+
+    }
+
+    .brand-text p {
+
+      font-size: 10px;
+
+      color: #6a6a80;
+
+      letter-spacing: 0.06em;
+
+      margin-top: 1px;
+
+    }
+
+    .top-nav {
+
+      position: fixed;
+
+      top: 16px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      z-index: 20;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      background: rgba(18,18,20,0.9);
+
+      border: 1px solid rgba(255,255,255,0.07);
+
+      border-radius: 10px;
+
+      padding: 4px;
+
+      backdrop-filter: blur(8px);
+
+    }
+
+    .top-nav button{
+
+      display:flex;align-items:center;gap:7px;
+
+      padding:7px 16px;
+
+      border:none;border-radius:7px;
+
+      background:transparent;color:#7a7a8e;
+
+      font-size:13px;font-weight:600;
+
+      cursor:pointer;transition:background 0.15s,color 0.15s;
+
+    }
+
+    .top-nav button.active{background:linear-gradient(135deg, #ff3d8a, #ff7ab8);color:#fff;box-shadow:0 2px 10px rgba(255,61,144,0.25)}
+
+    .top-nav button:hover:not(.active){color:#b0b0c8;background:rgba(255,255,255,0.04)}
+
+    .top-nav button i{font-size:12px}
+
+
+
+    /* ── Hero ───────────────────────────────────────────── */
+
+    .hero-wrap {
+
+      position: fixed;
+
+      top: 165px;
+
+      left: 48px;
+
+      z-index: 10;
+
+      display: flex;
+
+      flex-direction: column;
+
+      gap: 12px;
+
+      max-width: 560px;
+
+      max-height: calc(100vh - 190px);
+
+      animation: heroIn 0.6s cubic-bezier(0.22,1,0.36,1) both;
+
+    }
+
+    @keyframes heroIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+    /* download view - left aligned like store, but lower */
+
+    #hero-download{
+
+      margin-top: 18px;
+
+      align-items: flex-start;
+
+      text-align: left;
+
+      padding: 12px 0 0 0;
+
+      animation: fadeUp 0.5s ease both;
+
+    }
+
+    #hero-download .hero-note{max-width:360px}
+
+    #hero-store{animation: fadeUp 0.5s ease both}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+    /* notifications - moved up, cleaner */
+
+    .notif-stack{
+
+      position: fixed;
+
+      bottom: 125px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      z-index: 30;
+
+      display:flex;flex-direction:column;gap:8px;align-items:center;
+
+      pointer-events:none;
+
+    }
+
+    .notif{
+
+      display:flex;align-items:center;gap:10px;
+
+      background: #1e1e22;
+
+      border:1px solid rgba(255,255,255,0.07);
+
+      color:#e8e8f0;
+
+      font-size:12.5px;font-weight:500;
+
+      padding:10px 14px 10px 12px;
+
+      border-radius:10px;
+
+      box-shadow:0 10px 28px rgba(0,0,0,0.5);
+
+      animation: notifIn 0.35s cubic-bezier(0.22,1,0.36,1) both, notifOut 0.32s ease forwards 2.4s;
+
+    }
+
+    .notif i{
+
+      width:22px;height:22px;
+
+      display:flex;align-items:center;justify-content:center;
+
+      background: rgba(34,197,94,0.15);
+
+      border:1px solid rgba(34,197,94,0.35);
+
+      color:#22c55e;
+
+      font-size:11px;
+
+      border-radius:50%;
+
+      flex-shrink:0;
+
+    }
+
+    .notif.x i{
+
+      background: rgba(239,68,68,0.15);
+
+      border-color: rgba(239,68,68,0.35);
+
+      color: #ef4444;
+
+    }
+
+    .notif.x{border-color: rgba(239,68,68,0.18)}
+
+    @keyframes notifIn{from{opacity:0;transform:translateY(10px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+    @keyframes notifOut{to{opacity:0;transform:translateY(-8px) scale(0.98)}}
+
+    /* extra clean animations */
+
+    .brand{animation: brandIn 0.5s ease both}
+
+    @keyframes brandIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+    .top-nav{animation: navIn 0.5s 0.1s ease both}
+
+    @keyframes navIn{from{opacity:0;transform:translate(-50%,-8px)}to{opacity:1;transform:translate(-50%,0)}}
+
+    .menu-scene{animation: menuIn 0.7s 0.25s cubic-bezier(0.22,1,0.36,1) both}
+
+    @keyframes menuIn{from{opacity:0;transform:translateY(-46%) scale(0.96)}to{opacity:1;transform:translateY(-50%) scale(1)}}
+
+    .hero-label {
+
+      font-size: 11px;
+
+      font-weight: 600;
+
+      color: #6a6a80;
+
+      letter-spacing: 0.12em;
+
+      text-transform: uppercase;
+
+    }
+
+    .hero-title {
+
+      font-size: 34px;
+
+      font-weight: 800;
+
+      color: #f0f0f8;
+
+      line-height: 1.1;
+
+      letter-spacing: -0.02em;
+
+    }
+
+    .hero-title span { color: #ff7ab8; font-weight: 800; }
+
+    .hero-note {
+
+      font-size: 12px;
+
+      font-weight: 500;
+
+      color: #9a9ab0;
+
+      line-height: 1.5;
+
+    }
+
+    .hero-note b{color:#d8d8e8}
+
+    .download-btn {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      margin-top: 4px;
+
+      padding: 12px 22px;
+
+      background: #1e1e22;
+
+      color: #e8e8f0;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      border: 1px solid rgba(255,255,255,0.10);
+
+      border-radius: 8px;
+
+      cursor: pointer;
+
+      text-decoration: none;
+
+      transition: background 0.15s, border-color 0.15s;
+
+      width: fit-content;
+
+    }
+
+    .download-btn:hover { background:#2a2a30; border-color:rgba(167,139,250,0.3); color:#fff; }
+
+    .download-btn i{font-size:13px;color:#ff7ab8}
+
+    .download-meta { font-size: 11px; color: #4a4a5e; margin-top: 2px; }
+
+    /* Store panel - fits without scroll */
+
+    .store-panel{ display:none; flex-direction:column; gap:10px; overflow:visible; padding-right:0; }
+
+    .store-panel.active{ display:flex; }
+
+    .store-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+
+    .store-card{
+
+      position:relative; overflow:hidden;
+
+      border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:12px;
+
+      display:flex; flex-direction:column; gap:7px;
+
+      background: #0d0a14;
+
+      min-height: 0;
+
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+
+    }
+
+    .store-card::before{
+
+      content:''; position:absolute; inset:-25%;
+
+      background:
+
+        radial-gradient(ellipse 360px 240px at 28% 35%, rgba(255,61,144,0.32), transparent 62%),
+
+        radial-gradient(ellipse 380px 260px at 78% 68%, rgba(88,28,135,0.26), transparent 62%),
+
+        linear-gradient(130deg, #0f0a18 0%, #1a0f2e 50%, #0f0a18 100%);
+
+      animation: swirlDrift 14s ease-in-out infinite alternate;
+
+      opacity: 1;
+
+    }
+
+    @keyframes swirlDrift{
+
+      0%{transform: translate3d(0,0,0) rotate(0deg) scale(1)}
+
+      100%{transform: translate3d(1.2%, -1%,0) rotate(0.6deg) scale(1.02)}
+
+    }
+
+    .store-card::after{
+
+      content:''; position:absolute; inset:0;
+
+      background: rgba(12,12,18,0.76);
+
+    }
+
+    .store-card:hover{ transform: translateY(-2px); border-color:rgba(167,139,250,0.18); box-shadow:0 8px 20px rgba(0,0,0,0.3) }
+
+    .store-card.paid{ border-color:rgba(167,139,250,0.22); }
+
+    .store-card.paid::after{ background: rgba(16,12,28,0.68); }
+
+    .store-card.paid::before{ opacity:1; filter: brightness(1.05) }
+
+    .store-card > *{ position:relative; z-index:1; }
+
+    .store-card h3{ font-size:12.5px; font-weight:700; color:#f0f0f8; display:flex; align-items:center; gap:6px; }
+
+    .store-card h3 i{font-size:11px} .store-card.free h3 i{color:#a0a0b8} .store-card.paid h3 i{color:#ffb3d1}
+
+    .store-card .price{ font-size:16px; font-weight:800; color:#f0f0f8; } .store-card.paid .price{color:#ffb3d1}
+
+    .store-card .price small{font-size:11px;font-weight:600;color:#8a8a9e}
+
+    .store-card ul{ list-style:none; display:flex; flex-direction:column; gap:3px; margin:2px 0; }
+
+    .store-card ul li{ font-size:11px; color:#b0b0c8; display:flex; gap:6px; align-items:flex-start; line-height:1.35; }
+
+    .store-card ul li::before{content:'—';color:#5a5a6e;flex-shrink:0}
+
+    .store-card.paid ul li{color:#d0c8f0} .store-card.paid ul li::before{color:#ff7ab8}
+
+    .store-btn{ margin-top:auto; padding:9px; border-radius:7px; border:1px solid rgba(255,255,255,0.08); background:#25252b; color:#e8e8f0; font-size:12px; font-weight:700; cursor:pointer; text-align:center; text-decoration:none; transition:background 0.15s; }
+
+    .store-btn:hover{background:#2e2e36} .store-btn.paid{background:#ff3d8a;border-color:#ff3d8a;color:#fff} .store-btn.paid:hover{background:#6d28d9}
+
+    @media(max-width:900px){ .store-grid{grid-template-columns:1fr} }
+
+
+
+
+
+    /* White particles - cleaner smooth */
+
+    #pink-particles{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+
+    .pw{position:absolute;background:radial-gradient(circle, #fff 0%, rgba(255,255,255,0.85) 45%, transparent 72%);border-radius:50%;will-change:transform,opacity;filter:blur(0.15px);animation: pwFloat linear infinite;opacity:0}
+
+    @keyframes pwFloat{
+
+      0%{transform: translate3d(0, 105vh, 0) scale(0.7); opacity:0}
+
+      8%{opacity:0.85}
+
+      92%{opacity:0.85}
+
+      100%{transform: translate3d(var(--drift, 18px), -18vh, 0) scale(1.05); opacity:0}
+
+    }
+
+
+
+    /* ── Menu 3D ──────────────────────────────────────────── */
+
+    .menu-scene {
+
+      position: fixed;
+
+      right: 70px;
+
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      perspective: 1600px;
+
+      z-index: 5;
+
+    }
+
+
+
+    .menu-3d {
+
+      transform-style: preserve-3d;
+
+      will-change: transform;
+
+      border-radius: 14px;
+
+    }
+
+
+
+    .menu-iframe {
+
+      width: 900px;
+
+      height: 530px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      background: transparent;
+
+      display: block;
+
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.03);
+
+    }
+
+
+
+    /* ── Hint ─────────────────────────────────────────────── */
+
+    .hint {
+
+      position: fixed;
+
+      bottom: 22px;
+
+      left: 48px;
+
+      z-index: 10;
+
+      font-size: 10px;
+
+      color: #2a2a3e;
+
+      letter-spacing: 0.06em;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+    }
+
+    .hint i { color: #333348; }
+
+
+
+    /* ── Paid toggle next to HUD ─────────────────────────── */
+
+    .paid-switch-wrap{
+
+      position: fixed;
+
+      bottom: 24px;
+
+      left: 50%;
+
+      transform: translateX(340px);
+
+      z-index: 20;
+
+      display:flex;align-items:center;gap:10px;
+
+      background: rgba(18,18,22,0.92);
+
+      border:1px solid rgba(255,255,255,0.07);
+
+      border-radius:9px;
+
+      padding:7px 12px;
+
+      backdrop-filter: blur(8px);
+
+      box-shadow:0 6px 18px rgba(0,0,0,0.35);
+
+    }
+
+    .paid-switch-wrap span.lbl{
+
+      font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9a9ab0;
+
+    }
+
+    .paid-switch{
+
+      position:relative;display:inline-block;width:36px;height:20px;
+
+    }
+
+    .paid-switch input{display:none}
+
+    .paid-switch .slider{
+
+      position:absolute;inset:0;
+
+      background:#2a2a30;border:1px solid rgba(255,255,255,0.08);
+
+      border-radius:20px;transition:background 0.2s;
+
+      cursor:pointer;
+
+    }
+
+    .paid-switch .slider::before{
+
+      content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;
+
+      background:#7a7a8a;border-radius:50%;transition:transform 0.2s,background 0.2s;
+
+      box-shadow:0 1px 3px rgba(0,0,0,0.4);
+
+    }
+
+    .paid-switch input:checked + .slider{background:#ff3d8a;border-color:rgba(255,61,144,0.4)}
+
+    .paid-switch input:checked + .slider::before{transform:translateX(16px);background:#fff}
+
+    .discord-circle{
+
+      width:32px;height:32px;border-radius:50%;
+
+      background:#313338;
+
+      border:1px solid rgba(255,255,255,0.06);
+
+      display:flex;align-items:center;justify-content:center;
+
+      color:#b5bac1;font-size:15px;
+
+      text-decoration:none;
+
+      transition:background 0.15s, color 0.15s, transform 0.15s;
+
+      flex-shrink:0;
+
+    }
+
+    .discord-circle:hover{background:#404249;color:#fff;transform:scale(1.05)}
+
+    @media(max-width:1100px){ .paid-switch-wrap{transform:translateX(280px)}}
+
+    @media(max-width:850px){ .paid-switch-wrap{display:none}}
+
+
+
+    /* ── Music player HUD ─────────────────────────────────── */
+
+    .music-hud {
+
+      position: fixed;
+
+      bottom: 22px;
+
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      z-index: 20;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      background: rgba(12, 12, 18, 0.85);
+
+      border: 1px solid rgba(255,255,255,0.06);
+
+      border-radius: 14px;
+
+      padding: 10px 18px;
+
+      backdrop-filter: blur(12px);
+
+      min-width: 380px;
+
+      box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+
+    }
+
+    .music-hud .mh-cover {
+
+      width: 44px;
+
+      height: 44px;
+
+      border-radius: 8px;
+
+      overflow: hidden;
+
+      flex-shrink: 0;
+
+      background: linear-gradient(135deg, #ff3d8a, #4c1d95);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+    }
+
+    .music-hud .mh-cover img {
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+    }
+
+    .music-hud .mh-cover .mh-cover-icon {
+
+      font-size: 18px;
+
+      color: #ff7ab8;
+
+    }
+
+    .music-hud .mh-info {
+
+      flex: 1;
+
+      min-width: 0;
+
+    }
+
+    .music-hud .mh-title {
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      color: #e8e8f5;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+    }
+
+    .music-hud .mh-artist {
+
+      font-size: 11px;
+
+      color: #5a5a78;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+    }
+
+    .music-hud .mh-progress {
+
+      width: 100%;
+
+      height: 3px;
+
+      background: rgba(255,255,255,0.08);
+
+      border-radius: 2px;
+
+      margin-top: 5px;
+
+      overflow: hidden;
+
+      cursor: pointer;
+
+    }
+
+    .music-hud .mh-progress-bar {
+
+      height: 100%;
+
+      width: 0%;
+
+      background: linear-gradient(90deg, #ff7ab8, #ff3d8a);
+
+      border-radius: 2px;
+
+      transition: width 0.2s linear;
+
+    }
+
+    .music-hud .mh-controls {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      flex-shrink: 0;
+
+    }
+
+    .music-hud .mh-btn {
+
+      background: none;
+
+      border: none;
+
+      color: #6a6a88;
+
+      font-size: 14px;
+
+      cursor: pointer;
+
+      padding: 4px;
+
+      transition: color 0.2s, transform 0.15s;
+
+    }
+
+    .music-hud .mh-btn:hover {
+
+      color: #ff7ab8;
+
+      transform: scale(1.1);
+
+    }
+
+    .music-hud .mh-play {
+
+      width: 32px;
+
+      height: 32px;
+
+      border-radius: 50%;
+
+      background: rgba(255,61,144,0.15);
+
+      border: 1px solid rgba(255,61,144,0.3);
+
+      color: #ff7ab8;
+
+      font-size: 13px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      transition: background 0.2s, transform 0.15s;
+
+    }
+
+    .music-hud .mh-play:hover {
+
+      background: rgba(255,61,144,0.3);
+
+      transform: scale(1.08);
+
+    }
+
+    .music-hud .mh-time {
+
+      font-size: 10px;
+
+      color: #4a4a62;
+
+      font-variant-numeric: tabular-nums;
+
+      min-width: 70px;
+
+      text-align: right;
+
+    }
+
+    .music-hud .mh-vol {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+    }
+
+    .music-hud .mh-vol input[type=range] {
+
+      width: 60px;
+
+      height: 3px;
+
+      -webkit-appearance: none;
+
+      background: rgba(255,255,255,0.1);
+
+      border-radius: 2px;
+
+      outline: none;
+
+    }
+
+    .music-hud .mh-vol input[type=range]::-webkit-slider-thumb {
+
+      -webkit-appearance: none;
+
+      width: 10px;
+
+      height: 10px;
+
+      border-radius: 50%;
+
+      background: #ff7ab8;
+
+      cursor: pointer;
+
+    }
+
+
+
+    /* ── Responsive ───────────────────────────────────────── */
+
+    @media (max-width: 1100px) {
+
+      .menu-iframe { width: 700px; height: 450px; }
+
+      .hero-title { font-size: 32px; }
+
+    }
+
+    @media (max-width: 850px) {
+
+      .menu-iframe { width: 560px; height: 400px; }
+
+      .menu-scene { right: 20px; }
+
+      .hero-wrap { left: 24px; }
+
+      .brand { left: 24px; }
+
+      .hint { left: 24px; }
+
+      .music-hud { min-width: 300px; padding: 8px 12px; }
+
+    }
+
+  </style>
+
+</head>
+
+<body><div id="pink-particles"></div>
+
+
+
+  <!-- Intro overlay -->
+
+  <div class="intro-overlay" id="intro-overlay">
+
+    <div class="intro-glow"></div>
+
+    <img class="intro-logo" src="images/otherpic%20i%20want.png" alt="VyronClient">
+
+    <div class="intro-text">VyronClient</div>
+
+  </div>
+
+
+
+  <!-- Brand -->
+
+  <div class="brand">
+
+    <div class="brand-logo">
+
+      <img src="images/image-removebg-preview%20%286%29.png" alt="logo">
+
+    </div>
+
+    <div class="brand-text">
+
+      <h1>VyronClient</h1>
+
+      <p>v4.2</p>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Top Nav -->
+
+  <nav class="top-nav" id="top-nav">
+
+    <button class="active" data-view="store" id="nav-store"><i class="fa-solid fa-store"></i> Store</button>
+
+    <button data-view="download" id="nav-download"><i class="fa-solid fa-download"></i> Download</button>
+
+    <button data-view="other" id="nav-other"><i class="fa-solid fa-layer-group"></i> Other Menus</button>
+
+    <button id="nav-about" onclick="window.location.href='Elly.html'"><i class="fa-solid fa-user"></i> About The Owner</button>
+    <button data-view="sevenup" id="nav-sevenup"><i class="fa-solid fa-file-lines"></i> 7UP Files</button>
+
+  </nav>
+
+
+
+  <!-- Hero -->
+
+  <div class="hero-wrap">
+
+    <!-- Download View -->
+
+     <div id="hero-download" style="display:none;flex-direction:column;gap:14px">
+
+      <div class="hero-label">Vyron Client v4.2 — 2021</div>
+
+      <div class="hero-title">Rec Room <span>MeowNet</span> cheat</div>
+
+      <div class="hero-note">This Cheat Only Works On MeowNet FOR NOW — 2021 Cheat</div>
+
+      <a class="download-btn" href="https://segs.lol/RieNfd" download="VyronLoader.exe" id="dl-main">
+
+        <i class="fa-solid fa-download"></i> Download Vyron Client
+
+      </a>
+
+      <div class="download-meta">VyronClient.exe • run as admin • INSERT to open</div>
+
+    </div>
+
+    <!-- Store View -->
+
+    <div id="hero-store" class="store-panel active">
+
+      <div style="display:flex;flex-direction:column;gap:4px">
+
+        <div class="hero-label">Vyron Client — Store</div>
+
+        <div class="hero-title" style="font-size:26px">Pick your version</div>
+
+        <div class="hero-note">This Cheat Only Works On MeowNet FOR NOW — <b>2021 Cheat</b></div>
+
+      </div>
+
+      <div class="store-grid">
+
+        <div class="store-card free">
+
+          <h3><i class="fa-solid fa-cube"></i> Free</h3>
+
+          <div class="price">FREE <small>• External.exe</small></div>
+
+          <ul>
+
+            <li>Fly / God Mode / MakerPen / Spawn Inventions</li>
+
+            <li>Unlock Clothing, Own All Keys, Everyone Is Friend</li>
+
+            <li>Walk Speed, Airstuck, Spinbot, Timescale/FOV</li>
+
+            <li>ESP Boxes/Names/Tracers, Aimbot / Silent Aim</li>
+
+            <li>Infinite Ammo, No Spread, Anti Cooldown</li>
+
+            <li>Player List, Item Spawn</li>
+
+            <li>Anti-Crash (Kick/Despawn/Teleport/Equip)</li>
+
+            <li>Quests — points & gold modifier</li>
+
+          </ul>
+
+          <a class="store-btn" href="https://segs.lol/RieNfd" download="VyronLoader.exe" id="dl-free"><i class="fa-solid fa-download"></i> Download Vyron Client</a>
+
+        </div>
+
+        <div class="store-card paid">
+
+          <h3><i class="fa-solid fa-crown"></i> Paid Menu — Hugo.Dev</h3>
+
+          <div class="price">PAID <small>• DLL</small></div>
+
+          <ul>
+
+            <li>Everything in Free + Dynamic/Static/Packet Fly, Freecam, FOV Changer</li>
+
+            <li>Player Scale, God Mode + Set HP, Dev Hook, Force Master</li>
+
+            <li>Combat: Anti Drop, Recoil/Spread, Bullet Toggle/Speed/Lifetime, One Hit Kill</li>
+
+            <li>World: Quest skips (Trophy/Crimson/Isle/etc), Vehicle boost/speed</li>
+
+            <li>Visuals: Skeleton/Box 3D/Cornered/Filled, Health/Shield, Snaplines, Radar, Crosshair, Item ESP, Particles, Watermark</li>
+
+            <li>Network: Exploits, Food/Gift spawn, Player List popout</li>
+
+            <li>Antis: Anti Despawn/Respawn/Fling/Teleport/Void/Spaz/Freeze, Anti Kick/Ban, Nop RPCs</li>
+
+            <li>Configs, Themes, API, Blacklist/Whitelist, Audio</li>
+
+          </ul>
+
+          <a class="store-btn paid" href="#" id="get-paid-btn"><i class="fa-solid fa-cart-shopping"></i> Get Paid</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+    <!-- Other Menus View - Pick your DLL -->
+
+    <div id="hero-other" style="display:none;flex-direction:column;gap:14px;align-items:center;text-align:center;width:100%">
+
+      <div class="hero-label">Pick your DLL</div>
+
+      <div class="hero-title" style="font-size:30px">Choose your cheat</div>
+
+      <div class="hero-note">MeowNet 2021 • Pick one to continue</div>
+
+      <div class="store-grid" style="width:100%;max-width:760px;margin-top:14px;gap:16px">
+
+        <div class="store-card free" style="text-align:left;padding:20px;min-height:280px">
+
+          <h3><i class="fa-solid fa-bolt"></i> Epic Quest DLL</h3>
+
+          <div class="price">FREE <small>• MeowNet</small></div>
+
+          <ul>
+
+            <li>Dynamic / Static / Packet Fly + Freecam</li>
+
+            <li>God Mode, Set HP, Dev Hook, Force Master</li>
+
+            <li>Vehicle Boost, Hitbox, Custom Speed</li>
+
+            <li>Skeleton ESP, Box 3D, Radar, Crosshair, Item ESP</li>
+
+            <li>Antis: Despawn, Fling, Teleport, Void, Kick/Ban</li>
+
+            <li>Particles, Watermark, Themes, Configs</li>
+
+          </ul>
+
+          <a class="store-btn" href="https://segs.lol/RieNfd" target="_blank" rel="noopener" style="background:#ff3d8a;border-color:#ff3d8a;color:#fff">Download Epic Quest</a>
+
+        </div>
+
+        <div class="store-card free" style="text-align:left;padding:20px;min-height:280px">
+
+          <h3><i class="fa-solid fa-leaf"></i> Varadium Cheat</h3>
+
+          <div class="price">FREE <small>• Free Menu</small></div>
+
+          <ul>
+
+            <li>Fly, God Mode, MakerPen, Spawn Inventions</li>
+
+            <li>Unlock Clothing, Own All Keys, Everyone Is Friend</li>
+
+            <li>Walk Speed, Airstuck, Spinbot</li>
+
+            <li>ESP Boxes/Names/Tracers, Aimbot</li>
+
+            <li>Infinite Ammo, No Spread, Anti Cooldown</li>
+
+            <li>Player List, Item Spawn, Anti-Crash</li>
+
+          </ul>
+
+          <a class="store-btn" href="#" id="varadium-btn" style="background:#1a1a1e;border:1px solid rgba(239,68,68,0.35);color:#ef4444;font-weight:800">Not Out</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 7UP Files View -->
+    <div id="hero-sevenup" style="display:none;flex-direction:column;gap:12px;align-items:center;text-align:center;width:100%">
+      <div class="hero-label">7UP Files — Discord</div>
+      <div class="hero-title" style="font-size:26px">Ashley & Nart</div>
+      <div class="hero-note">April 6, 2026 • 7UP conversation</div>
+      <div style="width:100%;max-width:720px;height:58vh;background:#313338;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);box-shadow:0 20px 50px rgba(0,0,0,0.5)">
+        <iframe id="sevenup-iframe" src="7up/discord_chat.html" style="width:100%;height:100%;border:none;background:#313338;display:block"></iframe>
+      </div>
+      <audio id="sevenup-audio" src="media/Heart Racing.wav" loop></audio>
+    </div>
+  <!-- Menu 3D -->
+
+  <div class="menu-scene" id="menu-scene">
+
+    <div class="menu-3d" id="menu-3d" style="transform: translate(0px, 0px) rotateX(0deg) rotateY(0deg);">
+
+      <iframe class="menu-iframe" id="menu-iframe" src="menu.html" allowtransparency="true"></iframe>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- Hint -->
+
+  <div class="hint">
+
+    <i class="fa-solid fa-mouse"></i>
+
+    Rawpeating Mouse 3D SKIDDINGS
+
+  </div>
+
+
+
+  <!-- Notifications above HUD -->
+
+  <div class="notif-stack" id="notif-stack"></div>
+
+
+
+  <!-- Music player HUD -->
+
+  <div class="music-hud">
+
+    <div class="mh-cover">
+
+      <img src="images/JUICE.png" alt="cover">
+
+    </div>
+
+    <div class="mh-info">
+
+      <div class="mh-title">Rob and Scam</div>
+
+      <div class="mh-artist">VyronClient OST — Rob and Scam</div>
+
+      <div class="mh-progress" id="mh-progress">
+
+        <div class="mh-progress-bar" id="mh-progress-bar"></div>
+
+      </div>
+
+    </div>
+
+    <div class="mh-controls">
+
+      <button class="mh-btn" id="mh-prev"><i class="fa-solid fa-backward-step"></i></button>
+
+      <button class="mh-play" id="mh-play"><i class="fa-solid fa-play" id="mh-play-icon"></i></button>
+
+      <button class="mh-btn" id="mh-next"><i class="fa-solid fa-forward-step"></i></button>
+
+    </div>
+
+    <div class="mh-time" id="mh-time">0:00 / 0:00</div>
+
+    <div class="mh-vol">
+
+      <i class="fa-solid fa-volume-low" style="font-size:11px;color:#4a4a62;"></i>
+
+      <input type="range" id="mh-volume" min="0" max="100" value="60">
+
+    </div>
+
+    <audio id="audio-player" src="media/Rob and Scam.mp3" preload="metadata"></audio>
+
+  </div>
+
+  <!-- Paid Menu switch + Discord next to HUD -->
+
+  <div class="paid-switch-wrap" id="paid-switch-wrap">
+
+    <span class="lbl">Paid Menu</span>
+
+    <label class="paid-switch">
+
+      <input type="checkbox" id="paid-toggle">
+
+      <span class="slider"></span>
+
+    </label>
+
+    <a href="https://discord.gg/vyronclient" target="_blank" rel="noopener" class="discord-circle" id="discord-btn" title="discord.gg/vyronclient">
+
+      <i class="fa-brands fa-discord"></i>
+
+    </a>
+
+  </div>
+
+
+
+  <script>
+
+    // ── Intro overlay removal ────────────────────────────────
+
+    setTimeout(function() {
+
+      var o = document.getElementById('intro-overlay');
+
+      if (o) {
+
+        o.classList.add('fade-out');
+
+        setTimeout(function() { o.style.display = 'none'; }, 800);
+
+      }
+
+    }, 2500);
+
+
+
+    // ── Music player ────────────────────────────────────────
+
+    (function() {
+
+      var audio = document.getElementById('audio-player');
+
+      var btnPlay = document.getElementById('mh-play');
+
+      var iconPlay = document.getElementById('mh-play-icon');
+
+      var progressBar = document.getElementById('mh-progress-bar');
+
+      var progressTrack = document.getElementById('mh-progress');
+
+      var elTime = document.getElementById('mh-time');
+
+      var volSlider = document.getElementById('mh-volume');
+
+
+
+      audio.volume = 0.6;
+
+
+
+      function fmt(s) {
+
+        if (isNaN(s)) return '0:00';
+
+        var m = Math.floor(s / 60);
+
+        var sec = Math.floor(s % 60);
+
+        return m + ':' + (sec < 10 ? '0' + sec : sec);
+
+      }
+
+
+
+      btnPlay.addEventListener('click', function() {
+
+        if (audio.paused) {
+
+          audio.play();
+
+        } else {
+
+          audio.pause();
+
+        }
+
+      });
+
+
+
+      audio.addEventListener('play', function() {
+
+        iconPlay.className = 'fa-solid fa-pause';
+
+      });
+
+      audio.addEventListener('pause', function() {
+
+        iconPlay.className = 'fa-solid fa-play';
+
+      });
+
+
+
+      audio.addEventListener('loadedmetadata', function() {
+
+        elTime.textContent = '0:00 / ' + fmt(audio.duration);
+
+      });
+
+
+
+      audio.addEventListener('timeupdate', function() {
+
+        var pct = (audio.currentTime / audio.duration) * 100;
+
+        progressBar.style.width = pct + '%';
+
+        elTime.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+
+      });
+
+
+
+      audio.addEventListener('ended', function() {
+
+        audio.currentTime = 0;
+
+        iconPlay.className = 'fa-solid fa-play';
+
+      });
+
+
+
+      progressTrack.addEventListener('click', function(e) {
+
+        var rect = progressTrack.getBoundingClientRect();
+
+        var pct = (e.clientX - rect.left) / rect.width;
+
+        audio.currentTime = pct * audio.duration;
+
+      });
+
+
+
+      volSlider.addEventListener('input', function() {
+
+        audio.volume = this.value / 100;
+
+      });
+
+
+
+      document.getElementById('mh-prev').addEventListener('click', function() {
+
+        audio.currentTime = Math.max(0, audio.currentTime - 10);
+
+      });
+
+      document.getElementById('mh-next').addEventListener('click', function() {
+
+        audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+
+      });
+
+    })();
+
+
+
+    // ── 3D Tilt — menu follows mouse, goes flat when hovered ──
+
+    (function() {
+
+      var scene  = document.getElementById('menu-scene');
+
+      var card   = document.getElementById('menu-3d');
+
+      var iframe = document.getElementById('menu-iframe');
+
+
+
+      var isDragging = false;
+
+      var isHovering = false;
+
+      var currentX = 0, currentY = 0;
+
+      var targetRotX = 0, targetRotY = 0;
+
+      var currentRotX = 0, currentRotY = 0;
+
+      var dragStartX = 0, dragStartY = 0;
+
+
+
+      scene.addEventListener('mouseenter', function() { isHovering = true; });
+
+      scene.addEventListener('mouseleave', function() { isHovering = false; });
+
+
+
+      document.addEventListener('mousemove', function(e) {
+
+        if (isDragging) return;
+
+
+
+        if (isHovering) {
+
+          targetRotX = 0;
+
+          targetRotY = 0;
+
+          return;
+
+        }
+
+
+
+        var rect = card.getBoundingClientRect();
+
+        var centerX = rect.left + rect.width / 2;
+
+        var centerY = rect.top + rect.height / 2;
+
+
+
+        var dx = (e.clientX - centerX) / (rect.width / 2);
+
+        var dy = (e.clientY - centerY) / (rect.height / 2);
+
+
+
+        var clampedDx = Math.max(-2, Math.min(2, dx));
+
+        var clampedDy = Math.max(-2, Math.min(2, dy));
+
+
+
+        targetRotY = clampedDx * 16;
+
+        targetRotX = -clampedDy * 14;
+
+      });
+
+
+
+      function animate() {
+
+        currentRotX += (targetRotX - currentRotX) * 0.1;
+
+        currentRotY += (targetRotY - currentRotY) * 0.1;
+
+
+
+        if (!isDragging) {
+
+          card.style.transform =
+
+            'translate(' + currentX + 'px, ' + currentY + 'px) ' +
+
+            'rotateX(' + currentRotX.toFixed(2) + 'deg) ' +
+
+            'rotateY(' + currentRotY.toFixed(2) + 'deg)';
+
+        }
+
+        requestAnimationFrame(animate);
+
+      }
+
+      animate();
+
+
+
+      // ── Drag to reposition ────────────────────────────────
+
+      scene.addEventListener('mousedown', function(e) {
+
+        if (e.target === iframe) return;
+
+        isDragging = true;
+
+        dragStartX = e.clientX;
+
+        dragStartY = e.clientY;
+
+        iframe.style.pointerEvents = 'none';
+
+        e.preventDefault();
+
+      });
+
+
+
+      document.addEventListener('mousemove', function(e) {
+
+        if (!isDragging) return;
+
+        currentX = e.clientX - dragStartX;
+
+        currentY = e.clientY - dragStartY;
+
+        var tiltY = Math.max(-10, Math.min(10, currentX * 0.015));
+
+        var tiltX = Math.max(-10, Math.min(10, -currentY * 0.015));
+
+        card.style.transform =
+
+          'translate(' + currentX + 'px, ' + currentY + 'px) ' +
+
+          'rotateX(' + tiltX.toFixed(2) + 'deg) ' +
+
+          'rotateY(' + tiltY.toFixed(2) + 'deg)';
+
+      });
+
+
+
+      document.addEventListener('mouseup', function() {
+
+        if (!isDragging) return;
+
+        isDragging = false;
+
+        iframe.style.pointerEvents = '';
+
+        try {
+
+          localStorage.setItem('vyron_menu_pos', JSON.stringify({ x: currentX, y: currentY }));
+
+        } catch(e) {}
+
+      });
+
+
+
+      // Restore saved position
+
+      try {
+
+        var saved = localStorage.getItem('vyron_menu_pos');
+
+        if (saved) {
+
+          var pos = JSON.parse(saved);
+
+          if (pos && typeof pos.x === 'number') {
+
+            currentX = pos.x;
+
+            currentY = pos.y;
+
+          }
+
+        }
+
+      } catch(e) {}
+
+
+
+      // ── Touch support ─────────────────────────────────────
+
+      scene.addEventListener('touchstart', function(e) {
+
+        if (e.target === iframe) return;
+
+        var t = e.touches[0];
+
+        isDragging = true;
+
+        dragStartX = t.clientX;
+
+        dragStartY = t.clientY;
+
+        iframe.style.pointerEvents = 'none';
+
+        e.preventDefault();
+
+      }, { passive: false });
+
+
+
+      document.addEventListener('touchmove', function(e) {
+
+        if (!isDragging) return;
+
+        var t = e.touches[0];
+
+        currentX = t.clientX - dragStartX;
+
+        currentY = t.clientY - dragStartY;
+
+        card.style.transform =
+
+          'translate(' + currentX + 'px, ' + currentY + 'px) ' +
+
+          'rotateX(' + (-currentY * 0.015).toFixed(2) + 'deg) ' +
+
+          'rotateY(' + (currentX * 0.015).toFixed(2) + 'deg)';
+
+        e.preventDefault();
+
+      }, { passive: false });
+
+
+
+      document.addEventListener('touchend', function() {
+
+        if (!isDragging) return;
+
+        isDragging = false;
+
+        iframe.style.pointerEvents = '';
+
+        try {
+
+          localStorage.setItem('vyron_menu_pos', JSON.stringify({ x: currentX, y: currentY }));
+
+        } catch(e) {}
+
+      });
+
+    })();
+
+
+
+    // ── Notifications ──────────────────────────────────
+
+    function showNotif(text, type){
+
+      var stack=document.getElementById('notif-stack');
+
+      if(!stack) return;
+
+      var isX = type==='x';
+
+      var el=document.createElement('div');
+
+      el.className='notif' + (isX ? ' x' : '');
+
+      el.innerHTML='<i class="fa-solid '+(isX?'fa-xmark':'fa-check')+'"></i><span>'+text+'</span>';
+
+      stack.appendChild(el);
+
+      setTimeout(function(){ if(el.parentNode) el.remove(); }, 2800);
+
+    }
+
+
+
+    // ── Top nav Store / Download ─────────────────────────
+
+    (function(){
+
+      var btnStore=document.getElementById('nav-store');
+
+      var btnDl=document.getElementById('nav-download');
+
+      var btnOther=document.getElementById('nav-other');
+
+      var viewStore=document.getElementById('hero-store');
+
+      var viewDl=document.getElementById('hero-download');
+
+      var viewOther=document.getElementById('hero-other');
+
+      function set(v){
+
+        btnStore.classList.toggle('active', v==='store');
+
+        btnDl.classList.toggle('active', v==='download');
+
+        if(btnOther) btnOther.classList.toggle('active', v==='other');
+
+        viewStore.style.display = v==='store' ? 'flex' : 'none';
+
+        viewStore.classList.toggle('active', v==='store');
+
+        viewDl.style.display = v==='download' ? 'flex' : 'none';
+
+        if(viewOther) viewOther.style.display = v==='other' ? 'flex' : 'none';
+        var viewSeven=document.getElementById('hero-sevenup');
+        if(viewSeven) viewSeven.style.display = v==='sevenup' ? 'flex' : 'none';
+        if(document.getElementById('nav-sevenup')) document.getElementById('nav-sevenup').classList.toggle('active', v==='sevenup');
+
+        var menuScene=document.getElementById('menu-scene');
+
+        var paidWrap=document.getElementById('paid-switch-wrap');
+
+        var hint=document.querySelector('.hint');
+
+        var heroWrap=document.querySelector('.hero-wrap');
+
+        if(v==='other' || v==='sevenup'){
+
+          if(menuScene) menuScene.style.display='none';
+
+          if(paidWrap) paidWrap.style.display='none';
+
+          if(hint) hint.style.display='none';
+
+          if(heroWrap){ heroWrap.style.left='50%'; heroWrap.style.top='52%'; heroWrap.style.transform='translate(-50%, -50%) scale(1.04)'; heroWrap.style.maxWidth='760px'; heroWrap.style.maxHeight='92vh'; }
+
+          showNotif('Pick your DLL');
+
+        } else {
+
+          if(menuScene) menuScene.style.display='';
+
+          if(paidWrap) paidWrap.style.display='flex';
+
+          if(hint) hint.style.display='flex';
+
+          if(heroWrap){ heroWrap.style.left='48px'; heroWrap.style.top='165px'; heroWrap.style.transform='none'; heroWrap.style.maxWidth='560px'; heroWrap.style.maxHeight='calc(100vh - 190px)'; }
+
+          if(v==='store') showNotif('Store opened');
+
+          else if(v==='download') showNotif('Download opened');
+
+        }
+
+      }
+
+      btnStore.addEventListener('click', function(){ set('store'); });
+
+      btnDl.addEventListener('click', function(){ set('download'); });
+
+      if(btnOther) btnOther.addEventListener('click', function(){ set('other'); });
+      var btnSeven=document.getElementById('nav-sevenup'); if(btnSeven) btnSeven.addEventListener('click', function(){ set('sevenup'); });
+
+      // download clicks
+
+      document.getElementById('dl-main')?.addEventListener('click', function(){ showNotif('Downloading Vyron Client'); });
+
+      document.getElementById('dl-free')?.addEventListener('click', function(){ showNotif('Downloading Vyron Client'); });
+
+      document.getElementById('get-paid-btn')?.addEventListener('click', function(e){
+
+        e.preventDefault();
+
+        showNotif('Not Buyable Yet Boost Our Discord Server', 'x');
+
+      });
+
+      // music hud clicks show notif
+
+      document.getElementById('mh-play')?.addEventListener('click', function(){ showNotif(this.querySelector('i').classList.contains('fa-play') ? 'Paused' : 'Playing'); });
+
+      document.getElementById('mh-prev')?.addEventListener('click', function(){ showNotif('Previous'); });
+
+      document.getElementById('mh-next')?.addEventListener('click', function(){ showNotif('Next track'); });
+
+      // Paid Menu switch next to HUD - toggles iframe between free and Hugo
+
+      var paidToggle=document.getElementById('paid-toggle');
+
+      var menuIframe=document.getElementById('menu-iframe');
+
+      if(paidToggle && menuIframe){
+
+        // always start on Free Menu
+
+        try{localStorage.setItem('vyron_paid_menu','0')}catch(e){}
+
+        paidToggle.checked=false;
+
+        menuIframe.src='menu.html';
+
+        paidToggle.addEventListener('change', function(){
+
+          if(this.checked){
+
+            menuIframe.src='hugo-menu.html';
+
+            try{localStorage.setItem('vyron_paid_menu','1')}catch(e){}
+
+            showNotif('Paid Menu enabled');
+
+          } else {
+
+            menuIframe.src='menu.html';
+
+            try{localStorage.setItem('vyron_paid_menu','0')}catch(e){}
+
+            showNotif('Free Menu enabled');
+
+          }
+
+        });
+
+        document.getElementById('discord-btn')?.addEventListener('click', function(){ showNotif('Opening Discord'); });
+
+      }
+
+    })();
+
+    // no countdown - replaced with download button
+
+  </script>
+
+
+
+
+
+
+
+  <script>
+
+  (function(){
+
+    var c=document.getElementById('pink-particles');
+
+    if(!c) return;
+
+    for(var i=0;i<32;i++){
+
+      var d=document.createElement('div');
+
+      d.className='pw';
+
+      var size=(1.6+Math.random()*1.8).toFixed(1);
+
+      d.style.width=size+'px'; d.style.height=size+'px';
+
+      d.style.left=(Math.random()*100)+'vw';
+
+      d.style.animationDuration=(13+Math.random()*11)+'s';
+
+      d.style.animationDelay=(Math.random()*10)+'s';
+
+      d.style.opacity=(0.6+Math.random()*0.35).toFixed(2);
+
+      d.style.setProperty('--drift', (Math.random()*36-18).toFixed(1)+'px');
+
+      c.appendChild(d);
+
+    }
+
+  })();
+
+  </script>
+
 </body></html>
