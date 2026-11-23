@@ -364,8 +364,11 @@ img.dot{animation:dotfade 9s ease-in-out infinite;animation-delay:calc(var(--k,0
 .cmi{display:flex;align-items:center;gap:13px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);cursor:pointer;transition:border-color .25s,background .25s,box-shadow .25s,transform .25s var(--ease)}
 .cmi:hover{transform:translateY(-1px);border-color:rgba(124,92,233,.4)}
 .comet input:checked+.cmi{border-color:var(--p2);background:rgba(124,92,233,.15);box-shadow:0 0 0 3px rgba(124,92,233,.16)}
-.cmic{flex:none;width:34px;display:flex;justify-content:center}
-.cmic img{width:22px;height:22px;object-fit:contain}
+.cmic{flex:none;display:flex;align-items:center;justify-content:flex-start}
+.cmic img.payimg{width:30px;height:30px;object-fit:contain}
+.cmic .coinstack{padding-left:4px;min-width:0}
+.cmic .coinstack .coinic.mini{width:19px;height:19px;margin-left:-8px;border-width:1.5px}
+.cmic .coinstack .coinic.mini:first-child{margin-left:0}
 .cmic svg{width:20px;height:20px}
 .cmt{min-width:0}
 .cmt b{display:block;font-size:14.5px}
