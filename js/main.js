@@ -7,7 +7,7 @@ const buyClose=()=>{buym.classList.remove("on");buym.setAttribute("aria-hidden",
 /* payment methods – rendered from PAY in config.js; empty links are hidden */
 const PAYM=[
  ["card","Card","Visa · Mastercard · instant checkout",'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 9.5h19M6 14.5h5"/></svg>'],
- ["paypal","PayPal","check out with your PayPal balance",'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.1 20.4 8.9 8.9A1 1 0 0 1 9.9 8h5.3c3 0 5.2-1.9 5.2-4.6C20.4 1.6 18.7.6 16 .6H9.9a1 1 0 0 0-1 .8L6.6 19.6a.6.6 0 0 0 .6.8h3.5l.9-5.6h3.1c3.5 0 6-2.2 6-5.3 0-.3 0-.6-.1-.9-1 2.4-3.1 3.4-6 3.4h-3.6l-1 8.4z" transform="translate(0 1.8) scale(.92)"/></svg>'],
+ ["paypal","PayPal","check out with your PayPal balance",'<img class="payimg" src="assets/paypal.png" alt="PayPal">'],
  ["crypto","Crypto","BTC · ETH · LTC · USDT",'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1.3 4.6 2.1.5-.4 1.7-1.3-.3-.7 2.8 1.3.3-.4 1.7-2.1-.5-.5 2.1h1.5l-.4 1.7-1.5-.4-.6 2.4-1.7-.4.6-2.4-3.4-.9.4-1.7 1.3.3.7-2.8-1.3-.3.4-1.7 3.4.9.5-2.1 1.7.4-.5 2.1z"/></svg>'],
  ["cashapp","Cash App","pay with your $cashtag",'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 3 12l9 9 9-9-9-9zm1.9 12.6-1.6.7-.4 1.7-1.6-.4.4-1.6-3-1.3.9-1.7 2.9 1.3 1.4-.6-2.4-3.3 1.6-.7.4-1.7 1.6.4-.4 1.6 3 1.3-.9 1.7-2.9-1.3-1.4.6 2.4 3.3z"/></svg>']];
 const paylist=document.getElementById("paylist");
