@@ -22,6 +22,11 @@ const SELLIX="";   // product uniqid, e.g. "64aeff68a36da"
    crypto : any crypto checkout link (Sellix product, Coinbase Commerce…)
    cashapp: https://cash.app/$YourTag/7.99                     */
 const PAY={card:"",paypal:"coconutdidll@gmail.com",crypto:"",cashapp:""};
+/* ====== PRICE + DISCOUNT CODES ======
+   PRICE = paid plan price in USD. COUPONS = code (lowercase) -> fraction off.
+   e.g. vyron2026:0.20 = 20% off -> total $6.39                              */
+const PRICE=7.99;
+const COUPONS={vyron2026:0.20};
 /* ============================================== */
 /* ====== YOUR CRYPTO WALLETS – no signup needed ======
    Paste YOUR wallet addresses here – buyers send crypto straight to you,

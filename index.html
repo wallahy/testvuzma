@@ -19,7 +19,7 @@
 <div id="prog"></div>
 <canvas id="bg" aria-hidden="true"></canvas><div class="grain"></div>
 
-<div class="bar">Vyron Client v4.2 is out now – join the Discord for new game releases</div>
+<div class="bar">Vyron Client sale – 20% off with code <b>VYRON2026</b> at checkout</div>
 <header id="hd"><div class="wrap"><nav>
   <a class="brand" href="#home"><img src="assets/logo.png" alt="Vyron logo" width="34" height="34">VyronClient</a>
   <div class="links main" id="menu"><a href="#home">Home</a><a href="#showcase">Showcase</a><a href="#community">Community</a><a href="#features">Why Vyron</a><a href="#plans">Plans</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a></div>
@@ -113,12 +113,49 @@
 </div></footer>
 
 <div class="buym" id="buym" aria-hidden="true">
-  <div class="buyc payc" role="dialog" aria-modal="true" aria-labelledby="buyt">
+  <div class="buyc co" role="dialog" aria-modal="true" aria-labelledby="buyt">
     <button class="buyx" id="buyx" aria-label="Close">&times;</button>
-    <div class="payplan"><span>Vyron Paid</span><b>$7.99<small> /lifetime</small></b></div>
-    <h3 id="buyt">Choose how to pay</h3>
-    <p class="paysub">Secure checkout – access is delivered instantly after payment.</p>
-    <div class="paylist" id="paylist"></div>
+    <div class="cogrid" id="coStep1">
+      <div class="cosum">
+        <div class="cobrand"><img src="assets/logo.png" alt="" width="30" height="30"><b>vyronclient.com</b></div>
+        <small class="colbl">ORDER TOTAL</small>
+        <div class="cototal" id="coTotal">$7.99</div>
+        <div class="coitem"><img src="assets/logo.png" alt="" width="40" height="40"><div><b>Vyron Client | Lifetime</b><small>Lifetime access</small></div><span>$7.99</span></div>
+        <div class="colines">
+          <div><span>Subtotal</span><span>$7.99</span></div>
+          <div class="codisr" id="coDisc"><span>Discount <b id="coCodeN"></b></span><span id="coDiscV"></span></div>
+          <div class="cott"><span>Total</span><b id="coTT">$7.99</b></div>
+        </div>
+      </div>
+      <div class="comain">
+        <div class="costeps"><span class="on">Order information</span><span>Confirm &amp; pay</span><span>Receive your items</span></div>
+        <div class="cof"><label for="coMail">E-MAIL ADDRESS *</label><input id="coMail" type="email" placeholder="you@example.com" autocomplete="email"></div>
+        <button class="cohave" id="coHave" type="button">Have a discount code? <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="codc" id="coDc"><input id="coCode" type="text" placeholder="Enter code" autocomplete="off"><button class="coapply" id="coApply" type="button">Apply</button></div>
+        <p class="codemsg" id="coMsg" hidden></p>
+        <div class="cof"><span class="colbl">PAYMENT</span><div class="comets" id="coMets"></div></div>
+        <label class="coagree"><input type="checkbox" id="coAgree"><span>I have read and agree to the Terms of Service.</span></label>
+        <button class="btn pri block" id="coGo" type="button">Continue to Payment →</button>
+        <p class="conote">All transactions are secure and encrypted.</p>
+      </div>
+    </div>
+    <div class="costep2" id="coStep2" hidden>
+      <button class="coback" id="coBack" type="button">← Order information</button>
+      <h3 id="buyt">Complete your payment</h3>
+      <div class="paylist" id="paylist"></div>
+    </div>
+  </div>
+</div>
+
+<div class="buym" id="setm" aria-hidden="true">
+  <div class="buyc setc" role="dialog" aria-modal="true" aria-labelledby="sett">
+    <button class="buyx" id="setx" aria-label="Close">&times;</button>
+    <h3 id="sett">Settings</h3>
+    <div class="setuser" id="setUser"></div>
+    <div class="setrow"><span>Accent theme</span><div class="swatches" id="setSw"></div></div>
+    <div class="setrow"><span>Animated background</span><button class="tg" id="tgBg" type="button" aria-label="Toggle background"></button></div>
+    <div class="setrow"><span>Reduce motion</span><button class="tg" id="tgMo" type="button" aria-label="Toggle motion"></button></div>
+    <div class="setrow"><span>Account</span><button class="setout" id="setOut" type="button">Log out</button></div>
   </div>
 </div>
 

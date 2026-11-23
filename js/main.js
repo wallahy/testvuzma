@@ -11,17 +11,6 @@ const PAYM=[
  ["crypto","Crypto","BTC · ETH · LTC · USDT",'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1.3 4.6 2.1.5-.4 1.7-1.3-.3-.7 2.8 1.3.3-.4 1.7-2.1-.5-.5 2.1h1.5l-.4 1.7-1.5-.4-.6 2.4-1.7-.4.6-2.4-3.4-.9.4-1.7 1.3.3.7-2.8-1.3-.3.4-1.7 3.4.9.5-2.1 1.7.4-.5 2.1z"/></svg>'],
  ["cashapp","Cash App","pay with your $cashtag",'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 3 12l9 9 9-9-9-9zm1.9 12.6-1.6.7-.4 1.7-1.6-.4.4-1.6-3-1.3.9-1.7 2.9 1.3 1.4-.6-2.4-3.3 1.6-.7.4-1.7 1.6.4-.4 1.6 3 1.3-.9 1.7-2.9-1.3-1.4.6 2.4 3.3z"/></svg>']];
 const paylist=document.getElementById("paylist");
-const payBtns=PAYM.filter(m=>m[0]==="paypal"||(typeof PAY!=="undefined"&&PAY[m[0]]));
-let payHTML="";
-/* Sellix = the real checkout — its overlay opens on-site and accepts
-   card / PayPal / CashApp / crypto, so it sits on top of the list */
-if(typeof SELLIX!=="undefined"&&SELLIX)
- payHTML+=`<button class="paybtn sellixbtn" type="button" data-sellix-product="${SELLIX}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h12v6H6zM6 8h12v13H6z" transform="rotate(90 12 12) scale(.9)"/><path d="M9 12h6M9 15.5h4" stroke-linecap="round"/></svg></span><span><b>Secure Checkout</b><small>card · paypal · cashapp · crypto</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>`;
-payHTML+=payBtns.map(m=>{
- const v=(typeof PAY!=="undefined"&&PAY[m[0]])||"";
- if(m[0]==="paypal"&&v.includes("@"))
-  return `<button class="paybtn ppbtn" type="button"><span class="ic">${m[3]}</span><span><b>${m[1]}</b><small>send $7.99 to our PayPal email</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="crylist pplist"><div class="cryin"><div class="crya"><small>send $7.99 to this PayPal email:</small><code>${v}</code><div class="cryacts"><button type="button" class="crycopy" data-c="${v}">copy email</button><a class="crytrack" href="https://www.paypal.com/myaccount/transfer/send" target="_blank" rel="noopener">open PayPal ↗</a><button type="button" class="crysent ppsent">I've sent it →</button></div></div></div><p class="crynote">after you send, post the receipt screenshot in the payment-proof channel on our Discord to get your roles.</p></div>`;
- return `<a class="paybtn" href="${v||LINKS.discord}" target="_blank" rel="noopener"><span class="ic">${m[3]}</span><span><b>${m[1]}</b><small>${m[2]}</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>`}).join("");
 
 /* crypto wallets – zero signup, money goes straight to you
    [key, name, ticker, glyph, tag] – tag = optional blue pill on the row */
@@ -29,16 +18,64 @@ const CW=[["btc","Bitcoin","BTC","assets/coins/btc.png"],["ltc","Litecoin","LTC"
 const CWLT=(typeof CRYPTO!=="undefined")?CRYPTO:{};
 const CEXP={btc:"https://blockchair.com/bitcoin/address/",ltc:"https://blockchair.com/litecoin/address/",usdt:"https://tronscan.org/#/address/",eth:"https://etherscan.io/address/",trx:"https://tronscan.org/#/address/",sol:"https://solscan.io/account/"};
 const wRows=CW.filter(c=>CWLT[c[0]]);
-if(wRows.length){
- const stack=wRows.map(c=>c[3].includes("/")?`<img class="coinic coinimg mini" src="${c[3]}" alt="">`:`<span class="coinic mini">${c[3]}</span>`).join("");
- payHTML+=`<button class="paybtn crybtn" type="button"><span class="coinstack">${stack}</span><span><b>Crypto methods</b><small>${wRows.map(c=>c[2]).join(" · ")} — straight to our wallet</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="crylist">${wRows.map(c=>`<button class="cryrow" type="button" data-c="${c[0]}" data-n="${c[1]}">${c[3].includes("/")?`<img class="coinic coinimg" src="${c[3]}" alt="">`:`<span class="coinic">${c[3]}</span>`}<span class="crynm"><b>${c[1]}${c[4]?` <span class="tracktag">${c[4]}</span>`:""}</b><small>${c[2]}</small></span><code>${CWLT[c[0]].slice(0,10)}…${CWLT[c[0]].slice(-5)}</code></button>`).join("")}<p class="cryalert"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 4.4L19.8 19H4.2L12 6.4zM11 10h2v5h-2v-5zm0 6.2h2v2h-2v-2z"/></svg><span>If you don't have ltc join our <a href="${LINKS.discord}" target="_blank" rel="noopener">discord</a> for way more methods</span></p></div><div class="crybox" id="crybox"></div>`;
-}
+const coinStack=wRows.map(c=>c[3].includes("/")?`<img class="coinic coinimg mini" src="${c[3]}" alt="">`:`<span class="coinic mini">${c[3]}</span>`).join("");
 
-paylist.innerHTML=payHTML||`<p class="paynone">Checkout links are being set up – grab Paid through a Discord ticket for now.</p>`;
+/* price + coupons */
+const BASE=(typeof PRICE!=="undefined")?PRICE:7.99;
+const CPS=(typeof COUPONS!=="undefined")?COUPONS:{};
+let total=BASE;
+const fmt=v=>"$"+v.toFixed(2);
+
+/* checkout methods */
+const PPV=(typeof PAY!=="undefined"&&PAY.paypal)||"";
+const METS=[];
+if(typeof SELLIX!=="undefined"&&SELLIX)METS.push(["sx","Secure Checkout","card · paypal · cashapp · crypto"]);
+METS.push(PPV.includes("@")?["ppe","PayPal","send to our PayPal email"]:["pp","PayPal","check out with your PayPal balance"]);
+if(wRows.length)METS.push(["cr","Crypto",wRows.map(c=>c[2]).join(" · ")]);
+if(PAY&&PAY.card)METS.push(["card","Card","Visa · Mastercard · instant checkout"]);
+if(PAY&&PAY.cashapp)METS.push(["cashapp","Cash App","pay with your $cashtag"]);
+const ICO={pp:'<img class="payimg" src="assets/paypal.png" alt="">',ppe:'<img class="payimg" src="assets/paypal.png" alt="">',cr:`<span class="coinstack">${coinStack}</span>`,sx:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h12v6H6zM6 8h12v13H6z" transform="rotate(90 12 12) scale(.9)"/><path d="M9 12h6M9 15.5h4" stroke-linecap="round"/></svg>',card:PAYM[0][3],cashapp:PAYM[3][3]};
+document.getElementById("coMets").innerHTML=METS.map((m,i)=>`<label class="comet"><input type="radio" name="comet" value="${m[0]}"${i?"":" checked"}><span class="cmi"><span class="cmic">${ICO[m[0]]||""}</span><span class="cmt"><b>${m[1]}</b><small>${m[2]}</small></span></span></label>`).join("");
+/* sellix embed binds product buttons on load – keep a hidden one it can latch */
+if(typeof SELLIX!=="undefined"&&SELLIX)document.getElementById("buym").insertAdjacentHTML("beforeend",`<button type="button" id="sxbtn" data-sellix-product="${SELLIX}" hidden></button>`);
+
+const cryptoBlock=()=>wRows.length?`<button class="paybtn crybtn" type="button"><span class="coinstack">${coinStack}</span><span><b>Crypto methods</b><small>${wRows.map(c=>c[2]).join(" · ")} — straight to our wallet</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="crylist open">${wRows.map(c=>`<button class="cryrow" type="button" data-c="${c[0]}" data-n="${c[1]}">${c[3].includes("/")?`<img class="coinic coinimg" src="${c[3]}" alt="">`:`<span class="coinic">${c[3]}</span>`}<span class="crynm"><b>${c[1]}${c[4]?` <span class="tracktag">${c[4]}</span>`:""}</b><small>${c[2]}</small></span><code>${CWLT[c[0]].slice(0,10)}…${CWLT[c[0]].slice(-5)}</code></button>`).join("")}<p class="cryalert"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 4.4L19.8 19H4.2L12 6.4zM11 10h2v5h-2v-5zm0 6.2h2v2h-2v-2z"/></svg><span>If you don't have ltc join our <a href="${LINKS.discord}" target="_blank" rel="noopener">discord</a> for way more methods</span></p></div><div class="crybox" id="crybox"></div>`:"";
+
+/* checkout step 1 -> step 2 */
+const coStep1=document.getElementById("coStep1"),coStep2=document.getElementById("coStep2");
+const coMail=document.getElementById("coMail"),coAgree=document.getElementById("coAgree");
+document.getElementById("coHave").onclick=()=>{document.getElementById("coDc").classList.toggle("open");document.getElementById("coCode").focus()};
+document.getElementById("coApply").onclick=()=>{
+ const c=document.getElementById("coCode").value.trim().toLowerCase(),msg=document.getElementById("coMsg");
+ if(!c)return;
+ if(CPS[c]){
+  total=+(BASE*(1-CPS[c])).toFixed(2);
+  document.getElementById("coDisc").classList.add("on");
+  document.getElementById("coCodeN").textContent=c.toUpperCase();
+  document.getElementById("coDiscV").textContent="-"+fmt(BASE-total);
+  document.getElementById("coTotal").textContent=fmt(total);
+  document.getElementById("coTT").textContent=fmt(total);
+  msg.hidden=false;msg.className="codemsg ok";msg.textContent=`Code applied – ${CPS[c]*100}% off.`;
+ }else{msg.hidden=false;msg.className="codemsg";msg.textContent="That code isn't valid.";}
+};
+document.getElementById("coGo").onclick=()=>{
+ if(!/\S+@\S+\.\S+/.test(coMail.value)){coMail.classList.add("err");coMail.focus();return}
+ coMail.classList.remove("err");
+ if(!coAgree.checked){coAgree.closest(".coagree").classList.add("err");return}
+ coAgree.closest(".coagree").classList.remove("err");
+ const m=(document.querySelector('input[name="comet"]:checked')||{}).value||"";
+ const go2=h=>{paylist.innerHTML=h;coStep1.hidden=true;coStep2.hidden=false};
+ if(m==="ppe")go2(`<div class="cryin"><div class="crya"><small>send ${fmt(total)} to this PayPal email:</small><code>${PPV}</code><div class="cryacts"><button type="button" class="crycopy" data-c="${PPV}">copy email</button><a class="crytrack" href="https://www.paypal.com/myaccount/transfer/send" target="_blank" rel="noopener">open PayPal ↗</a><button type="button" class="crysent ppsent">I've sent it →</button></div></div></div><p class="crynote">after you send, post the receipt screenshot in the payment-proof channel on our Discord to get your roles.</p>`);
+ else if(m==="cr")go2(cryptoBlock());
+ else if(m==="sx"){const b=document.getElementById("sxbtn");if(b)b.click()}
+ else if(m==="pp"){open(PPV||LINKS.discord,"_blank");showThanks()}
+ else if(PAY&&PAY[m]){open(PAY[m],"_blank");showThanks()}
+};
+document.getElementById("coBack").onclick=()=>{coStep2.hidden=true;coStep1.hidden=false};
 
 /* crypto interactions */
 paylist.addEventListener("click",e=>{
- if(e.target.closest(".paybtn")&&!e.target.closest(".ppbtn"))showThanks();
+ if(e.target.closest("a.paybtn"))showThanks();
  if(e.target.closest(".ppsent")){showThanks();return}
  const tb=e.target.closest(".crybtn,.ppbtn");
  if(tb){tb.nextElementSibling.classList.toggle("open");return;}
@@ -46,7 +83,7 @@ paylist.addEventListener("click",e=>{
  if(rw){
   const a=CWLT[rw.dataset.c],n=rw.dataset.n;
   const ex=CEXP[rw.dataset.c]||"";
-  document.getElementById("crybox").innerHTML=`<div class="cryin"><img alt="${n} address QR" src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&margin=8&data=${encodeURIComponent(a)}"><div class="crya"><small>send $7.99 worth of ${n} to:</small><code>${a}</code><div class="cryacts"><button type="button" class="crycopy" data-c="${a}">copy address</button>${ex?`<a class="crytrack" href="${ex}${a}" target="_blank" rel="noopener">Track Me! ↗</a>`:""}</div><button type="button" class="crysent" data-c="${rw.dataset.c}" data-a="${a}">I've sent it →</button></div></div><p class="crynote">after you send, tap "I've sent it" – we detect the payment on-chain and take you to your customer page.</p>`;
+  document.getElementById("crybox").innerHTML=`<div class="cryin"><img alt="${n} address QR" src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&margin=8&data=${encodeURIComponent(a)}"><div class="crya"><small>send ${fmt(total)} worth of ${n} to:</small><code>${a}</code><div class="cryacts"><button type="button" class="crycopy" data-c="${a}">copy address</button>${ex?`<a class="crytrack" href="${ex}${a}" target="_blank" rel="noopener">Track Me! ↗</a>`:""}</div><button type="button" class="crysent" data-c="${rw.dataset.c}" data-a="${a}">I've sent it →</button></div></div><p class="crynote">after you send, tap "I've sent it" – we detect the payment on-chain and take you to your customer page.</p>`;
   return;
  }
  const sn=e.target.closest(".crysent");
@@ -149,19 +186,86 @@ const showThanks=()=>{tm.classList.add("on");tm.setAttribute("aria-hidden","fals
 document.getElementById("thanksx").onclick=thanksClose;
 tm.addEventListener("click",e=>{if(e.target===tm)thanksClose()});
 
-addEventListener("keydown",e=>{if(e.key==="Escape"){buyClose();thanksClose()}});
+addEventListener("keydown",e=>{if(e.key==="Escape"){buyClose();thanksClose();closeSet();closeMenu()}});
 
 /* discord login (OAuth2 implicit) */
 const DCBTN=document.getElementById("dcbtn"),DCCLIENT="1572232361125355601";
+let dcUser=null;
+const dAv=u=>u.avatar?`https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=64`:`https://cdn.discordapp.com/embed/avatars/${Number((BigInt(u.id)>>22n)%6n)}.png`;
 const dcSet=u=>{
+ dcUser=u;
  let chip=document.getElementById("dchip");
- if(!u){if(chip)chip.remove();DCBTN.hidden=false;return}
+ if(!u){if(chip)chip.remove();const m=document.getElementById("dmenu");if(m)m.remove();DCBTN.hidden=false;return}
  DCBTN.hidden=true;
- if(!chip){chip=document.createElement("div");chip.id="dchip";chip.className="dchip";chip.title="Logged in with Discord";chip.innerHTML='<img alt=""><span></span>';DCBTN.parentElement.insertBefore(chip,DCBTN)}
- const av=u.avatar?`https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=64`:`https://cdn.discordapp.com/embed/avatars/${Number((BigInt(u.id)>>22n)%6n)}.png`;
- chip.querySelector("img").src=av;
+ if(!chip){
+  chip=document.createElement("div");chip.id="dchip";chip.className="dchip";chip.title="Account";chip.setAttribute("aria-expanded","false");
+  chip.innerHTML='<img alt=""><span></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>';
+  DCBTN.parentElement.insertBefore(chip,DCBTN);
+  chip.addEventListener("click",e=>{e.stopPropagation();toggleMenu()});
+ }
+ chip.querySelector("img").src=dAv(u);
  chip.querySelector("span").textContent=u.global_name||u.username;
 };
+
+/* site settings – persisted */
+const SW=[["","Vyron Purple","#7c5ce9"],["blue","Ocean","#4f8df5"],["pink","Sakura","#e95cb3"],["green","Emerald","#3fd98a"],["orange","Ember","#f59a4f"]];
+let SET;try{SET=JSON.parse(localStorage.getItem("vyset")||"{}")}catch(e){SET={}}
+const markSw=()=>document.querySelectorAll(".sw").forEach(b=>b.classList.toggle("on",(b.dataset.t||"")===(SET.theme||"")));
+const applySet=()=>{
+ document.documentElement.dataset.theme=SET.theme||"";
+ const bg=document.getElementById("bg");if(bg)bg.style.display=SET.bg===0?"none":"";
+ document.documentElement.classList.toggle("rm",!!SET.rm);
+ const tb=document.getElementById("tgBg"),tm2=document.getElementById("tgMo");
+ if(tb)tb.classList.toggle("on",SET.bg!==0);if(tm2)tm2.classList.toggle("on",!!SET.rm);
+ markSw();
+};
+const saveSet=()=>{localStorage.setItem("vyset",JSON.stringify(SET));applySet()};
+
+/* account dropdown */
+const toggleMenu=()=>{
+ const u=dcUser;if(!u)return;
+ let m=document.getElementById("dmenu");
+ if(!m){
+  m=document.createElement("div");m.id="dmenu";m.className="dmenu";
+  m.innerHTML=`<div class="dmh"><img alt=""><div><b></b><small></small></div></div>
+  <a class="dmi" id="dmProf" href="#" target="_blank" rel="noopener">View Discord profile ↗</a>
+  <button class="dmi" id="dmSet" type="button">Settings</button>
+  <div class="dml">Theme</div><div class="dmsw" id="dmSw"></div>
+  <button class="dmi out" id="dmOut" type="button">Log out</button>`;
+  document.querySelector(".nav-r").appendChild(m);
+  m.querySelector("#dmSw").innerHTML=SW.map(t=>`<button class="sw" type="button" data-t="${t[0]}" title="${t[1]}" style="--c:${t[2]}"></button>`).join("");
+  m.querySelector("#dmSw").addEventListener("click",e=>{const b=e.target.closest(".sw");if(b){SET.theme=b.dataset.t;saveSet()}});
+  m.querySelector("#dmSet").onclick=()=>{closeMenu();openSet()};
+  m.querySelector("#dmOut").onclick=()=>{localStorage.removeItem("dc_tok");dcSet(null)};
+ }
+ m.querySelector(".dmh img").src=dAv(u);
+ m.querySelector(".dmh b").textContent=u.global_name||u.username;
+ m.querySelector(".dmh small").textContent="@"+u.username;
+ m.querySelector("#dmProf").href=`https://discord.com/users/${u.id}`;
+ const on=!m.classList.contains("on");
+ m.classList.toggle("on",on);
+ const ch=document.getElementById("dchip");if(ch)ch.setAttribute("aria-expanded",on);
+};
+const closeMenu=()=>{const m=document.getElementById("dmenu");if(m)m.classList.remove("on");const ch=document.getElementById("dchip");if(ch)ch.setAttribute("aria-expanded","false")};
+document.addEventListener("click",e=>{if(!e.target.closest("#dmenu")&&!e.target.closest("#dchip"))closeMenu()});
+
+/* settings modal */
+const setm=document.getElementById("setm");
+const closeSet=()=>{setm.classList.remove("on");setm.setAttribute("aria-hidden","true")};
+const openSet=()=>{
+ const u=dcUser,su=document.getElementById("setUser");
+ su.innerHTML=u?`<img src="${dAv(u)}" alt=""><div><b>${u.global_name||u.username}</b><small>@${u.username} · logged in with Discord</small></div>`:`<div><b>Not logged in</b><small>use "Login with Discord" in the navbar</small></div>`;
+ setm.classList.add("on");setm.setAttribute("aria-hidden","false");
+};
+document.getElementById("setx").onclick=closeSet;
+setm.addEventListener("click",e=>{if(e.target===setm)closeSet()});
+document.getElementById("setSw").innerHTML=SW.map(t=>`<button class="sw" type="button" data-t="${t[0]}" title="${t[1]}" style="--c:${t[2]}"></button>`).join("");
+document.getElementById("setSw").addEventListener("click",e=>{const b=e.target.closest(".sw");if(b){SET.theme=b.dataset.t;saveSet()}});
+document.getElementById("tgBg").onclick=()=>{SET.bg=SET.bg===0?1:0;saveSet()};
+document.getElementById("tgMo").onclick=()=>{SET.rm=!SET.rm;saveSet()};
+document.getElementById("setOut").onclick=()=>{localStorage.removeItem("dc_tok");dcSet(null);closeSet()};
+applySet();
+
 const dcLoad=async t=>{try{const r=await fetch("https://discord.com/api/users/@me",{headers:{Authorization:`Bearer ${t}`}});if(!r.ok)throw 0;dcSet(await r.json())}catch(e){localStorage.removeItem("dc_tok");dcSet(null)}};
 const hp=new URLSearchParams(location.hash.slice(1));
 if(hp.get("access_token")){localStorage.setItem("dc_tok",hp.get("access_token"));history.replaceState(null,"",location.pathname+location.search)}
