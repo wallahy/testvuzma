@@ -374,6 +374,11 @@ img.dot{animation:dotfade 9s ease-in-out infinite;animation-delay:calc(var(--k,0
 .coagree input{width:16px;height:16px;accent-color:var(--p2);flex:none}
 .coagree.err{color:#ff9d9d;animation:shake .35s}
 .conote{margin:12px 0 0;text-align:center;font-size:11.5px;color:var(--mute)}
+.ppbox{padding:16px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(124,92,233,.35)}
+.ppbox>small{display:block;font-size:12px;color:var(--mute);margin-bottom:10px}
+.pprow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.pprow code{flex:1;min-width:0;font-size:12px;word-break:break-all;color:#e8e8f0;font-family:ui-monospace,Consolas,monospace;line-height:1.5}
+.crynote b{color:#d9d5ee}
 .costep2{padding:30px 28px}
 .coback{font-size:13px;color:var(--mute);margin-bottom:14px;transition:color .2s}
 .coback:hover{color:#fff}

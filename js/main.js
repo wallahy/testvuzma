@@ -14,7 +14,7 @@ const paylist=document.getElementById("paylist");
 
 /* crypto wallets – zero signup, money goes straight to you
    [key, name, ticker, glyph, tag] – tag = optional blue pill on the row */
-const CW=[["btc","Bitcoin","BTC","assets/coins/btc.png"],["ltc","Litecoin","LTC","Ł","Track Me!"],["usdt","USDT","TRC-20","₮"],["eth","Ethereum","ERC-20","assets/coins/eth.png"],["trx","Tron","TRX","T"],["sol","Solana","SOL","assets/coins/sol.png"]];
+const CW=[["btc","Bitcoin","BTC","assets/coins/btc.png"],["ltc","Litecoin","LTC","assets/coins/ltc.png","Track Me!"],["usdt","USDT","TRC-20","₮"],["eth","Ethereum","ERC-20","assets/coins/eth.png"],["trx","Tron","TRX","T"],["sol","Solana","SOL","assets/coins/sol.png"]];
 const CWLT=(typeof CRYPTO!=="undefined")?CRYPTO:{};
 const CEXP={btc:"https://blockchair.com/bitcoin/address/",ltc:"https://blockchair.com/litecoin/address/",usdt:"https://tronscan.org/#/address/",eth:"https://etherscan.io/address/",trx:"https://tronscan.org/#/address/",sol:"https://solscan.io/account/"};
 const wRows=CW.filter(c=>CWLT[c[0]]);
@@ -65,7 +65,7 @@ document.getElementById("coGo").onclick=()=>{
  coAgree.closest(".coagree").classList.remove("err");
  const m=(document.querySelector('input[name="comet"]:checked')||{}).value||"";
  const go2=h=>{paylist.innerHTML=h;coStep1.hidden=true;coStep2.hidden=false};
- if(m==="ppe")go2(`<div class="cryin"><div class="crya"><small>send ${fmt(total)} to this PayPal email:</small><code>${PPV}</code><div class="cryacts"><button type="button" class="crycopy" data-c="${PPV}">copy email</button><a class="crytrack" href="https://www.paypal.com/myaccount/transfer/send" target="_blank" rel="noopener">open PayPal ↗</a><button type="button" class="crysent ppsent">I've sent it →</button></div></div></div><p class="crynote">after you send, post the receipt screenshot in the payment-proof channel on our Discord to get your roles.</p>`);
+ if(m==="ppe")go2(`<div class="ppbox"><small>send ${fmt(total)} to this PayPal email:</small><div class="pprow"><code>${PPV}</code><button type="button" class="crycopy" data-c="${PPV}">copy email</button><a class="crytrack" href="https://www.paypal.com/myaccount/transfer/send" target="_blank" rel="noopener">open PayPal ↗</a></div></div><p class="crynote">when you pay, send a screenshot showing you sent the money to the <b>payment-proof</b> channel on our <a href="${LINKS.discord}" target="_blank" rel="noopener">Discord</a> to get your roles.</p>`);
  else if(m==="cr")go2(cryptoBlock());
  else if(m==="sx"){const b=document.getElementById("sxbtn");if(b)b.click()}
  else if(m==="pp"){open(PPV||LINKS.discord,"_blank");showThanks()}
@@ -83,7 +83,7 @@ paylist.addEventListener("click",e=>{
  if(rw){
   const a=CWLT[rw.dataset.c],n=rw.dataset.n;
   const ex=CEXP[rw.dataset.c]||"";
-  document.getElementById("crybox").innerHTML=`<div class="cryin"><img alt="${n} address QR" src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&margin=8&data=${encodeURIComponent(a)}"><div class="crya"><small>send ${fmt(total)} worth of ${n} to:</small><code>${a}</code><div class="cryacts"><button type="button" class="crycopy" data-c="${a}">copy address</button>${ex?`<a class="crytrack" href="${ex}${a}" target="_blank" rel="noopener">Track Me! ↗</a>`:""}</div><button type="button" class="crysent" data-c="${rw.dataset.c}" data-a="${a}">I've sent it →</button></div></div><p class="crynote">after you send, tap "I've sent it" – we detect the payment on-chain and take you to your customer page.</p>`;
+  document.getElementById("crybox").innerHTML=`<div class="cryin"><img alt="${n} address QR" src="https://api.qrserver.com/v1/create-qr-code/?size=132x132&margin=8&data=${encodeURIComponent(a)}"><div class="crya"><small>send ${fmt(total)} worth of ${n} to:</small><code>${a}</code><div class="cryacts"><button type="button" class="crycopy" data-c="${a}">copy address</button>${ex?`<a class="crytrack" href="${ex}${a}" target="_blank" rel="noopener">Track Me! ↗</a>`:""}</div></div></div><p class="crynote">when you pay, send a screenshot showing you sent the money to the <b>payment-proof</b> channel on our <a href="${LINKS.discord}" target="_blank" rel="noopener">Discord</a> to get your roles.</p>`;
   return;
  }
  const sn=e.target.closest(".crysent");
