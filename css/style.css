@@ -274,8 +274,8 @@ button.paybtn{font:inherit;color:inherit;cursor:pointer}
 .sellix-iframe,.sellix-iframe-container,.sellix-modal{color-scheme:none}
 
 /* ---- crypto wallet checkout ---- */
-.crybtn .arr{transition:transform .3s var(--ease)}
-.crybtn:has(+ .crylist.open) .arr{transform:rotate(180deg)}
+.crybtn .arr,.ppbtn .arr{transition:transform .3s var(--ease)}
+.crybtn:has(+ .crylist.open) .arr,.ppbtn:has(+ .pplist.open) .arr{transform:rotate(180deg)}
 .crylist{display:none;flex-direction:column;gap:6px;padding:6px 0 2px}
 .crylist.open{display:flex}
 .cryrow{display:flex;align-items:center;gap:10px;width:100%;padding:10px 14px;border-radius:11px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.09);font:inherit;color:inherit;cursor:pointer;text-align:left;transition:background .2s,border-color .2s}

@@ -17,7 +17,11 @@ let payHTML="";
    card / PayPal / CashApp / crypto, so it sits on top of the list */
 if(typeof SELLIX!=="undefined"&&SELLIX)
  payHTML+=`<button class="paybtn sellixbtn" type="button" data-sellix-product="${SELLIX}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h12v6H6zM6 8h12v13H6z" transform="rotate(90 12 12) scale(.9)"/><path d="M9 12h6M9 15.5h4" stroke-linecap="round"/></svg></span><span><b>Secure Checkout</b><small>card · paypal · cashapp · crypto</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>`;
-payHTML+=payBtns.map(m=>{const u=(typeof PAY!=="undefined"&&PAY[m[0]])||LINKS.discord;return `<a class="paybtn" href="${u}" target="_blank" rel="noopener"><span class="ic">${m[3]}</span><span><b>${m[1]}</b><small>${m[2]}</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>`}).join("");
+payHTML+=payBtns.map(m=>{
+ const v=(typeof PAY!=="undefined"&&PAY[m[0]])||"";
+ if(m[0]==="paypal"&&v.includes("@"))
+  return `<button class="paybtn ppbtn" type="button"><span class="ic">${m[3]}</span><span><b>${m[1]}</b><small>send $7.99 to our PayPal email</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="crylist pplist"><div class="cryin"><div class="crya"><small>send $7.99 to this PayPal email:</small><code>${v}</code><div class="cryacts"><button type="button" class="crycopy" data-c="${v}">copy email</button><a class="crytrack" href="https://www.paypal.com/myaccount/transfer/send" target="_blank" rel="noopener">open PayPal ↗</a><button type="button" class="crysent ppsent">I've sent it →</button></div></div></div><p class="crynote">after you send, post the receipt screenshot in the payment-proof channel on our Discord to get your roles.</p></div>`;
+ return `<a class="paybtn" href="${v||LINKS.discord}" target="_blank" rel="noopener"><span class="ic">${m[3]}</span><span><b>${m[1]}</b><small>${m[2]}</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>`}).join("");
 
 /* crypto wallets – zero signup, money goes straight to you
    [key, name, ticker, glyph, tag] – tag = optional blue pill on the row */
@@ -34,8 +38,9 @@ paylist.innerHTML=payHTML||`<p class="paynone">Checkout links are being set up �
 
 /* crypto interactions */
 paylist.addEventListener("click",e=>{
- if(e.target.closest(".paybtn"))showThanks();
- const tb=e.target.closest(".crybtn");
+ if(e.target.closest(".paybtn")&&!e.target.closest(".ppbtn"))showThanks();
+ if(e.target.closest(".ppsent")){showThanks();return}
+ const tb=e.target.closest(".crybtn,.ppbtn");
  if(tb){tb.nextElementSibling.classList.toggle("open");return;}
  const rw=e.target.closest(".cryrow");
  if(rw){
