@@ -11,13 +11,13 @@ const PAYM=[
  ["crypto","Crypto","BTC · ETH · LTC · USDT",'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1.3 4.6 2.1.5-.4 1.7-1.3-.3-.7 2.8 1.3.3-.4 1.7-2.1-.5-.5 2.1h1.5l-.4 1.7-1.5-.4-.6 2.4-1.7-.4.6-2.4-3.4-.9.4-1.7 1.3.3.7-2.8-1.3-.3.4-1.7 3.4.9.5-2.1 1.7.4-.5 2.1z"/></svg>'],
  ["cashapp","Cash App","pay with your $cashtag",'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 3 12l9 9 9-9-9-9zm1.9 12.6-1.6.7-.4 1.7-1.6-.4.4-1.6-3-1.3.9-1.7 2.9 1.3 1.4-.6-2.4-3.3 1.6-.7.4-1.7 1.6.4-.4 1.6 3 1.3-.9 1.7-2.9-1.3-1.4.6 2.4 3.3z"/></svg>']];
 const paylist=document.getElementById("paylist");
-const payBtns=PAYM.filter(m=>typeof PAY!=="undefined"&&PAY[m[0]]);
+const payBtns=PAYM.filter(m=>m[0]==="paypal"||(typeof PAY!=="undefined"&&PAY[m[0]]));
 let payHTML="";
 /* Sellix = the real checkout — its overlay opens on-site and accepts
    card / PayPal / CashApp / crypto, so it sits on top of the list */
 if(typeof SELLIX!=="undefined"&&SELLIX)
  payHTML+=`<button class="paybtn sellixbtn" type="button" data-sellix-product="${SELLIX}"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h12v6H6zM6 8h12v13H6z" transform="rotate(90 12 12) scale(.9)"/><path d="M9 12h6M9 15.5h4" stroke-linecap="round"/></svg></span><span><b>Secure Checkout</b><small>card · paypal · cashapp · crypto</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>`;
-payHTML+=payBtns.map(m=>`<a class="paybtn" href="${PAY[m[0]]}" target="_blank" rel="noopener"><span class="ic">${m[3]}</span><span><b>${m[1]}</b><small>${m[2]}</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>`).join("");
+payHTML+=payBtns.map(m=>{const u=(typeof PAY!=="undefined"&&PAY[m[0]])||LINKS.discord;return `<a class="paybtn" href="${u}" target="_blank" rel="noopener"><span class="ic">${m[3]}</span><span><b>${m[1]}</b><small>${m[2]}</small></span><svg class="arr" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>`}).join("");
 
 /* crypto wallets – zero signup, money goes straight to you
    [key, name, ticker, glyph, tag] – tag = optional blue pill on the row */
@@ -34,6 +34,7 @@ paylist.innerHTML=payHTML||`<p class="paynone">Checkout links are being set up �
 
 /* crypto interactions */
 paylist.addEventListener("click",e=>{
+ if(e.target.closest(".paybtn"))showThanks();
  const tb=e.target.closest(".crybtn");
  if(tb){tb.nextElementSibling.classList.toggle("open");return;}
  const rw=e.target.closest(".cryrow");
@@ -135,7 +136,33 @@ addEventListener("hashchange",renderPaid);renderPaid();
 document.querySelectorAll('[data-link="paid"]').forEach(a=>a.addEventListener("click",e=>{e.preventDefault();buym.classList.add("on");buym.setAttribute("aria-hidden","false")}));
 document.getElementById("buyx").onclick=buyClose;
 buym.addEventListener("click",e=>{if(e.target===buym)buyClose()});
-addEventListener("keydown",e=>{if(e.key==="Escape")buyClose()});
+
+/* thanks-for-buying popup */
+const tm=document.getElementById("thanks");
+const thanksClose=()=>{tm.classList.remove("on");tm.setAttribute("aria-hidden","true")};
+const showThanks=()=>{tm.classList.add("on");tm.setAttribute("aria-hidden","false")};
+document.getElementById("thanksx").onclick=thanksClose;
+tm.addEventListener("click",e=>{if(e.target===tm)thanksClose()});
+
+addEventListener("keydown",e=>{if(e.key==="Escape"){buyClose();thanksClose()}});
+
+/* discord login (OAuth2 implicit) */
+const DCBTN=document.getElementById("dcbtn"),DCCLIENT="1572232361125355601";
+const dcSet=u=>{
+ let chip=document.getElementById("dchip");
+ if(!u){if(chip)chip.remove();DCBTN.hidden=false;return}
+ DCBTN.hidden=true;
+ if(!chip){chip=document.createElement("div");chip.id="dchip";chip.className="dchip";chip.title="Logged in with Discord";chip.innerHTML='<img alt=""><span></span>';DCBTN.parentElement.insertBefore(chip,DCBTN)}
+ const av=u.avatar?`https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.png?size=64`:`https://cdn.discordapp.com/embed/avatars/${Number((BigInt(u.id)>>22n)%6n)}.png`;
+ chip.querySelector("img").src=av;
+ chip.querySelector("span").textContent=u.global_name||u.username;
+};
+const dcLoad=async t=>{try{const r=await fetch("https://discord.com/api/users/@me",{headers:{Authorization:`Bearer ${t}`}});if(!r.ok)throw 0;dcSet(await r.json())}catch(e){localStorage.removeItem("dc_tok");dcSet(null)}};
+const hp=new URLSearchParams(location.hash.slice(1));
+if(hp.get("access_token")){localStorage.setItem("dc_tok",hp.get("access_token"));history.replaceState(null,"",location.pathname+location.search)}
+const dct=localStorage.getItem("dc_tok");
+if(dct)dcLoad(dct);
+DCBTN.onclick=e=>{e.preventDefault();location.href=`https://discord.com/oauth2/authorize?client_id=${DCCLIENT}&response_type=token&redirect_uri=${encodeURIComponent(location.href.split("#")[0])}&scope=identify`};
 document.getElementById("yr").textContent=new Date().getFullYear();
 
 const W=[["Many Steam games","One community building clients for a growing list of free and paid Steam games."],["Free to start","Grab a free client and be up and running in minutes. No account walls."],["Paid for more","Premium clients with extended feature sets for players who want everything."],["Made by players","Built by a community that plays the same games you do."],["Updates on Discord","New games and new builds are announced as soon as they are ready."],["Help when you need it","Ask questions, share feedback and get support from the community and team."]];

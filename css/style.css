@@ -22,6 +22,12 @@ nav{display:flex;align-items:center;gap:36px;height:76px}
 .links a:hover{color:#fff}.links a:hover::after{transform:scaleX(1)}
 .sp{flex:1}
 .pill{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#111;font-weight:600;font-size:14px;padding:11px 22px;border-radius:999px;transition:transform .3s var(--ease),box-shadow .3s}
+.pill.ghost2{background:rgba(255,255,255,.06);color:#fff;border:1px solid var(--line)}
+.pill.ghost2:hover{border-color:rgba(124,92,233,.6);background:rgba(124,92,233,.14)}
+.dchip{display:inline-flex;align-items:center;gap:9px;padding:6px 16px 6px 7px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(124,92,233,.45);font-weight:600;font-size:14px}
+.nav-r [hidden]{display:none}
+.dchip img{width:30px;height:30px;border-radius:50%;background:#222}
+.dchip span{max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pill:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,92,233,.45)}
 .burger{display:none;width:42px;height:42px;border-radius:12px;border:1px solid var(--line);place-items:center}
 .burger i{display:block;width:18px;height:2px;background:#fff;box-shadow:0 6px #fff,0 -6px #fff;border-radius:2px}
@@ -36,7 +42,8 @@ nav{display:flex;align-items:center;gap:36px;height:76px}
 .btn.white{background:linear-gradient(90deg,#fff,#c9c6d2);color:#111;box-shadow:0 10px 40px -12px rgba(255,255,255,.4)}
 .btn.block{width:100%}
 section{padding:110px 0;position:relative}
-.hero{min-height:calc(100vh - 110px);display:grid;place-items:center;text-align:center;padding:20px 0 170px}
+.hero{min-height:min(680px,calc(100vh - 110px));display:grid;place-items:center;text-align:center;padding:20px 0 110px}
+#showcase{padding-top:60px}
 .tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--p2);border:2px solid var(--p1);border-radius:999px;padding:7px 18px;background:rgba(90,47,194,.12)}
 .tag b{width:7px;height:7px;border-radius:50%;background:var(--p2);box-shadow:0 0 0 0 rgba(124,92,233,.7);animation:ping 2.2s infinite}
 @keyframes ping{70%{box-shadow:0 0 0 10px rgba(124,92,233,0)}100%{box-shadow:0 0 0 0 rgba(124,92,233,0)}}
@@ -250,6 +257,12 @@ img.dot{animation:dotfade 9s ease-in-out infinite;animation-delay:calc(var(--k,0
 .paynone{margin:6px 0 2px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.18);font-size:13px;color:#c7c7d1;text-align:center}
 .paydisc{display:block;margin-top:16px;text-align:center;font-size:13px;color:var(--mute);text-decoration:underline dotted;text-underline-offset:3px}
 .paydisc:hover{color:#fff}
+
+/* ---- thanks popup ---- */
+.thanks{text-align:center}
+.thanks .paidcheck{margin-top:6px}
+.thanks h3{font-size:22px}
+.thanks .paysub{font-size:14px;line-height:1.55;margin-bottom:22px}
 
 /* ---- sellix checkout ---- */
 .sellixbtn{background:linear-gradient(110deg,rgba(124,92,233,.35),rgba(79,109,245,.22));border-color:rgba(124,92,233,.55)}

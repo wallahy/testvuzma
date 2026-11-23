@@ -17,6 +17,7 @@ const SELLIX="";   // product uniqid, e.g. "64aeff68a36da"
             • Stripe  (dashboard.stripe.com -> Payment Links) cards only
             • Gumroad / Payhip product URL also works
    paypal : your PayPal.me link  -> https://paypal.me/YourName/7.99
+            (leave empty and the PayPal button sends buyers to your Discord)
    crypto : any crypto checkout link (Sellix product, Coinbase Commerce…)
    cashapp: https://cash.app/$YourTag/7.99                     */
 const PAY={card:"",paypal:"",crypto:"",cashapp:""};
